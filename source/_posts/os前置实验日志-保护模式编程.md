@@ -1249,7 +1249,8 @@ BIOS中断函数存放在ROM中，需要通过中断向量表调用，中断函�
 <div id="ref-1"></div>
 
 [1]
-* 
+
+* 注释1
 
 
     tips1.0:为什么有实模式？
@@ -1272,7 +1273,8 @@ BIOS中断函数存放在ROM中，需要通过中断向量表调用，中断函�
 <div id="ref-3"></div>
 
 [3] 
-*   
+
+*  注释3
 
         哪些是Code Segment哪些又是System Segment
         GDT表中的KERNEL_CODE_SEG/KERNEL_DATA_SEG/APP_CODE_SEG/APP_DATA_SEG是代码段Code Segment，S位都置1
@@ -1283,7 +1285,8 @@ BIOS中断函数存放在ROM中，需要通过中断向量表调用，中断函�
 <div id="ref-4"></div>
 
 [4]
-* 
+
+* 注释4
 
         为什么中间要间隔一层sys_show?
         因为想要实现低特权级使用高特权级的系统调用，一层简单调用无法到汇编代码中切换特权级
