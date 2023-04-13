@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>os前置实验日志-保护模式编程 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="os前置实验-实模式启动到了解保护模式编程简单了解从通电到实模式启动再到保护模式编程，目标是通过定时中断实现双任务切换并在屏幕上显示双任务切换过程，程序仅简单的配置了分页机制、多任务切换、定时中断系统的配置、LDT表等，仅仅是为了熟悉后续操作系统实验由于只是为了熟悉保护模式下的编程，所以程序相当简单，实模式和保护模式的内存都使用平坦模型，实模式中段寄存器简单的设置为0 一些可能用到的硬件知识和一些">
+<meta property="og:type" content="article">
+<meta property="og:title" content="os前置实验日志-保护模式编程">
+<meta property="og:url" content="http://example.com/2023/04/13/os%E5%89%8D%E7%BD%AE%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%97-%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E7%BC%96%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="os前置实验-实模式启动到了解保护模式编程简单了解从通电到实模式启动再到保护模式编程，目标是通过定时中断实现双任务切换并在屏幕上显示双任务切换过程，程序仅简单的配置了分页机制、多任务切换、定时中断系统的配置、LDT表等，仅仅是为了熟悉后续操作系统实验由于只是为了熟悉保护模式下的编程，所以程序相当简单，实模式和保护模式的内存都使用平坦模型，实模式中段寄存器简单的设置为0 一些可能用到的硬件知识和一些">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-04-13T10:30:21.000Z">
+<meta property="article:modified_time" content="2023-04-13T10:36:19.479Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-os前置实验日志-保护模式编程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/04/13/os%E5%89%8D%E7%BD%AE%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%97-%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E7%BC%96%E7%A8%8B/" class="article-date">
+  <time datetime="2023-04-13T10:30:21.000Z" itemprop="datePublished">2023-04-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      os前置实验日志-保护模式编程
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="os前置实验-实模式启动到了解保护模式编程"><a href="#os前置实验-实模式启动到了解保护模式编程" class="headerlink" title="os前置实验-实模式启动到了解保护模式编程"></a><font color='＃AD8E6' >os前置实验-实模式启动到了解保护模式编程</h1><p><em>简单了解从通电到实模式启动再到保护模式编程，目标是通过定时中断实现双任务切换并在屏幕上显示双任务切换过程，程序仅简单的配置了分页机制、多任务切换、定时中断系统的配置、LDT表等，仅仅是为了熟悉后续操作系统实验</em><br><br><em>由于只是为了熟悉保护模式下的编程，所以程序相当简单，实模式和保护模式的内存都使用平坦模型，实模式中段寄存器简单的设置为0</em></p>
+<h1 id="一些可能用到的硬件知识和一些概念的简略介绍"><a href="#一些可能用到的硬件知识和一些概念的简略介绍" class="headerlink" title="一些可能用到的硬件知识和一些概念的简略介绍"></a>一些可能用到的硬件知识和一些概念的简略介绍</h1><h2 id="0-计算机启动过程："><a href="#0-计算机启动过程：" class="headerlink" title="0.计算机启动过程："></a>0.计算机启动过程：</h2><ol>
+<li>通电</li>
+<li>先以16位实模式启动，再切换到对应的32或64位保护模式</li>
+<li>读取固化在ROM芯片中的bios (basic input output system|基本输入输出系统) 进行硬件检查 (比如根据某种顺序检查有哪些存储设备，存储设备中是否有引导代码等)</li>
+<li>bios根据指定的顺序，检查存储设备，如果是从硬盘启动则把引导代码从硬盘加载到内存地址0x7c00<a href="#ref-1"><sup>1</sup></a></li>
+<li>主引导记录把操作权交付给操作系统<br></li>
+</ol>
+<h2 id="1-Intel-i386寄存器"><a href="#1-Intel-i386寄存器" class="headerlink" title="1.Intel i386寄存器"></a>1.Intel i386寄存器</h2><ul>
+<li>32位通用寄存器</li>
+</ul>
+<ol>
+<li>EAX (16 : ax) ax (ah : al) 一般用于累加器</li>
+<li>EBX (16 : bx) bx (bh : bl)一般用作基址寄存器</li>
+<li>ECX (16 : cx) cx (ch : cl)一般用于计数</li>
+<li>EDX (16 : dx) dx (dh : dl)一般用于存放数据</li>
+<li>ESP (16 : sp) 一般用作堆栈指针</li>
+<li>EBP (16 : bp) 一般用作基址指针</li>
+<li>ESI (16 : si) 一般用作源变址</li>
+<li>EDI (16 : di) 一般用作目标变址</li>
+</ol>
+<ul>
+<li>16位段寄存器16位<br><br>在实模式中用作基址寄存器，如果一bit表示内存中的一个字节的话，一个段寄存器只能表示64kb内存，因此将其值右移四位作为基址表示1mb的内存，将程序分为不同的数据段：</li>
+</ul>
+<ol>
+<li>CS：代码段寄存器</li>
+<li>DS：数据段寄存器</li>
+<li>SS：堆栈寄存器</li>
+<li>ES：附加段寄存器</li>
+</ol>
+<ul>
+<li>状态和控制寄存器</li>
+</ul>
+<ol>
+<li>EIP:存放下一条指令的偏移量，%CS（代码段寄存器）+%EIP=下一条指令地址</li>
+<li>EFLAGS：条件寄存器</li>
+<li>CR0：机器状态字</li>
+<li>CR1：Intel保留</li>
+<li>CR2：页故障地址</li>
+<li>CR3：页目录地址</li>
+</ol>
+<ul>
+<li>在本实验的实模式编程下仅把段寄存器置0</li>
+</ul>
+<h2 id="2-内存结构"><a href="#2-内存结构" class="headerlink" title="2.内存结构"></a>2.内存结构</h2><ul>
+<li>0x0000<del>0x03ff BIOS的中断向量表，0x4000</del>0x4fff BIOS数据区，0x5000<del>0x7c00用户可用区域，我们把这里设为栈（从高地址向低地址增长），0x7c00</del>0x7dff00MBR，0x7e00~0x7fff bootloader需要一个栈空间或者读磁盘的交换空间（也有说可以自由使用，本次实验中保护模式进入代码0x7e00开始）<del>0x8000后内核代码</del></li>
+</ul>
+<h2 id="3-主引导扇区"><a href="#3-主引导扇区" class="headerlink" title="3.主引导扇区"></a>3.主引导扇区</h2><ol>
+<li>硬盘第一个扇区(大小为128*2^n,n一般取2，为512byte)为主引导扇区MBR，由446字节的主引导记录、64字节的分区表和两个结束字节0x55和0xAA</li>
+<li>MBR由分区程序产生，用于检查分区表是否正确，系统硬件完成自检后引导具有激活标志的分区上的操作系统，并将控制权交给启动程序</li>
+<li>分区表64字节，对四个分区的信息进行描述，每个分区信息占16字节</li>
+</ol>
+<h2 id="4-BIOS"><a href="#4-BIOS" class="headerlink" title="4.BIOS"></a>4.BIOS</h2><ul>
+<li>BIOS是存储在主板ROM上的一段程序<br>BIOS 中断调用即 BIOS 中断服务程序，是计算机系统软、硬件之间的一个可编程接口。开机时，BIOS 会通知 CPU 各种硬件设备的中断号，并提供中断服务程序。软件可以通过调用 BIOS 中断对软盘驱动器、键盘及显示器等外围设备进行管理。<br>BIOS中断函数存放在ROM中，需要通过中断向量表调用，中断函数的参数通过寄存器传递，因此使用汇编代码调用比较方便</li>
+</ul>
+<h1 id="2-实模式"><a href="#2-实模式" class="headerlink" title="2.实模式"></a>2.实模式</h1><h2 id="1-如何编译和运行"><a href="#1-如何编译和运行" class="headerlink" title="1. 如何编译和运行"></a>1. 如何编译和运行</h2><p>使用makefile组织工程，源文件为os.c和start.S，头文件为os.h，伪目标放在makefile头部以便于生成多个目标，链接器重定向代码加载位置，然后将os.bin在编译时通过dd命令写入到磁盘映像文件中，运行时从磁盘映像文件的第一个扇区加载到内存位置0x7c00(也可以在汇编中指定.org 0x7c00)，以下是对makefile的一些说明</p>
+<pre><code># 工具链前缀，如果是windows和mac，使用x86_64-elf-
+# 如果是linux，使用x86_64-linux-gnu-
+# 工具链前缀，如果是windows和mac，使用x86_64-elf-
+# 如果是linux，使用x86_64-linux-gnu-
+ifeq ($(LANG),)
+    TOOL_PREFIX = x86_64-linux-gnu-
+else
+    TOOL_PREFIX = x86_64-elf-
+endif
+
+#关闭pie，pie能使程序像共享库一样在主存任何位置装载，这需要将程序编译成位置无关，并链接为ELF共享对象。但内核程序装载在固定地址\
+关闭堆栈保护，堆栈保护会为程序插入额外代码，为何关闭如何开启\
+不连接系统标准启动文件和标准库文件，只把指定的文件传递给连接器，内核环境不支持一些标准库函数(?)\
+不搜索默认路径头文件，同上
+CFLAGS = -g -c -O0 -m32 -fno-pie -fno-stack-protector -nostdlib -nostdinc
+ 
+#链接器将代码加载位置重定向到0x7c00，否则为0x0000
+all: source/os.c source/os.h source/start.S
+$(TOOL_PREFIX)gcc $(CFLAGS) source/start.S
+$(TOOL_PREFIX)gcc $(CFLAGS) source/os.c    
+$(TOOL_PREFIX)ld -m elf_i386 -Ttext=0x7c00 start.o os.o -o os.elf
+
+#拷贝二进制文件到os.bin以便加载进磁盘映像
+$&#123;TOOL_PREFIX&#125;objcopy -O binary os.elf os.bin
+
+#-x显示所可用的头信息，包括符号表、重定位入口。-x 等价于-a -f -h -r -t 同时指定。/
+-d显示机器的汇编助记符/
+-S反汇编代码与原代码交替显示，编译时需要加上参数-g，即需要调试信息/
+反汇编代码输出到文件os_dis.txt中
+$&#123;TOOL_PREFIX&#125;objdump -x -d -S  os.elf &gt; os_dis.txt    
+
+#读取elf文件到txt
+$&#123;TOOL_PREFIX&#125;readelf -a  os.elf &gt; os_elf.txt
+</code></pre>
+<h2 id="2-BIOS行为"><a href="#2-BIOS行为" class="headerlink" title="2. BIOS行为"></a>2. BIOS行为</h2><ol>
+<li>BIOS会按照一定顺序依次从不同存储设备中查找MBR ，如果第一个设备未查找到bios则继续查询其他存储设备，如果剩余的设备都无引导扇区则引导失败。本实验MBR存储在硬盘中，由bios从硬盘的第一个扇区加载到内存位置0x7C00，加载到内存前会bios查看硬盘上第一个扇区最后两字节是否是0x55和0xAA，最后两个字节不一致则会显示不是一个可引导的磁盘，加载完成后则切换到保护模式</li>
+<li>之后的代码使用c编写，加载到内存位置0x7e00</li>
+</ol>
+<h2 id="3-实模式初始化"><a href="#3-实模式初始化" class="headerlink" title="3. 实模式初始化"></a>3. 实模式初始化</h2><pre><code>#include &quot;os.h&quot;
+
+// 声明本地以下符号是全局的，在其它源文件中可以访问
+.global _start, timer_int, syscall_handler, do_syscall
+
+.extern os_init, color, str, func
+
+// 指定以下的代码生成16位的机器指令，这样才能在启动时的实模式下运行
+  .code16
+
+// 以下是代码区
+ .text
+_start: 
+//为cs赋0，不加也行，qmenu会自动为cs赋0
+//平坦模式，段寄存器简单置零
+mov $0, %ax
+mov %ax, %ds
+mov %ax, %es
+mov %ax, %ss
+mov %ax, %gs
+mov %ax, %fs
+mov $_start, %esp            //将0x7c00给到esp，为后续的C代码分配栈空间，x86从高地址向低地址压栈，在makefile中指定了代码起始位置为0x7c00
+</code></pre>
+<h2 id="4-加载0x7e00后的剩余代码"><a href="#4-加载0x7e00后的剩余代码" class="headerlink" title="4. 加载0x7e00后的剩余代码"></a>4. 加载0x7e00后的剩余代码</h2><ul>
+<li><p>使用bios程序中的的int13中断，读取硬盘中的c内核程序到内存</p>
+</li>
+<li><p>int13中断的步骤</p>
+</li>
+</ul>
+<ol>
+<li><p>将CPU内的标志寄存器内容压入堆栈，用来保存断点的现场状态。</p>
+</li>
+<li><p>将断点的地址（CS和IP寄存器的当前值）压入堆栈保存，以保存返回所需的断点地址。</p>
+</li>
+<li><p>按中断号取得中断向量，并无条件跳转到中断向量所指向的目标地址。<br>此后，CPU就进入中断服务程序去运行它的程序了。而中断服务程序最后会有一条IRET中断返回指令，通过它恢复现场返回断点，程序继续执行INT 指令后面的程序指令。</p>
+</li>
+<li><p>参数：<br><br>AH=02H 指明调用读扇区功能。<br><br>AL 置要读的扇区数目，不允许使用读磁道末端以外的数值，也不允许使该寄存器为0。<br><br>CH 磁道号的低8位数。<br><br>CL 低5位放入所读起始扇区号，位7-6表示磁道号的高2位。cl=开始扇区（位0—5），磁道号高二位（位6—7）<br><br>DL 需要进行读操作的驱动器号。dl=驱动器号（若是硬盘则要置位7）<br><br>DH 所读磁盘的磁头号。dh=磁头号<br></p>
+<pre><code> //给bios中的函数传递参数，参数需要遵守bios函数的规范
+ read_self_all:
+     mov $_start_32, %bx        //要加载到的内存地址，0x7c00+0x0200=0x7e00
+     mov $0x2, %cx                //所读磁盘的起始扇区号为cl=0x02
+     mov $0x240, %ax              //0x0240给到ax，其中al=0x40指明要读的扇区数目，一个扇区512byte，2^6*2^9=2^15byte=32kb，ah=0x02表示调用读磁盘功能
+     mov $0x80, %dx                //驱动器号，dl=0x80指第一块磁盘
+     int $0x13                     //int13中断调用bios函数
+     jc read_self_all              //这里只做了简单的处理，判断cf标志位是否为1（读取失败则跳回read_self_all到标志处）
+</code></pre>
+</li>
+</ol>
+<h1 id="保护模式"><a href="#保护模式" class="headerlink" title="保护模式"></a>保护模式</h1><p><em>以下适用于保护模式</em></p>
+<h2 id="0-为何要有保护模式"><a href="#0-为何要有保护模式" class="headerlink" title="0.为何要有保护模式"></a>0.为何要有保护模式</h2><ol>
+<li><p>实模式的问题：<br><br>段寄存器直接保存基地址（右移四位），段寄存器加偏移量直接访问任意位置，没有保护容易被修改，比较危险</p>
+</li>
+<li><p>保护模式的改善：<br><br>保护模式中段寄存器不再直接参与寻址，而是作为GDT表(对用户应用可以是LDT表)的选择子选择表项，选择子中存储了表项的起始地址和特权级信息，而表项中存储了程序代码段起始地址等信息</p>
+</li>
+</ol>
+<h2 id="1-保护模式编程"><a href="#1-保护模式编程" class="headerlink" title="1.保护模式编程"></a>1.保护模式编程</h2><ol>
+<li>如何从实模式切换到保护模式<br></li>
+</ol>
+<ul>
+<li><p>切换过程:</p>
+</li>
+<li><p>屏蔽中断</p>
+</li>
+<li><p>初始化32位段描述符（GDT)</p>
+</li>
+<li><p>初始化32位的中断向量表（IDT）</p>
+</li>
+<li><p>初始化32位的栈</p>
+</li>
+<li><p>长跳转到32位地址</p>
+</li>
+<li><p>汇编代码</p>
+<pre><code>  /*
+  在文件 start.S 中
+  */
+  mov $_start, %esp            //预先分配栈空间，从0x7c00开始向低地址增长
+
+  ......
+
+  //进入保护模式
+  cli                            //关中断, 防止模式切换时产生中断
+  lgdt gdt_desc                //GDTR寄存器保存GDT表地址
+  lidt idt_desc                //IDTR寄存器保存IDT表地址
+
+  jmp $KERNEL_CODE_SEG, $_start_32//从实模式跳转到保护模式需要跳转一次以清空流水线
+
+  _start_32_:
+
+  ......
+
+  //CR0寄存器最高位控制页表是否打开
+  mov %cr0, %eax
+  orl $(1&lt;&lt;31), %eax
+  mov %eax, %cr0
+
+  ......
+
+  gdt_desc:
+  .word (256*8) - 1            //gdt表的界限，从0开始所以要减一,256*8十六进制值为0x7ff
+  .long gdt_table                //gdt表的起始地址
+
+  idt_desc:
+  .word (256*8) - 1            //gdt表的界限，从0开始所以要减一,值为0x7ff
+  .long idt_table                //gdt表的起始地址
+</code></pre>
+</li>
+</ul>
+<ol start="2">
+<li>GDT表<br></li>
+</ol>
+<ul>
+<li>32位保护模式中，段与段之间是互相隔离的，当访问的地址超出段的界限时处理器就会阻止这种访问，因此每个段都需要有起始地址、范围、访问权限以及其他属性四个部分，这四个部分合在一起叫做段描述符（Segment Descriptor），总共需要8个字节来描述。但Intel为了保持向后兼容，将段寄存器仍然规定为16-bit，显然我们无法用16-bit的段寄存器来直接存储64-bit的段描述符。<br><br>解决的办法是将所有64-bit的段描述符放到一个数组中，将16-bit段寄存器的值作为下标来访问这个数组（以字节为单位），获取64-bit的段描述符，这个数组就叫做全局描述符表（Global Descriptor Table, GDT）。<a href="#ref-2"><sup>2</sup></a><br></li>
+<li>GDT表项的构成:<br><br>表项64位,从低位到高位的分布为<br></li>
+</ul>
+<pre><code>    Limit:                      0  : 15
+    Base:                       16 ：31
+    Base|TYPE|S|DPL|P：         0 ：7 | 8 : 11 | 12: 12 | 13 : 14 | 15 : 15
+    Limit|AVL|L|DB|G|Base       16 : 19 | 20 : 20 | 21 : 21 | 22 : 22 | 23 : 23 | 24 : 31
+Base：段的基地址，由一个字（32位下，32bits，4字节）组成，意味着可以是保护模式下4G内存中任意一个位置(4G=2^32, 单位由G决定)&lt;br&gt;
+Limit: 段界限，20bits&lt;br&gt;
+G：段界限的单位，1bits，为0以字节为单位，为1以4kb为单位&lt;br&gt;
+P：存在标志位，1bits，为0说明内存不存在，当检查到为0而后面指令又要用到这段时可以引发缺页中断，然后中断将这段加载到内存，为1存在&lt;br&gt;
+DPL：4个特权级，2bits,代表的数值越小特权级越高，00，01，10，11&lt;br&gt;
+S：描述符类型，1bits, 为0表示系统段System Segment，为1表示代码段Code Segment&lt;br&gt;(关于什么是系统段什么是代码段见注释)[&lt;sup&gt;3&lt;/sup&gt;](#ref-3)
+DB：默认操作数大小或指针大小，1bits,D为0表示对于代码段/数据段指令的偏移地址或操作数为16位，为1则32位&lt;br&gt;
+TYPE：表项所描述的数据段类型为代码段\数据段\系统调用门\TSS结构\LDT\...，4bits, 并且根据S的值为0还是为1对于位的解释不同,，较为复杂，详情见手册&lt;br&gt;
+L：标志64位代码段&lt;br&gt;
+AVL：给操作系统的保留位&lt;br&gt;
+</code></pre>
+<ul>
+<li>16位段寄存器CS用于存放GDT表索引，GDT表本身使用结构数组实现，GDT表项大小为64bit，我们将其简单的均分为四个部分：<br></li>
+</ul>
+<pre><code>    segment_limit， //段限制，简单设为0xffff
+    base_s,         //基地址，简单设为0x0000
+    base_attr,      //属性位，对内核段简单设为0x9a00(1001 1010 0000 0000 P=1, DPL=00, S=1为何是1见注释3, TYPE=1010：代码段、地址向上增长、可读写、未被访问过)或0x9200 (1001 0010 0000 0000相比于之前，TYPE=0010：数据段、地址向上增长、可读写、未被访问过)
+    base_limit      //段限制2和标志位, 对内核段设为0x00cf(0000 0000 1100 1111 Limit=1111,AVL=0, L=0, DB=1, G=1段以4kb为单位)
+
+因为段选择子的构成为
+
+    RPL:    0 : 1   //权限
+    TI：    2 : 2   //表明是GDT选择子还是LDT选择子
+    Index:  3 : 15  //索引
+
+索引值需要左移三位留给RPL和TI，所以在宏定义中需要*8，相当于左移三位，而在GDT表中需要/8，相当于右移三位取索引值作为数组下标。
+
+内存基地址权限等保存在GDT表中，通过GDT寄存器加载GDT表的地址GDT表首项GDT[0]要置0&lt;br&gt;
+
+
+
+    /*
+    在文件 os.h 中
+    */
+    #define KERNEL_CODE_SEG    (1 * 8)    //内核代码区索引
+    #define KERNEL_DATA_SEG    (2 * 8)   //内核数据区索引
+    
+    /*
+    在文件 os.c 中
+    */
+    struct 
+    &#123;
+    //将表项简单的均分为四个部分
+    uint16_t segment_limit, base_s, base_attr, base_limit;
+    &#125;gdt_table[256]__attribute__((aligned(8)))=
+    &#123;
+    //数组gdt[1]和[2]设为索引，其他数据自动填0
+    [KERNEL_CODE_SEG / 8]=&#123;0xffff, 0x0000, 0x9a00, 0x00cf&#125;,//段寄存器CS访问
+    [KERNEL_DATA_SEG / 8]=&#123;0xFFFF, 0x0000, 0x9200, 0x00cf&#125;,//段寄存器BS访问
+    &#125;;
+</code></pre>
+<ul>
+<li>GDT表的位置保存在GDTR寄存器中<br>  使用</li>
+</ul>
+<pre><code>     lgdt gdt_desc
+     ...
+     gdt_desc:
+    .word (256*8) - 1            //gdt表的界限，从0开始所以要减一,256*8十六进制值为0x7ff
+    .long gdt_table                //gdt表的起始地址
+
+
+保存GDT表地址到GDTR寄存器
+</code></pre>
+<h2 id="2-初始化页表"><a href="#2-初始化页表" class="headerlink" title="2. 初始化页表"></a>2. 初始化页表</h2><p>在32位寻址空间下需要2^32位地址，也就是4GB大小的内存，然而我们在qemu初始化时只给了128MB的内存（2^27位地址），我们通过两级页表实现128MB到4GB的内存映射，我们在这里只是简单初始化页表、直接设置了一个地址映射并且设置了恒等映射，并没有编写完整的地址映射机制</p>
+<ul>
+<li><p>虚拟内存分页机制</p>
+<p>  a. 内存分页：<br><br>  通过地址映射扩充可访问地址范围（比如实际内存中有暂时空闲的内存，通过调度将空闲的内存作为虚拟地址，因为实际内存大小限制，所以虚拟内存不可能全部被占用，占用量超过实际内存时虚拟内存不会再分配地址，直到实际内存有空闲），也可以实现权限细分、内存隔离等。</p>
+<p>  b. 内存访问过程：<br><br>  代码访问内存时通过DS或SS段寄存器访问GDT表得到数据段基地址，基地址加上偏移量得到虚拟内存地址，虚拟内存通过页表定位到物理内存</p>
+<p>  c. 页表本身的存储：<br><br>  CR3寄存器存储页表起始地址，页目录表只有一个，1024个元素，32位虚拟地址的前10位为页目录表，二级页表查找中间10位地址，最后12位为物理页偏移</p>
+<p>  d. 页表查询过程：<font color="red" >（重点）</font><br><br>  虚拟内存分为4kb的页，实际内存也分为4kb的页，页目录表存放的地址表示虚拟内存中的第几个4M，第二页表存放的地址表示页表目录中的第某个4M中的第几个4kb，最后的物理页偏移存放二级页表的4kb中的某个实际地址，页表的映射需要编写映射机构实现，本实验只是开启页表并未涉及到映射的实现</p>
+<p>  e. 关于恒等映射：<br><br>  因为打开页表前我们一直使用的是物理地址，但是打开分页机制后，运行在高特权级的内核与运行在低特权级的应用在访存上都会受到影响（比如内核栈的基地址等），它们的访存地址会被视为一个虚拟地址并通过页表查找，这时需要在页表中建立一个恒等映射使得虚拟地址与物理地址一一对应，这样在代码寻址时，之前的地址虽然通过页表寻找但仍然保存了之前的含义，我们使用页表第0项建立这种恒等映射关系（0~4mb）</p>
+</li>
+</ul>
+<ul>
+<li><p>CR寄存器</p>
+<p>  只列出本实验用到的页表控制的相关位功能</p>
+<p>  a. CR0:</p>
+<pre><code>  PE：0~0 置0表示实地址模式；置1表示保护模式。
+  PG：31~31 置0表示不开启分页机制；置1表示开启分页机制。
+  WP：16~16 置0表示R0代码可以读写任意用户级物理页；置1表示R0可以读取任意用户级物理页，但对于只读的物理页则不能写。
+</code></pre>
+<p>  b. CR1: 保留，不使用</p>
+<p>  c. CR2:</p>
+<pre><code>  当CPU访问某个无效页面时，会产生缺页异常，此时，CPU会将引起异常
+  的线性地址存放在CR2中。本实验未使用。
+</code></pre>
+<p>  d. CR3:</p>
+<pre><code>  存储页表目录物理地址，页目录表总是放在以4K字节为单位的存储器边界上，因此，它的地址的低12位总为0，不起作用，即使写上内容，也不会被理会。
+</code></pre>
+</li>
+</ul>
+<pre><code>e. CR4:
+
+    PAE：置0表示10-10-12分页，置1表示2-9-9-12分页。
+    PSE: 4~4 10-10-12分页时的前提下，置1表示4M映射，置0表示4k映射。
+</code></pre>
+<ul>
+<li><p>页表项的构成：<br>只列出用到的表项</p>
+<pre><code>  0~0：V表示表项是否合法，为0表示不合法，表项的其他位的值会被忽略
+  1~1：R\W\X：为1表示可读可写可执行，为0表示可读或可执行，当处理器运行在超级用户特权级（级别0、1或2）时，则R/W位不起作用。页目录项中的R/W位对其所映射的所有页面起作用。
+  4~4：用户权限，如果为1，那么运行在任何特权级上的程序都可以访问该页面。如果为0，那么页面只能被运行在超级用户特权级（0、1或2）上的程序访问。页目录项中的U/S位对其所映射的所有页面起作用。
+  7~7：PS，为0表明表项做4kb映射，为1表示做4mb映射，手册中原话“Page size; must be 1 (otherwise, this entry references a page table; see Table 4-5. If CR4.PSE = 1, must be 0 (otherwise, this entry maps a 4-MByte page; see Table 4-4); otherwise, ignored)”
+</code></pre>
+</li>
+<li><p>实现：<br>页表本身占用1024*4=4kb空间</p>
+<pre><code>  //使用二级页表映射，第一个页表索引前10位，第二个索引中间10位，物理页中偏移12位
+  #define MAP_ADDR 0x80000000//2^31
+
+  //位设置
+  #define PDE_P (1&lt;&lt;0)    //表项存在
+  #define PDE_W (1&lt;&lt;1)    //表项可写
+  #define PDE_U (1&lt;&lt;2)    //用户权限
+  #define PDE_PS (1&lt;&lt;7)   //表明做4mb映射
+</code></pre>
+</li>
+</ul>
+<pre><code>    //物理页偏移，将虚拟地址0x80000000映射到这个数组，需要4kb内存对齐
+    //随便赋给它一个初值，运行后比较0x80000000位置和这个数组的第0项值确定分页机制是否成功
+    uint8_t map_phy_buffer[4096] __attribute__((aligned(4096)))=
+    &#123;
+        0x36,
+    &#125;;
+
+    //页表，4kb对齐
+    uint32_t pag_dir[1024] __attribute__((aligned(4096)))=
+    &#123;
+        //第0项恒等映射，4MB虚拟内存恒等映射到物理内存
+        [0]=(0) | PDE_P | PDE_W | PDE_U |PDE_PS,
+        //其它表项在后面的函数中初始化
+    &#125;;
+
+    //二级页表一个4mb页目录表项对应一个二级页表，4kb对齐
+    static uint32_t pag_dir_2[1024] __attribute__((aligned(4096)))=
+    &#123;
+        0,
+    &#125;;
+
+    void os_init(void)
+    &#123;
+        ......
+        //对地址0x80000000取最高10位，页目录表项pag_dir[1000 0000 00]指向二级页表
+        pag_dir[MAP_ADDR&gt;&gt;22]=(uint32_t)pag_dir_2 | PDE_P | PDE_W | PDE_U;
+        //取中间10位(0x3ff从最低位数10个1), 二级页表pag_dir_2[0000 0000 00]指向数组的物理地址
+        pag_dir_2[MAP_ADDR&gt;&gt;12 &amp;0x3ff]=(uint32_t)map_phy_buffer | PDE_P | PDE_W | PDE_U;
+    &#125;
+</code></pre>
+<ul>
+<li>运行效果<br><br>此时在内存监视器中查看&amp;map_phy_buffer和*(unsigned char *)0x80000000位置的值应该是相同的</li>
+</ul>
+<h2 id="3-定时中断"><a href="#3-定时中断" class="headerlink" title="3. 定时中断"></a>3. 定时中断</h2><p>运行程序时，可以通过定时中断来暂时打断一个任务的执行然后切换到其他任务，执行结束后或者中断再次发生后返回前一个任务。我们通过设置定时中断实现周期性执行任务切换，中断分为外部中断（外部设备对CPU的中断）和内部中断），内部中断分为软中断（由中断服务程序对内核进行的中断）和异常，这里仅使用软中断</p>
+<ol>
+<li><p>8259中断发生器和8253芯片：<br><br> 具体参数和中断管脚的开启屏蔽查看手册</p>
+<p> 设置芯片时将IRQ0通道设置为在IDT表项0x20设置中断</p>
+<pre><code> outb(0x20,0x21);
+</code></pre>
+</li>
+<li><p>中断发生的步骤:<br><br> a. 8253定时器产生时钟信号设置中断时间100ms，连接8259芯片管脚产生中断信号，中断信号通过函数绑定IDT表，到IDT表中寻找中断函数并执行,需要自己配置IDT表项和中断函数</p>
+<p> b. 来自CPU自身的中断占用中断向量表0~21,8259芯片绑定IDT表项20，从表项20开始寻找中断函数</p>
+<p> c. 中断处理函数注意保护现场，处理结束后恢复现场</p>
+</li>
+<li><p>IDT表:</p>
+<p> IDT表并不是一个函数指针直接指向中断函数，而是通过GDT表在虚拟地址中寻找中断函数位置</p>
+</li>
+</ol>
+<ul>
+<li><p>IDTR寄存器存储IDT表位置和界限</p>
+<pre><code>  lidt idt_desc                    //IDTR寄存器保存IDT表地址
+  idt_desc:
+      .word (256*8) - 1            //gdt表的界限，从0开始所以要减一,值为0x7ff
+      .long idt_table                //gdt表的起始地址
+</code></pre>
+</li>
+<li><p>表项含义</p>
+<p>  IDT 表中可以存放三种类型的门描述符:</p>
+<p>  中断门描述符</p>
+<p>  陷阱门描述符</p>
+<p>  任务门描述符</p>
+<p>  我们在这里只简单的使用中断门<br>  中断门表项32位：</p>
+<pre><code>  offset:                     0  : 15
+  Segment Selector:           16 ：31
+  Reserved                    0  : 4
+  000                         5  : 7
+  TYPE：                      8  ：11
+  DPL：                       13 ：14
+  P：                         15 : 15
+  offset：                    16 : 31
+</code></pre>
+<p>  Selector：Segment Selector for destination code segment 相当于GDT中的段选择子，指向GDT表项得到代码段地址<br><br>  Offset：Offset to procedure entry point中断函数入口，即相对于GDT表中得到的代码段的偏移量<br><br>  DPL：Descriptor Privilege Level 中断描述符的特权级，后面切换特权级时用到<br>,数值越小特权级越高<br>  TYPE：表明门类型，0101是任务门，D110是中断门，D111是陷阱门，D100是调用门<br><br>  P：Segment Present flag 段存在标志<br><br>  TYPE中的D：Size of gate: 1 = 32 bits; 0 = 16 bits 中断门大小<br><br>  我们将表项分为四部分</p>
+<pre><code>  struct
+  &#123;
+      uint16_t offset_l, selector, attr, offset_h;
+  &#125;idt_table[256]__attribute__((aligned(8)));
+
+  /*
+  offset_l：中断函数虚拟地址的低16位
+  selector: GDT表段选择子
+  attr: 0x8e00(1000 1100 0000 0000 P=1, DPL=00, S=0这一位要求置0, TYPE=1110，其它8位未使用置0)
+  offset_h: 中断函数虚拟地址的高16位
+  */
+
+  idt_table[0x20].offset_l=(uint32_t)timer_init &amp;0xFFFF;
+  idt_table[0x20].offset_h=(uint32_t)timer_init &gt;&gt;16;
+  idt_table[0x20].selector=KERNEL_CODE_SEG;
+  idt_table[0x20].attr=0X8E00;
+
+   
+</code></pre>
+</li>
+</ul>
+<ol start="4">
+<li>定时中断的实现，一些参数是芯片手册固定好的参数，这里不做解释</li>
+</ol>
+<pre><code>    /*
+    在os.c中
+    */
+
+    //全局IDT表
+    struct
+    &#123;
+        uint16_t offset_l, selector, attr, offset_h;
+    &#125;idt_table[256]__attribute__((aligned(8)));
+
+    ......
+
+    //8253定时器定时中断配置，端口引脚绑定，具体查看相应手册
+    void outb(uint8_t data, uint16_t port)
+    &#123;
+        //下面的语句是内嵌汇编表达式，asm是一个宏定义表示声明一个内联汇编表达式，volatile可选，表明不允许GCC对其做优化
+        __asm__ __volatile__(&quot;outb %[v], %[p]&quot;::[p]&quot;d&quot;(port), [v]&quot;a&quot;(data));
+    &#125;
+
+    void timer_init(void);//这个函数用汇编编写，这里只是给IDT表项一个可引用的函数位置，否则.S文件中的函数名需要在.c中声明
+    void os_init(void)
+    &#123;
+        //IDT表配置，8259芯片配置
+        //主片中断起始0x20，写到0x21端口
+        //主片0xA0，到0xA1
+        outb(0x11,0x20);//主片初始化，向20端口写入规定值
+        outb(0x11,0xA0);//从片初始化，向A0写入规定值
+        outb(0x20,0x21);//CPU内部中断向量占用向量号0~21，从通道IRQ0传来的中断信号进入IDT表项IDT[20]后进行中断查找
+        outb(0x28,0xA1);//有8个引脚，表项配置到0x28
+        outb(1&lt;&lt;2,0x21);//主片第二个管脚连了从片
+        outb(2,0xa1);//从片第二个管脚连到主片上
+        outb(0x1,0x21);//配置主片工作模式，见手册
+        outb(0x1,0xA1);//配置从片工作模式，见手册
+        outb(0xfe,0x21);//通道IRQ0设置为0开中断，其他为1屏蔽中断
+        outb(0xff,0xA1);//屏蔽从片中断
+
+        //8253每隔100ms产生一次中断
+        int tmo=(1193180 / 100);
+        outb(0x36,0x43);
+        outb((uint8_t)tmo,0x40);
+        outb(tmo&gt;&gt;8,0x40);
+
+        //芯片产生中断到CPU，信号到IDT表项，IDT表项选择子指向GDT表，通过GDT表在虚拟地址中寻找中断函数位置
+        idt_table[0x20].offset_l=(uint32_t)timer_init &amp;0xFFFF;
+        idt_table[0x20].offset_h=(uint32_t)timer_init &gt;&gt;16;
+        idt_table[0x20].selector=KERNEL_CODE_SEG;
+        idt_table[0x20].attr=0X8E00;
+        ......
+    &#125;
+
+    /*
+    在start.S中
+    */
+
+    timer_init:                        //中断函数,处理完中断后需要向8259发送值,发生中断时都会跑到这个中断函数中执行代码，并且特权级为0，此时可以实现task0和task1的上下文切换
+    push %ds
+    pusha                        //保护现场，消除中断时寄存器值改变产生的影响
+    mov $0x20, %al
+    outb %al, $0x20                //outb只支持al寄存器
+
+    mov $KERNEL_DATA_SEG, %ax
+    mov %ax, %ds
+
+    ......
+
+    popa
+    pop %ds
+    iret
+</code></pre>
+<h2 id="4-运行一个task"><a href="#4-运行一个task" class="headerlink" title="4. 运行一个task"></a>4. 运行一个task</h2><ol>
+<li><p>特权级：<br>计算机资源的特权级分为0、1、2、3，其中内核运行在特权级0下，系统程序（驱动、虚拟机等）运行在特权级1、2下，用户程序运行在特权级3下，特权级数值越小权限越高，运行在对应特权级下的内核程序可以使用对应特权级的的计算机资源，0特权级下的程序可以使用所有计算机资源，随着特权级降低可以使用的资源范围也逐渐缩小<br><br>我们的内核程序到目前为止运行在0特权级下，想要使用我们的内核程序运行一个用户程序就需要从特权级0切换到特权级3</p>
+</li>
+<li><p>特权级检查</p>
+</li>
+</ol>
+<ul>
+<li><p>在GDT表和IDT表中检查表项的DPL字段，指示表项代表的段应该用哪个特权级去访问，相等于为资源添加了特权级标签，用在低特权级下运行的程序访问高特权级资源</p>
+</li>
+<li><p>代码段CS寄存器最低两位中的CPL字段表明当前的程序是在哪种特权级下运行的</p>
+</li>
+<li><p>DS或SS等其它段寄存器最低两位中的RPL字段说明的是进程对段访问的请求权限(Request Privilege Level)，是对于段选择子而言的，每个段选择子有自己的RPL，它说明的是进程对段访问的请求权限，本次实验中并未使用</p>
+</li>
+<li><p>DPL&gt;=max{CPL, RPL}才能访问对应资源</p>
+</li>
+</ul>
+<ol start="2">
+<li>特权级切换：</li>
+</ol>
+<ul>
+<li><p>程序从高特权级切换到低特权级的方法</p>
+</li>
+<li><p>用户程序和GDT表数据段设置<br>  使用GDT表中应的用代码段和应用数据段（DPL=3）而不是内核对应段（DPL=0）</p>
+<pre><code>  /*
+  在start.S中
+  */
+  task_0_entry:
+      mov %ss, %ax    //ss中存的是APP_DATA_SEG
+      mov %ax, %ds
+      mov %ax, %es
+      mov %ax, %ss
+      mov %ax, %gs
+      mov %ax, %fs
+      jmp task_0
+
+  /*
+  在os.h中
+  */
+  #define APP_CODE_SEG       ((3*8) | 3)//低两位设置为11，DPL=3，，注意加括号防止宏展开时因为运算级问题得到错误结果
+  #define APP_DATA_SEG       ((4*8) | 3)//同上
+</code></pre>
+</li>
+</ul>
+<pre><code>    /*
+    在os.c中
+    */
+    //虽然是一个死循环，但是后面可以通过中断切换到其它程序
+    void task_0(void)
+    &#123;
+        //char *str=&quot;taska:1234&quot;;
+        uint8_t color=0;
+    for(;;)
+        color++;
+        //sys_show(str,color++);  
+    &#125;
+
+    uint32_t task0_dpl3_stack[1024];    //为task_0配置栈
+    ......
+
+    struct 
+    &#123;   
+        //段限制、代码段起始位置，属性、代码段限制
+        uint16_t segment_limit, base_s, base_attr, base_limit;
+    &#125;gdt_table[256]__attribute__((aligned(8)))=
+    &#123;
+        //在此复习一下上面对于内核段第三部分的设置：0x9a00(1001 1010 0000 0000 P=1, DPL=00, S=1为何是1见注释3, TYPE=1010：代码段、地址向上增长、可读写、未被访问过)或0x9200 (1001 0010 0000 0000相比于之前，TYPE=0010：数据段、地址向上增长、可读写、未被访问过)
+
+        ......
+
+        //相比于内核段，应用段只有属性位（第三部分）不同，不同之处在于DPL段置为11（特权级3），导致从0x9xxx（1001 中间两位为DPL=00）变为0xfxxx（1111 中间两位为DPL=11）
+        [APP_CODE_SEG / 8]=&#123;0xffff, 0x0000, 0xfa00, 0x00cf&#125;,
+        [APP_DATA_SEG / 8]=&#123;0xffff, 0x0000, 0xf300, 0x00cf&#125;,
+
+        ......
+
+    &#125;;
+</code></pre>
+<ul>
+<li><p>如何切换到低特权级<font color="red" >（重点）</font></p>
+<p>  不能直接使用jmp指令，jmp指令简单跳转并未切换运行的特权级<br></p>
+<p>  我们使用Intel手册中的方法，利用栈行为和iret指令</p>
+<p>  程序切换并且发生特权级变动时的栈行为</p>
+<p>  当运行在特权级3的程序因为发生中断导致程序切换特权级0的程序下时，会自动切换到另外一个特权级0的栈，此时会将运行的特权级3的程序的寄存器值SS（特权级3的栈所在的段对应的段寄存器）\ESP（特权级3的栈指针）\EFLAGS\CS（特权级3的代码段的段寄存器）\EIP（中断发生前一刻的指令位置）\错误码（可选）压入特权级0的栈中（这些值按照上面的顺序从栈顶向下排列）</p>
+<p>  因此我们可以利用这一点，在没有发生中断的情况下，在特权级0的状态下先将指令地址压入栈中，然后使用iret指令（iret中断返回指令会自动将栈中的值弹出到对应寄存器）弹出到对应寄存器，因为会将值弹出到EIP寄存器，所以指令自然跳转到我们的用户程序，而且由于值也会弹出到SS和CS寄存器，我们也可以借此改变程序的特权级</p>
+<p>  以下是汇编实现</p>
+<pre><code>  push $APP_DATA_SEG              //在os.h中已经将低2位设置为11，DPL=3，弹到ss寄存器
+  push $task0_dpl3_stack+1024*4   //由于栈是从高地址向低地址增长，所以我们把数组的最后一个地址给到ESP作为栈指针
+  push $0                     //EFLAG寄存器需要设置为0x202，根据手册第1~1位需要置为1，我们希望跳转到用户程序时中断是打开的，所以第9~9位IF置为1（0关闭1开启，sti开中断指令的原理就是设置IF位为1达到目的的)，但是到这一步运行时会出现一些问题（后面会说明解决），我们先设置为0
+  push $APP_CODE_SEG              //在os.h中已经将低2位设置为11，DPL=3
+  push $task_0_entry
+  iret
+</code></pre>
+</li>
+</ul>
+<h2 id="5-实现两个task切换"><a href="#5-实现两个task切换" class="headerlink" title="5. 实现两个task切换"></a>5. 实现两个task切换</h2><ul>
+<li><p>如何切换</p>
+<p>  我们应该都知道，在进行函数调用时，需要做保护现场和恢复现场的操作，对于中断造成的任务切换也是一样，任务在运行时，需要使用内核寄存器保存运行状态数据，还需要使用栈保存参数和局部变量等，x86为任务切换提供了硬件上的支持，只需要为每个任务配置一个TSS（任务状态段）结构，CPU从一个任务切换到另一个任务时会自动将上一个任务的状态保存到TSS结构中，并且TSS结构中保存的数据会自动恢复到对应栈和寄存器，这样即可方便的使用一条指令（jmp TSS）进行跳转。</p>
+<p>  那么可不可以使用之前从内核切换到task_0的方法实现任务切换呢，之前从内核切换到task_0时，由于高特权级可以使用所有资源，所以可以利用特权级发生变化时栈的行为进行切换，而低特权级切换到高特权级时，由于低特权级权限问题，无法使用iret指令也无法直接使用汇编指令达成一些栈操作，所以不能使用这种方法。</p>
+</li>
+</ul>
+<ul>
+<li><p>task_0和task_1以及对应的栈</p>
+<pre><code>  /*
+  在os.c中
+  */
+  //虽然是一个死循环，但是后面可以通过中断切换到其它程序
+  void task_0(void)
+  &#123;
+      char *str=&quot;taska:1234&quot;;
+      uint8_t color=0;
+  for(;;)
+      sys_show(str,color++);  
+  &#125;
+
+  void task_1(void)
+  &#123;
+      char *str=&quot;taskb:5678&quot;;
+      uint8_t color=0xff;
+      for(;;)
+          sys_show(str,color--);
+
+  &#125;
+
+  uint32_t task0_dpl0_stack[1024];
+  uint32_t task0_dpl3_stack[1024];
+  uint32_t task1_dpl0_stack[1024];
+  uint32_t task1_dpl3_stack[1024];
+</code></pre>
+</li>
+<li><p>TSS结构</p>
+<p>  大小：27 * 32 / 8=108字节,下面每行32位，共27行</p>
+<pre><code>  31          15          0            
+              SSP
+  I/O Map Base Address    Reserved T(位置0~0)
+  Reserved                LDT Segment Selector    
+  Reserved                GS                      
+  Reserved                FS                      
+  Reserved                DS                      
+  Reserved                SS                      
+  Reserved                CS                      
+  Reserved                ES                   
+              EDI
+              ESI
+              EBP
+              ESP
+              EBX
+              EDX
+              ECX
+              EAX
+              EFLAGS
+              EIP
+              CR3 (PDBR)
+  Reserved                SS2
+              ESP2
+  Reserved                SS1
+              ESP1
+  Reserved                SS0
+              ESP0
+  Reserved                Previous Task Link
+</code></pre>
+<p>  TSS对于同一个任务可以分配它运行在在不同特权级时的栈空间，当同一个任务只发生特权级变化时，在TSS结构中寻找对应特权级的栈指针并进行栈切换，上表中ESPx对应特权级x时的栈，ESP对应特权级3时的栈<br>  其中特权级3对应的栈用于运行应用程序，特权级0对应的栈用于运行中断和异常处理程序</p>
+</li>
+<li><p>TSS结构实现</p>
+<pre><code>  //TSS表实现进程的上下文切换
+  //（上下文切换指取出将要运行的程序之前保存的状态并保存现在正在运行但将要切出的程序的状态）
+  //这些状态包括寄存器
+  uint32_t task0_tss[]=
+  &#123;
+      // prelink, esp0, ss0, esp1, ss1, esp2, ss2
+      0,  (uint32_t)task0_dpl0_stack + 4*1024, KERNEL_DATA_SEG , /* 后边不用使用 */ 0x0, 0x0, 0x0, 0x0,
+      // cr3, eip, eflags, eax, ecx, edx, ebx, esp, ebp, esi, edi,
+      (uint32_t)pag_dir,  (uint32_t)task_0/*入口地址*/, 0x202, 0xa, 0xc, 0xd, 0xb, (uint32_t)task0_dpl3_stack + 4*1024/* 栈 */, 0x1, 0x2, 0x3,
+      // es, cs, ss, ds, fs, gs, ldt, iomap
+      GDT_DATA_SEG, TASK_CODE_SEG, GDT_DATA_SEG, GDT_DATA_SEG, GDT_DATA_SEG, GDT_DATA_SEG, TASK0_LDT_SEG, 0x0,
+  &#125;;
+
+  uint32_t task1_tss[]=
+  &#123;
+      // prelink, esp0, ss0, esp1, ss1, esp2, ss2
+      0,  (uint32_t)task1_dpl0_stack + 4*1024, KERNEL_DATA_SEG , /* 后边不用使用 */ 0x0, 0x0, 0x0, 0x0,
+      // cr3, eip, eflags, eax, ecx, edx, ebx, esp, ebp, esi, edi,
+      (uint32_t)pag_dir, (uint32_t)task_1/*入口地址*/, 0x202, 0xa, 0xc, 0xd, 0xb, 
+      (uint32_t)task1_dpl3_stack + 4*1024/* 函数局部变量的栈空间 */, 0x1, 0x2, 0x3,
+      // es, cs, ss, ds, fs, gs, ldt, iomap
+      GDT_DATA_SEG, TASK_CODE_SEG, GDT_DATA_SEG, GDT_DATA_SEG, GDT_DATA_SEG, GDT_DATA_SEG, TASK1_LDT_SEG, 0x0,
+  &#125;;
+</code></pre>
+</li>
+<li><p>GDT表的TSS表项</p>
+</li>
+</ul>
+<pre><code>    Segment Limit:              0  : 15
+    Base Address:               16 ：31
+    Base:                       0  :  7
+    TYPE：                      8  ：11
+    1                           12 : 12
+    DPL：                       13 ：14
+    P：                         15 : 15
+    Limit：                     16 : 19
+    AVL:                        20 : 20
+    0                           21 : 22
+    G:                          23 : 23
+    Base:                       24 : 31
+
+    G:置0表示32位TSS表
+    Limit:When the G flag is 0 in a TSS descriptor for a 32-bit TSS,the limit field must have a value equal to or greater than 67H. G为0时，必须设为大于等于67H
+    TYPE：10B1
+    DPL：In most systems, the DPLs of TSS descriptors are set to values less than 3, so that only privileged software can perform task switching. 一般特权级数值设置为小于3，可以根据程序运行的特权级设置
+    其他属性和之前的表项类似
+</code></pre>
+<ul>
+<li><p>TSS表项实现</p>
+<pre><code>  /*
+  在os.h中
+  */
+
+  #define TASK0_TSS_SEL      (5 * 8)
+  #define TASK1_TSS_SEL      (6 * 8)
+
+   /*
+  在os.c中
+  */
+  struct 
+  &#123;
+      //段限制、代码段起始位置，属性、代码段限制
+      uint16_t segment_limit, base_s, base_attr, base_limit;
+  &#125;gdt_table[256]__attribute__((aligned(8)))=
+  &#123;
+  [TASK0_TSS_SEL / 8]=&#123;0x0068, 0, 0xE900, 0x0&#125;,//Limit:0x68，要求大于0x67,0xe900(1110 1001 0000 0000 P=1 段存在标志,DPL=11 权限， TYPE=1001, G=0),base_s在后面的函数中设置
+  [TASK1_TSS_SEL / 8]=&#123;0x0068, 0, 0xE900, 0X0&#125;,//同上
+  
+
+  ......
+
+  &#125;；
+
+  ......
+
+  void os_init(void)
+  &#123;
+      ......
+
+      gdt_table[TASK0_TSS_SEL / 8].base_s=(uint16_t)(uint32_t)task0_tss;
+      gdt_table[TASK1_TSS_SEL / 8].base_s=(uint16_t)(uint32_t)task1_tss;
+
+      ......
+
+  &#125;
+</code></pre>
+</li>
+</ul>
+<ul>
+<li><p>TR寄存器</p>
+<p>  tr 寄存器中存放的就是描述了TSS段的相关信息，比如TSS段的基址，大小和属性。可以通过 ltr指令跟上TSS段描述符的选择子来加载TSS段。该指令是特权指令，只能在特权级为0的情况下使用。任务切换时，当前所有寄存器（TSS结构中有的那些寄存器）的值被填写到当前 tr 段寄存器指向的 TSS 中，然后把新的 TSS 段选择子指向的段描述符加载到 tr 段寄存器中，最后用新的 TSS 段中的值覆盖到当前所有寄存器（TSS结构中有的那些寄存器）中。</p>
+<pre><code>  /*
+  在start.S中
+  */
+
+  //传递GDT表中的选择子给tr寄存器告知要运行哪一个任务
+  //先运行task0的tss
+  mov $TASK0_TSS_SEL, %ax
+  ltr %ax
+</code></pre>
+</li>
+<li><p>任务切换时栈的行为<font color="red" >（重点）</font></p>
+<p>  使用TSS切换任务task0和task1，task0_dpl0,task0_dpl3,task1_dpl0,task1_dpl3这几个栈的切换顺序怎样的。</p>
+<p>  想要了解这个问题，首先要知道如何进行任务切换，由于特权级低的原因，直接从task0切换到task1并不现实，我们可以利用定时中断进入内核态再执行跳转指令到tsak1。</p>
+<p>  利用之前小节的方法，先从内核进入task0中，运行task0时，由于定时中断机制会调用我们自己设计的中断函数timer_init，此时特权级为0，为了编程方便，我们设计一个c函数task_sched，由于特权级为0，所以在这个c函数中可以使用内嵌汇编表达式通过ljmpl指令长跳转到task1函数的位置，这个c函数在timer_init中断函数中使用call指令调用。之后只要发生中断我们就从一个task的死循环中跳转到另一个task。</p>
+<pre><code>  //先使用上一节的方法进入task0
+  push $TASK_DATA_SEG            //ESP程序选择子
+  push $task0_dpl3_stack+1024*4//为task0配置栈空间,栈从高地址向低地址压栈，栈底为数组最后一个元素
+  push $0x202                    //EFLAG的IF标志位IF控制开关中断
+  push $TASK_CODE_SEG            //CS代码段
+  push $task_0_entry            //EIP相当于PC，弹出后PC跳转到任务处
+  iret
+</code></pre>
+</li>
+</ul>
+<pre><code>    task_0_entry:
+    mov %ss, %ax
+    mov %ax, %ds
+    mov %ax, %es
+    mov %ax, %ss
+    mov %ax, %gs
+    mov %ax, %fs
+    jmp task_0
+
+    ......
+
+    timer_int:                        
+
+    ......
+
+    call task_sched                //任务切换函数
+
+    ......
+
+
+    void task_sched(void)
+    &#123;
+        static int task_tss=TASK0_TSS_SEL;
+
+        task_tss=(task_tss==TASK0_TSS_SEL)?                TASK1_TSS_SEL:TASK0_TSS_SEL;
+
+        //需要跳转到那个选择子
+        uint32_t addr[]=&#123;0,task_tss&#125;;
+        //内联汇编，跳转
+        __asm__ __volatile__(&quot;ljmpl *(%[a]) &quot;::[a]&quot;r&quot;(addr));
+        //由于此时是特权级0，GDT表的内核代码段可访问
+
+    &#125;
+
+
+实现了切换后，栈的行为就可以通过一个实验验证
+
+猜测：
+
+栈行为应该是先从task0_dpl3切换到task0_dpl0，中断程序使用task0_dpl0；
+
+再到task1_dpl3再到task1_dpl0，中断程序使用task0_dpl0；
+
+然后再到task0_dpl3，一直循环。
+
+验证：
+
+我们在timer_init函数的pusha前后各打一个断点
+
+第一次f5运行到push %ds前，栈task1_dpl0和寄存器值如下，task1_dpl0[994]以及后面的元素的值都为0
+![avatar][base64str1]
+
+f10运行到pusha指令，栈task1_dpl0和寄存器值如下
+![avatar][base64str2]
+
+可以看到task1_dpl0[994]的值变为寄存器ds的值0x0010
+
+f10运行到pusha后的mov指令，栈task1_dpl0和寄存器值如下
+![avatar][base64str2]
+
+可以看到本是0的区域变成了新的值，关于这些值是什么感兴趣可以自己查阅TSS结构中的值和对应的寄存器值
+
+在本实验中只分配了5个栈，在此过程中观察到其他栈的值并未发生变化，因此至少可以肯定使用TSS切换任务时，task任务运行时中断所调用的中断函数使用的是对应的task_dpl0栈，至于task之间切换时栈从前一个dpl0切到dpl3是显而易见的，因此
+
+栈行为应该是先从task0_dpl3切换到task0_dpl0，中断程序使用task0_dpl0；
+
+再到task1_dpl3再到task1_dpl0，中断程序使用task0_dpl0；
+
+然后再到task0_dpl3，一直循环。
+</code></pre>
+<h2 id="6-添加一个系统调用实现屏幕循环显示"><a href="#6-添加一个系统调用实现屏幕循环显示" class="headerlink" title="6. 添加一个系统调用实现屏幕循环显示"></a>6. 添加一个系统调用实现屏幕循环显示</h2><p>到此为止我们已经完成了任务切换，那么如何通过屏幕上的文字或图像直观的显示任务切换过程呢，CPU的一部分地址是分配给图像显示的，我们按照规则对其写入数据即可在屏幕上显示出想要的效果。</p>
+<ul>
+<li><p>如何在屏幕上显示文字或图像</p>
+<p>  CPU寻址范围0xaffff-0xbffff分配给图像显示</p>
+<p>  0xA0000-0xAFFFF 64KB EGA/VGA/XGA/XVGA彩色模式</p>
+<p>  0xb0000-0xb7fff 32KB 黑白文本</p>
+<p>  0xB80000-0xBffff 32KB 为彩色文本</p>
+<p>  这些地址映射为显卡显存，写入相当于写入显存</p>
+<p>  想要在屏幕上显示图像或文字，需要对这些区域进行写入，但是我们的程序运行在低特权级下，无权对这些地址进行写入</p>
+<p>  系统调用能够使得高特权级代码提供一个接口给低特权级代码，因此我们可以编写特定的系统调用函数给特定的用户程序实现我们的目的，参数通过x86提供的系统调用门传递，不需要额外的中断</p>
+</li>
+<li><p>系统调用门在GDT表上拥有一个表项，表项结构和IDT表中的表项结构类似</p>
+<pre><code>  offset:                     0  ：15
+  Segment Selector:           16 : 31
+  Param.Count:                0  : 4
+  000                         5  : 7
+  TYPE：                      8  ：11
+  0                           12 ：12
+  DPL：                       13 ：14
+  P：                         15 : 15
+  offset：                    16 : 31
+</code></pre>
+<p>  Param.Count: The parameter count, field indicates the number of parameters to copy from the calling procedures stack to the new stack if a stack switch occurs</p>
+<p>  参数个数, 如果堆栈<br>  切换发生, 字段指示从调用过程堆栈复制到新堆栈的参数数量</p>
+<p>  TYPE：1100，其它和IDT表类似</p>
+<pre><code>  /*
+  在os.h中
+  */
+
+  #define SYS_CALL_SEG       (7 * 8)
+
+  /*
+  在os.c中
+  */
+
+  struct 
+  &#123;
+      //段限制、代码段起始位置，属性、代码段限制
+      uint16_t segment_limit, base_s, base_attr, base_limit;
+  &#125;gdt_table[256]__attribute__((aligned(8)))=
+  &#123;
+  ......
+
+  //系统调用门
+  [SYS_CALL_SEG / 8]=&#123;0x0000, KERNEL_CODE_SEG, 0xec03, 0&#125;,//segment limit=KERNEL_CODE_SEG, 0xec03(1110 1100 0000 0011,P=1, DPL=11,TYPE=1100,Param.Count=0011 )
+
+  &#125;;
+
+  ......
+
+  void syscall_handler(void);//系统调用函数,用汇编写, 这里只是给GDT表项一个可引用的函数位置，否则.S文件中的函数名需要在.c中声明
+  void os_init(void)
+  &#123;
+
+  ...... 
+
+  gdt_table[SYS_CALL_SEG / 8].segment_limit=(uint16_t)(uint32_t)syscall_handler;
+
+  ......
+
+  &#125;
+</code></pre>
+</li>
+</ul>
+<pre><code>do_syscall是系统调用函数，我们不直接调用，而是提供一个接口sys_show给用户程序调用，并且处理参数如何通过调用门传递的问题[&lt;sup&gt;4&lt;/sup&gt;](#ref-4)
+</code></pre>
+<ul>
+<li><p>调用过程和如何通过调用门传递参数<font color="red" >（重点）</font></p>
+<p>  参数通过栈传递，唤起系统调用时会发生特权级的变换，栈通过TSS由task_dpl3变为task_dpl0，硬件会压入栈变换时前一个栈的一些值：SS和ESP，然后会拷贝3个栈的单元（3个参数，参数数量由选择子中的Param.Count数值决定）, 我们在sys_show中通过内联汇编代码使用push指令将参数压入栈（压栈时注意顺序），使用lcall将调用门的选择子传递给寄存器，syscall_handler的位置位于GDT表的调用门表项中，syscall_handler中使用call指令调用do_syscall，在syscall_handle调用do_syscall前还要保存相关寄存器值，把ds切换为内核数据段。</p>
+<p>  现在参数传递到了syscall_handler的栈中，我们还需要将参数传递给do_syscall，通过观察反汇编代码，我们得知gcc在调用时函数，会读取调用者对应数量的的栈顶值作为参数，但是在特权级切换时，栈拷贝结束后依然会压入一些其他寄存器值，我们需要把拷贝的参数再次压入栈顶。通过esp指针的值作为基址，后压入的参数数量作为偏移量来再次压入参数，在做操作前要用ebp寄存器保存esp寄存器值</p>
+<pre><code>  push 13*4(%ebp) //%ebp+13*4 这个值是color
+  push 12*4(%ebp) //str
+  push 11*4(%ebp) //功能号
+
+  call do_syscall
+  //多压入了3个值要调整栈指针位置
+  add $(3*4), %esp
+</code></pre>
+<p>  最后，从0特权级到3特权级的调用返回时需要使用retf指令，因为栈切换时发生了硬件复制（比如本来没有硬件复制时栈大小为10，硬件复制了3个值进去，现在是13个值，但是执行popa指令时cpu并不知道硬件多复制了3个值，所以只会弹栈上面的10个值出去，栈中还剩3个值）我们需要加上参数$(3*4)把剩余的3个值弹出以恢复task_dpl0的原本状态。</p>
+<pre><code>  popa
+  pop %ds
+  retf $(3*4)
+</code></pre>
+<p>  实现:</p>
+<pre><code>   /*
+  在os.c中
+  */
+
+  void sys_show(char * str, char color)
+  &#123;
+      uint32_t addr[]=&#123;0,SYS_CALL_SEG&#125;;
+      __asm__ __volatile__(&quot;push %[color];push %[str];push %[id];lcall *(%[a]) &quot;::
+      [a]&quot;r&quot;(addr),[color]&quot;m&quot;(color),[str]&quot;m&quot;(str),[id]&quot;r&quot;(2));
+  &#125;
+  
+
+  /*
+  在start.S中
+  */
+
+  syscall_handler:
+  push %ds
+  pusha
+
+  mov $KERNEL_DATA_SEG, %ax
+  mov %ax, %ds
+
+  mov %esp, %ebp
+  push 13*4(%ebp)
+  push 12*4(%ebp)
+  push 11*4(%ebp)
+
+  call do_syscall
+  //退出要调整栈指针位置
+  add $(3*4), %esp
+
+  popa
+  pop %ds
+  retf $(3*4)
+</code></pre>
+</li>
+<li><p>系统调用函数实现</p>
+<pre><code>  /*
+  在start.S中
+  */
+
+  syscall_handler:
+  push %ds
+  pusha
+
+  mov $KERNEL_DATA_SEG, %ax
+  mov %ax, %ds
+
+  mov %esp, %ebp
+  push 13*4(%ebp)
+  push 12*4(%ebp)
+  push 11*4(%ebp)
+
+  push 
+
+  call do_syscall
+  //多压入了3个值要调整栈指针位置
+  add $(3*4), %esp
+
+  popa
+  pop %ds
+  retf $(3*4)
+
+  /*
+  在os.c中
+  */
+
+  void sys_show(char * str, char color)
+  &#123;
+      uint32_t addr[]=&#123;0,SYS_CALL_SEG&#125;;
+      __asm__ __volatile__(&quot;push %[color];push %[str];push %[id];lcall *(%[a]) &quot;::
+      [a]&quot;r&quot;(addr),[color]&quot;m&quot;(color),[str]&quot;m&quot;(str),[id]&quot;r&quot;(2));
+  &#125;
+
+  //func 功能号，决定我们在屏幕上做什么（清屏之类的），这里只设置2用来显示任务切换
+  void do_syscall(int func,char * str, char color)
+  &#123;
+      static int row=0;
+      if(func == 2)
+      &#123;
+          //操作地址0xb8000可以向屏幕显示，每个显示的元素项用16位设置，16位中高八位颜色低八位ascii码
+          unsigned short * dest = (unsigned short *)0xb8000+80*row;
+
+          while(*str)
+              //显示格式，color放在高8位
+              *dest++=*str++ | (color&lt;&lt;8);
+
+          //屏幕上显示区域为25行的，超过就清零并重新显示
+          row = (row &gt;= 25)?0 : row + 1;
+
+          //一个空循环用于延长显示
+          for(int i=0;i&lt;0xffffff;i++)
+          &#123;
+              ;
+          &#125;
+      &#125;
+  &#125;
+
+  //对两个task做了一些改变
+  void task_0(void)
+  &#123;
+      char *str=&quot;taska:1234&quot;;
+      uint8_t color=0;
+      for(;;)
+          sys_show(str,color++);
+  &#125;
+
+  void task_1(void)
+  &#123;
+      char *str=&quot;taskb:5678&quot;;
+      uint8_t color=0xff;
+      for(;;)
+          sys_show(str,color--);
+
+  &#125;
+</code></pre>
+</li>
+</ul>
+<h2 id="7-使用LDT表"><a href="#7-使用LDT表" class="headerlink" title="7. 使用LDT表"></a>7. 使用LDT表</h2><ul>
+<li><p>LDT表</p>
+<p>  除了GDT（全局描述符表）之外，IA-还允许使用使用一个可选的结构LDT（局部描述符表），但与GDT不同的是，LDT在系统中可以存在多个，并且从LDT的名字可以得知，LDT不是全局可见的，它们只对引用它们的任务可见，每个任务最多可以拥有一个LDT，程序通过TSS结构的值自己使用的LDT表。另外，每一个LDT自身作为一个段存在，它们的段描述符被放在GDT中。<br>  另外，我们的保护模式使用的也是平坦模型，由于GDT是全局可见的所以两个程序的代码段和数据段都是互相可见的。LDT表有多个并且单程序可见，我们可以在LDT表A中设置程序A自己的代码段和数据段，在LDT表B中也设置程序B自己的代码段和数据段。这样段寄存器寻找段时通过不同的LDT表选择对应程序的段选择子，选择LDT表A的过程中LDT表B是不可见的，如果使用的不是平坦模型则实现了数据隔离。</p>
+</li>
+<li><p>LDTR寄存器</p>
+<p>  因为同一时刻只有一个任务运行，所以虽然LDT表由多个但LDTR寄存器只有一个，LDTR用于存储在GDT表中存储的LDT表的段选择子，因此我们是先通过TSS在GDT表中选择对应的LDT表的段选择子来选择对应的LDT表，再通段寄存器查对应的LDT表来查询自己私有的程序段。</p>
+<pre><code>  //程序先进入TASK0所以LDTR寄存器预先设置为TASK0的LDT表选择子
+  mov $TASK0_LDT_SEG , %ax
+  lldt %ax                    //LDTR寄存器
+</code></pre>
+</li>
+<li><p>LDT表结构和GDT表基本相同</p>
+<pre><code>  /*
+  在os.h中
+  */
+  
+  //应用LDT表的选择子，LDT表可以从0开始,CS\DS寄存器会判断从GDT表还是LDT表中查找对应的代码段和数据段，第2位为1从LDT,0和1位为1切换到特权级3
+  #define TASK_CODE_SEG      ((0*0) | 0x4 | 3)
+  #define TASK_DATA_SEG      ((1*8) | 0x4 | 3)
+  
+  /*
+  在os.c中
+  */
+
+  struct
+  &#123;
+      uint16_t segment_limit, base_s, base_attr, base_limit;
+  &#125;task0_ldt_table[2]__attribute__((aligned(8)))=
+  &#123;
+      [TASK_CODE_SEG / 8]=&#123;0xffff, 0x0000, 0xfa00,0x00cf&#125;,
+      [TASK_DATA_SEG / 8]=&#123;0xffff, 0x0000, 0xf300,0x00cf&#125;,
+  &#125;;
+
+  struct
+  &#123;
+      uint16_t segment_limit, base_s, base_attr, base_limit;
+  &#125;task1_ldt_table[2]__attribute__((aligned(8)))=
+  &#123;
+      [TASK_CODE_SEG / 8]=&#123;0xffff, 0x0000, 0xfa00,0x00cf&#125;,
+      [TASK_DATA_SEG / 8]=&#123;0xffff, 0x0000, 0xf300,0x00cf&#125;,
+  &#125;;
+</code></pre>
+</li>
+<li><p>GDT中的LDT表项：</p>
+<pre><code>  /*
+  在os.h中
+  */
+
+  #define TASK0_LDT_SEG      (8 * 8)
+  #define TASK1_LDT_SEG      (9 * 8)
+  
+  /*
+  在os.c中
+  */
+
+  struct 
+  &#123;
+      //段限制、代码段起始位置，属性、代码段限制
+      uint16_t segment_limit, base_s, base_attr, base_limit;
+  &#125;gdt_table[256]__attribute__((aligned(8)))=
+  &#123;
+      ......
+
+      [TASK0_LDT_SEG / 8]=&#123;sizeof(task0_ldt_table)-1, 0x0, 0xe200, 0x00cf&#125;,
+      [TASK1_LDT_SEG / 8]=&#123;sizeof(task1_ldt_table)-1, 0x0, 0xe200, 0x00cf&#125;,
+
+      ......
+
+  &#125;;
+
+  ......
+
+  void os_init(void)
+  &#123;
+
+      ......
+
+      gdt_table[TASK0_LDT_SEG / 8].base_s=(uint16_t)(uint32_t)task0_ldt_table;
+      gdt_table[TASK1_LDT_SEG / 8].base_s=(uint16_t)(uint32_t)task1_ldt_table;
+
+      ......
+
+  &#125;
+</code></pre>
+</li>
+</ul>
+<ul>
+<li><p>TSS结构也要做出对应改变</p>
+<p>  对应的APP_XXX_SEG改为TASK_XXX_SEG</p>
+<pre><code>  uint32_t task0_tss[]=
+  &#123;
+  // prelink, esp0, ss0, esp1, ss1, esp2, ss2
+  0,  (uint32_t)task0_dpl0_stack + 4*1024, KERNEL_DATA_SEG , /* 后边不用使用 */ 0x0, 0x0, 0x0, 0x0,
+  // cr3, eip, eflags, eax, ecx, edx, ebx, esp, ebp, esi, edi,
+  (uint32_t)pag_dir,  (uint32_t)task_0/*入口地址*/, 0x202, 0xa, 0xc, 0xd, 0xb, (uint32_t)task0_dpl3_stack + 4*1024/* 栈 */, 0x1, 0x2, 0x3,
+  // es, cs, ss, ds, fs, gs, ldt, iomap
+  TASK_DATA_SEG, TASK_CODE_SEG, TASK_DATA_SEG, TASK_DATA_SEG, TASK_DATA_SEG, TASK_DATA_SEG, TASK0_LDT_SEG, 0x0,
+  &#125;;
+
+  uint32_t task1_tss[]=
+  &#123;
+  // prelink, esp0, ss0, esp1, ss1, esp2, ss2
+  0,  (uint32_t)task1_dpl0_stack + 4*1024, KERNEL_DATA_SEG , /* 后边不用使用 */ 0x0, 0x0, 0x0, 0x0,
+  // cr3, eip, eflags, eax, ecx, edx, ebx, esp, ebp, esi, edi,
+  (uint32_t)pag_dir, (uint32_t)task_1/*入口地址*/, 0x202, 0xa, 0xc, 0xd, 0xb, 
+  (uint32_t)task1_dpl3_stack + 4*1024/* 函数局部变量的栈空间 */, 0x1, 0x2, 0x3,
+  // es, cs, ss, ds, fs, gs, ldt, iomap
+  TASK_DATA_SEG, TASK_CODE_SEG, TASK_DATA_SEG, TASK_DATA_SEG, TASK_DATA_SEG, TASK_DATA_SEG, TASK1_LDT_SEG, 0x0,
+  &#125;;
+</code></pre>
+<p>  配置完成后运行效果应与之前一致，只是段寄存器改为通过LDT表而不是GDT表。</p>
+</li>
+</ul>
+<h2 id="8-总结"><a href="#8-总结" class="headerlink" title="8. 总结"></a>8. 总结</h2><h2 id="9-代码地址"><a href="#9-代码地址" class="headerlink" title="9. 代码地址"></a>9. 代码地址</h2><h2 id="注释和引用"><a href="#注释和引用" class="headerlink" title="注释和引用"></a>注释和引用</h2><div id="ref-1"></div>
+[1]<br>
+
+
+<pre><code>tips1.0:为什么有实模式？
+最早期的8086处理器只有实模式一种工作方式，数据总线16位，地址总线20位，寄存器为16位。所以一次最多取2^16=64kb数据，因此实模式下每段最大64kb，地址总线20位，2^20=1mb，寄存器左移四位+段内偏移就能定位地
+
+tips1.1:为什么是0x7c00?
+0x7c00来自8088芯片，后来的cpu为了保持兼容性一直沿用。当时的操作系统是86-DOS，所需最小内存量是32kb，即0x0000~0x7FFF，芯片本身占用0x0000~0x03FF，用来保存各种中断程序的存储位置。因此内存只剩下0x4000~0x7FFF，主引导记录被放在内存地址尾部，由于实模式下&lt;font color=&quot;red&quot;&gt;硬盘&lt;/font&gt;以一个扇区为一个读写单位（每次读写必须为扇区大小的整数倍），一个扇区是512字节，主引导记录需要一个扇区，用于主引导记录的数据区和栈需要一个扇区，所以预留位置变成了0x7FFF-0x0200-0x0200+0x0001=0x7C00，0x7c00~0x7dff存放主引导，0x7e00~0x7fff存放数据和堆栈，在makefile中设置代码加载位置为0x7c00
+
+
+        x86_64-elf-(或x86_64-linux-gnu-)ld -m elf_i386 -Ttext=0x7c00 start.o os.o -o os.elf
+
+
+tips1.2:
+一个有效的主引导扇区应该以0x55和0xAA为结尾
+</code></pre>
+<div id="ref-2"></div>
+
+<p>[2] <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/VGhpbZaeyVwq3Ghs2E6eEw">16位实模式切换32位保护模式详解-看雪学苑</a></p>
+<div id="ref-3"></div>
+
+<p>[3] </p>
+<pre><code>    哪些是Code Segment哪些又是System Segment
+    GDT表中的KERNEL_CODE_SEG/KERNEL_DATA_SEG/APP_CODE_SEG/APP_DATA_SEG是代码段Code Segment，S位都置1
+    LDT\TSS结构\STSCALL是系统段System Segment，S位都置0
+    不这样置位就会跑飞
+</code></pre>
+<div id="ref-4"></div>
+[4]
+
+<pre><code>    为什么中间要间隔一层sys_show?
+    因为想要实现低特权级使用高特权级的系统调用，一层简单调用无法到汇编代码中切换特权级
+</code></pre>
+<h1 id="下面是图片的base64转码"><a href="#下面是图片的base64转码" class="headerlink" title="下面是图片的base64转码"></a>下面是图片的base64转码</h1>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/04/13/os%E5%89%8D%E7%BD%AE%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%97-%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E7%BC%96%E7%A8%8B/" data-id="clgezintc0000j4uq37bx314c" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/04/13/test-my-site/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">test_my_site</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/04/13/os%E5%89%8D%E7%BD%AE%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%97-%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E7%BC%96%E7%A8%8B/">os前置实验日志-保护模式编程</a>
+          </li>
+        
+          <li>
+            <a href="/2023/04/13/test-my-site/">test_my_site</a>
+          </li>
+        
+          <li>
+            <a href="/2023/04/13/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
