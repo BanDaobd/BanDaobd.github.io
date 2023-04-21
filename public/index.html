@@ -1329,40 +1329,50 @@ TYPE中的D：Size of gate: 1 = 32 bits; 0 = 16 bits 中断门大小<br><br>
 </ul>
 <h2 id="注释和引用">注释和引用</h2>
 <div id="ref-1"></div>
-[1]<br>
-<pre><code>tips1.0:为什么有实模式？
-最早期的8086处理器只有实模式一种工作方式，数据总线16位，地址总线20位，寄存器为16位。所以一次最多取2^16=64kb数据，因此实模式下每段最大64kb，地址总线20位，2^20=1mb，寄存器左移四位+段内偏移就能定位地
-
-tips1.1:为什么是0x7c00?
-0x7c00来自8088芯片，后来的cpu为了保持兼容性一直沿用。当时的操作系统是86-DOS，所需最小内存量是32kb，即0x0000~0x7FFF，芯片本身占用0x0000~0x03FF，用来保存各种中断程序的存储位置。因此内存只剩下0x4000~0x7FFF，主引导记录被放在内存地址尾部，由于实模式下&lt;font color=&quot;red&quot;&gt;硬盘&lt;/font&gt;以一个扇区为一个读写单位（每次读写必须为扇区大小的整数倍），一个扇区是512字节，主引导记录需要一个扇区，用于主引导记录的数据区和栈需要一个扇区，所以预留位置变成了0x7FFF-0x0200-0x0200+0x0001=0x7C00，0x7c00~0x7dff存放主引导，0x7e00~0x7fff存放数据和堆栈，在makefile中设置代码加载位置为0x7c00
-
-
-    	x86_64-elf-(或x86_64-linux-gnu-)ld -m elf_i386 -Ttext=0x7c00 start.o os.o -o os.elf
-
-
-tips1.2:
-一个有效的主引导扇区应该以0x55和0xAA为结尾
+<p>[1]</p>
+<ul>
+<li>
+<p>注释1</p>
+<p>tips1.0:为什么有实模式？<br>
+最早期的8086处理器只有实模式一种工作方式，数据总线16位，地址总线20位，寄存器为16位。所以一次最多取2^16=64kb数据，因此实模式下每段最大64kb，地址总线20位，2^20=1mb，寄存器左移四位+段内偏移就能定位地</p>
+<p>tips1.1:为什么是0x7c00?<br>
+0x7c00来自8088芯片，后来的cpu为了保持兼容性一直沿用。当时的操作系统是86-DOS，所需最小内存量是32kb，即0x0000~0x7FFF，芯片本身占用0x0000~0x03FF，用来保存各种中断程序的存储位置。因此内存只剩下0x4000~0x7FFF，主引导记录被放在内存地址尾部，由于实模式下<font color="red">硬盘</font>以一个扇区为一个读写单位（每次读写必须为扇区大小的整数倍），一个扇区是512字节，主引导记录需要一个扇区，用于主引导记录的数据区和栈需要一个扇区，所以预留位置变成了0x7FFF-0x0200-0x0200+0x0001=0x7C00，0x7c00~0x7dff存放主引导，0x7e00~0x7fff存放数据和堆栈，在makefile中设置代码加载位置为0x7c00</p>
+<pre><code>  	x86_64-elf-(或x86_64-linux-gnu-)ld -m elf_i386 -Ttext=0x7c00 start.o os.o -o os.elf
 </code></pre>
+<p>tips1.2:<br>
+一个有效的主引导扇区应该以0x55和0xAA为结尾</p>
+</li>
+</ul>
 <div id="ref-2"></div>
 <p>[2] <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/VGhpbZaeyVwq3Ghs2E6eEw">16位实模式切换32位保护模式详解-看雪学苑</a></p>
 <div id="ref-3"></div>
 <p>[3]</p>
-<pre><code>    哪些是Code Segment哪些又是System Segment
-    GDT表中的KERNEL_CODE_SEG/KERNEL_DATA_SEG/APP_CODE_SEG/APP_DATA_SEG是代码段Code Segment，S位都置1
-    LDT\TSS结构\STSCALL是系统段System Segment，S位都置0
-    不这样置位就会跑飞
+<ul>
+<li>
+<p>注释3</p>
+<pre><code> 哪些是Code Segment哪些又是System Segment
+ GDT表中的KERNEL_CODE_SEG/KERNEL_DATA_SEG/APP_CODE_SEG/APP_DATA_SEG是代码段Code Segment，S位都置1
+ LDT\TSS结构\STSCALL是系统段System Segment，S位都置0
+ 不这样置位就会跑飞
 </code></pre>
+</li>
+</ul>
 <div id="ref-4"></div>
-[4]
-<pre><code>    为什么中间要间隔一层sys_show?
-    因为想要实现低特权级使用高特权级的系统调用，一层简单调用无法到汇编代码中切换特权级
+<p>[4]</p>
+<ul>
+<li>
+<p>注释4</p>
+<pre><code>  为什么中间要间隔一层sys_show?
+  因为想要实现低特权级使用高特权级的系统调用，一层简单调用无法到汇编代码中切换特权级
 </code></pre>
+</li>
+</ul>
 <h1>下面是图片的base64转码</h1>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/04/13/os%E5%89%8D%E7%BD%AE%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%97-%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E7%BC%96%E7%A8%8B/" data-id="clgezintc0000j4uq37bx314c" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2023/04/13/os%E5%89%8D%E7%BD%AE%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%97-%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E7%BC%96%E7%A8%8B/" data-id="clgpzywol0002jsuq4xx1cu4q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1398,7 +1408,7 @@ tips1.2:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/04/13/test-my-site/" data-id="clgew0m4y00017cuqeqkbcu2t" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2023/04/13/test-my-site/" data-id="clgpzywoh0001jsuq1qjn1fuv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1431,23 +1441,24 @@ tips1.2:
     <div class="article-entry" itemprop="articleBody">
       
         <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
+<h2 id="Quick-Start">Quick Start</h2>
+<h3 id="Create-a-new-post">Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
+<h3 id="Run-server">Run server</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
+<h3 id="Generate-static-files">Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
+<h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/04/13/hello-world/" data-id="clgew0m4p00007cuq80gb9op6" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2023/04/13/hello-world/" data-id="clgpzywo90000jsuqex26eer8" class="article-share-link">Share</a>
       
       
     </footer>
