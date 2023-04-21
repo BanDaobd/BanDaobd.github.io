@@ -1,0 +1,255 @@
+[2023-04-16 13:15:48Z INFO HostContext] No proxy settings were found based on environmental variables (http_proxy/https_proxy/HTTP_PROXY/HTTPS_PROXY)
+[2023-04-16 13:15:48Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-04-16 13:15:48Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-04-16 13:15:48Z INFO HostContext] Well known config file 'Credentials': 'D:\Blog\blog\actions-runner\.credentials'
+[2023-04-16 13:15:49Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-04-16 13:15:49Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-04-16 13:15:49Z INFO HostContext] Well known config file 'Runner': 'D:\Blog\blog\actions-runner\.runner'
+[2023-04-16 13:15:49Z INFO Listener] Runner is built for Windows (X64) - win-x64.
+[2023-04-16 13:15:49Z INFO Listener] RuntimeInformation: Microsoft Windows 10.0.22621.
+[2023-04-16 13:15:49Z INFO Listener] Version: 2.303.0
+[2023-04-16 13:15:49Z INFO Listener] Commit: e676c7871817c1b484299cd93fabdf4b95e70741
+[2023-04-16 13:15:49Z INFO Listener] Culture: zh-CN
+[2023-04-16 13:15:49Z INFO Listener] UI Culture: zh-CN
+[2023-04-16 13:15:49Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-04-16 13:15:49Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-04-16 13:15:49Z INFO Listener] Validating directory permissions for: 'D:\Blog\blog\actions-runner'
+[2023-04-16 13:15:49Z INFO CommandLineParser] Parse
+[2023-04-16 13:15:49Z INFO CommandLineParser] Parsing 3 args
+[2023-04-16 13:15:49Z INFO CommandLineParser] parsing argument
+[2023-04-16 13:15:49Z INFO CommandLineParser] HasArgs: False
+[2023-04-16 13:15:49Z INFO CommandLineParser] Adding Command: run
+[2023-04-16 13:15:49Z INFO CommandLineParser] parsing argument
+[2023-04-16 13:15:49Z INFO CommandLineParser] HasArgs: True
+[2023-04-16 13:15:49Z INFO CommandLineParser] arg: startuptype
+[2023-04-16 13:15:49Z INFO CommandLineParser] parsing argument
+[2023-04-16 13:15:49Z INFO CommandLineParser] HasArgs: True
+[2023-04-16 13:15:49Z INFO CommandLineParser] Adding option 'startuptype': 'service'
+[2023-04-16 13:15:49Z INFO Listener] Arguments parsed
+[2023-04-16 13:15:49Z INFO Runner] ExecuteCommand
+[2023-04-16 13:15:49Z INFO ConfigurationStore] currentAssemblyLocation: D:\Blog\blog\actions-runner\bin\Runner.Listener.dll
+[2023-04-16 13:15:49Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-04-16 13:15:49Z INFO ConfigurationStore] binPath: D:\Blog\blog\actions-runner\bin
+[2023-04-16 13:15:49Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-04-16 13:15:49Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-04-16 13:15:49Z INFO ConfigurationStore] RootFolder: D:\Blog\blog\actions-runner
+[2023-04-16 13:15:49Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-04-16 13:15:49Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-04-16 13:15:49Z INFO HostContext] Well known config file 'Runner': 'D:\Blog\blog\actions-runner\.runner'
+[2023-04-16 13:15:49Z INFO ConfigurationStore] ConfigFilePath: D:\Blog\blog\actions-runner\.runner
+[2023-04-16 13:15:49Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-04-16 13:15:49Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-04-16 13:15:49Z INFO HostContext] Well known config file 'Credentials': 'D:\Blog\blog\actions-runner\.credentials'
+[2023-04-16 13:15:49Z INFO ConfigurationStore] CredFilePath: D:\Blog\blog\actions-runner\.credentials
+[2023-04-16 13:15:49Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-04-16 13:15:49Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-04-16 13:15:49Z INFO HostContext] Well known config file 'MigratedCredentials': 'D:\Blog\blog\actions-runner\.credentials_migrated'
+[2023-04-16 13:15:49Z INFO ConfigurationStore] MigratedCredFilePath: D:\Blog\blog\actions-runner\.credentials_migrated
+[2023-04-16 13:15:49Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-04-16 13:15:49Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-04-16 13:15:49Z INFO HostContext] Well known config file 'Service': 'D:\Blog\blog\actions-runner\.service'
+[2023-04-16 13:15:49Z INFO ConfigurationStore] ServiceConfigFilePath: D:\Blog\blog\actions-runner\.service
+[2023-04-16 13:15:49Z INFO CommandSettings] Flag 'help': 'False'
+[2023-04-16 13:15:49Z INFO CommandSettings] Flag 'version': 'False'
+[2023-04-16 13:15:49Z INFO CommandSettings] Flag 'commit': 'False'
+[2023-04-16 13:15:49Z INFO CommandSettings] Flag 'check': 'False'
+[2023-04-16 13:15:49Z INFO CommandSettings] Command 'configure': 'False'
+[2023-04-16 13:15:49Z INFO CommandSettings] Command 'remove': 'False'
+[2023-04-16 13:15:49Z INFO CommandSettings] Command 'warmup': 'False'
+[2023-04-16 13:15:49Z INFO ConfigurationManager] LoadSettings
+[2023-04-16 13:15:49Z INFO ConfigurationStore] IsConfigured()
+[2023-04-16 13:15:49Z INFO ConfigurationStore] IsConfigured: True
+[2023-04-16 13:15:49Z INFO ConfigurationManager] Is configured: True
+[2023-04-16 13:15:49Z INFO ConfigurationStore] Read setting file: 299 chars
+[2023-04-16 13:15:49Z INFO ConfigurationManager] Settings Loaded
+[2023-04-16 13:15:49Z INFO ConfigurationStore] IsServiceConfigured()
+[2023-04-16 13:15:49Z INFO ConfigurationStore] IsServiceConfigured: True
+[2023-04-16 13:15:49Z INFO CommandSettings] Command 'run': 'True'
+[2023-04-16 13:15:49Z INFO ConfigurationStore] IsConfigured()
+[2023-04-16 13:15:49Z INFO ConfigurationStore] IsConfigured: True
+[2023-04-16 13:15:49Z INFO ConfigurationManager] Is configured: True
+[2023-04-16 13:15:49Z INFO Runner] Set runner startup type - Service
+[2023-04-16 13:15:49Z INFO CommandSettings] Flag 'once': 'False'
+[2023-04-16 13:15:49Z INFO CommandSettings] Flag 'once': 'False'
+[2023-04-16 13:15:49Z INFO Runner] RunAsync
+[2023-04-16 13:15:49Z INFO ConfigurationManager] LoadSettings
+[2023-04-16 13:15:49Z INFO ConfigurationStore] IsConfigured()
+[2023-04-16 13:15:49Z INFO ConfigurationStore] IsConfigured: True
+[2023-04-16 13:15:49Z INFO ConfigurationManager] Is configured: True
+[2023-04-16 13:15:49Z INFO ConfigurationManager] Settings Loaded
+[2023-04-16 13:15:49Z INFO MessageListener] {
+  "AgentId": 24,
+  "AgentName": "BanDao",
+  "PoolId": 1,
+  "PoolName": "Default",
+  "ServerUrl": "https://pipelines.actions.githubusercontent.com/vbd6EKQARMINAVUS7ckItTttXQj8tyGcNsCx4pAfhScPJ0nv7r",
+  "GitHubUrl": "https://github.com/BanDaobd/BanDaobd.github.io",
+  "WorkFolder": "_work"
+}
+[2023-04-16 13:15:49Z INFO MessageListener] Loading Credentials
+[2023-04-16 13:15:49Z INFO ConfigurationStore] HasCredentials()
+[2023-04-16 13:15:49Z INFO ConfigurationStore] stored True
+[2023-04-16 13:15:49Z INFO CredentialManager] GetCredentialProvider
+[2023-04-16 13:15:49Z INFO CredentialManager] Creating type OAuth
+[2023-04-16 13:15:49Z INFO CredentialManager] Creating credential type: OAuth
+[2023-04-16 13:15:49Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-04-16 13:15:49Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-04-16 13:15:49Z INFO HostContext] Well known config file 'RSACredentials': 'D:\Blog\blog\actions-runner\.credentials_rsaparams'
+[2023-04-16 13:15:49Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-04-16 13:15:49Z INFO MessageListener] Attempt to create session.
+[2023-04-16 13:15:49Z INFO MessageListener] Connecting to the Runner Server...
+[2023-04-16 13:15:49Z INFO RunnerServer] EstablishVssConnection
+[2023-04-16 13:15:49Z INFO RunnerServer] Establish connection with 100 seconds timeout.
+[2023-04-16 13:15:49Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2023-04-16 13:15:49Z INFO RunnerServer] EstablishVssConnection
+[2023-04-16 13:15:49Z INFO RunnerServer] Establish connection with 60 seconds timeout.
+[2023-04-16 13:15:49Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2023-04-16 13:15:49Z INFO RunnerServer] EstablishVssConnection
+[2023-04-16 13:15:49Z INFO RunnerServer] Establish connection with 60 seconds timeout.
+[2023-04-16 13:15:49Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2023-04-16 13:15:58Z WARN GitHubActionsService] Attempt 1 of GET request to https://pipelines.actions.githubusercontent.com/vbd6EKQARMINAVUS7ckItTttXQj8tyGcNsCx4pAfhScPJ0nv7r/_apis/connectionData?connectOptions=1&lastChangeId=39325697&lastChangeId64=39325697 failed (Socket Error: ConnectionReset). The operation will be retried in 10.813 seconds.
+[2023-04-16 13:15:58Z WARN GitHubActionsService] Attempt 1 of GET request to https://pipelines.actions.githubusercontent.com/vbd6EKQARMINAVUS7ckItTttXQj8tyGcNsCx4pAfhScPJ0nv7r/_apis/connectionData?connectOptions=1&lastChangeId=39325697&lastChangeId64=39325697 failed (Socket Error: ConnectionReset). The operation will be retried in 11.125 seconds.
+[2023-04-16 13:15:58Z WARN GitHubActionsService] Attempt 1 of GET request to https://pipelines.actions.githubusercontent.com/vbd6EKQARMINAVUS7ckItTttXQj8tyGcNsCx4pAfhScPJ0nv7r/_apis/connectionData?connectOptions=1&lastChangeId=39325697&lastChangeId64=39325697 failed (Socket Error: ConnectionReset). The operation will be retried in 10.806 seconds.
+[2023-04-16 13:16:15Z WARN GitHubActionsService] Attempt 2 of GET request to https://pipelines.actions.githubusercontent.com/vbd6EKQARMINAVUS7ckItTttXQj8tyGcNsCx4pAfhScPJ0nv7r/_apis/connectionData?connectOptions=1&lastChangeId=39325697&lastChangeId64=39325697 failed (Socket Error: ConnectionReset). The operation will be retried in 13.579 seconds.
+[2023-04-16 13:16:15Z WARN GitHubActionsService] Attempt 2 of GET request to https://pipelines.actions.githubusercontent.com/vbd6EKQARMINAVUS7ckItTttXQj8tyGcNsCx4pAfhScPJ0nv7r/_apis/connectionData?connectOptions=1&lastChangeId=39325697&lastChangeId64=39325697 failed (Socket Error: ConnectionReset). The operation will be retried in 13.483 seconds.
+[2023-04-16 13:16:15Z WARN GitHubActionsService] Attempt 2 of GET request to https://pipelines.actions.githubusercontent.com/vbd6EKQARMINAVUS7ckItTttXQj8tyGcNsCx4pAfhScPJ0nv7r/_apis/connectionData?connectOptions=1&lastChangeId=39325697&lastChangeId64=39325697 failed (Socket Error: ConnectionReset). The operation will be retried in 12.919 seconds.
+[2023-04-16 13:16:38Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2023-04-16 13:16:45Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2023-04-16 13:17:00Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2023-04-16 13:17:00Z INFO MessageListener] VssConnection created
+[2023-04-16 13:17:00Z INFO Terminal] WRITE LINE: 
+[2023-04-16 13:17:00Z INFO Terminal] WRITE LINE: 
+[2023-04-16 13:17:03Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-04-16 13:17:03Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-04-16 13:17:13Z WARN GitHubActionsService] Attempt 1 of POST request to https://vstoken.actions.githubusercontent.com/_apis/oauth2/token/ba0bd49a-eb00-4c29-b8c0-2038bf96cbf4 failed (Socket Error: ConnectionReset). The operation will be retried in 11.105 seconds.
+[2023-04-16 13:18:00Z WARN GitHubActionsService] Retrieving an AAD auth token took a long time (56.7158222 seconds)
+[2023-04-16 13:18:00Z WARN GitHubActionsService] POST request to https://pipelines.actions.githubusercontent.com/vbd6EKQARMINAVUS7ckItTttXQj8tyGcNsCx4pAfhScPJ0nv7r/_apis/distributedtask/pools/1/sessions timed out after 60 seconds.
+[2023-04-16 13:18:00Z ERR  MessageListener] Catch exception during create session.
+[2023-04-16 13:18:00Z ERR  MessageListener] System.TimeoutException: The HTTP request timed out after 00:01:00.
+ ---> System.Threading.Tasks.TaskCanceledException: The operation was canceled.
+ ---> System.IO.IOException: Unable to read data from the transport connection: 由于线程退出或应用程序请求，已中止 I/O 操作。.
+ ---> System.Net.Sockets.SocketException (995): 由于线程退出或应用程序请求，已中止 I/O 操作。
+   --- End of inner exception stack trace ---
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource<System.Int32>.GetResult(Int16 token)
+   at System.Net.Security.SslStream.EnsureFullTlsFrameAsync[TIOAdapter](TIOAdapter adapter)
+   at System.Net.Security.SslStream.ReadAsyncInternal[TIOAdapter](TIOAdapter adapter, Memory`1 buffer)
+   at System.Net.Http.HttpConnection.InitialFillAsync(Boolean async)
+   at System.Net.Http.HttpConnection.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpClient.HandleFailure(Exception e, Boolean telemetryStarted, HttpResponseMessage response, CancellationTokenSource cts, CancellationToken cancellationToken, CancellationTokenSource pendingRequestsCts)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at GitHub.Services.OAuth.VssOAuthTokenHttpClient.GetTokenAsync(VssOAuthGrant grant, VssOAuthClientCredential credential, VssOAuthTokenParameters tokenParameters, CancellationToken cancellationToken)
+   at GitHub.Services.OAuth.VssOAuthTokenProvider.OnGetTokenAsync(IssuedToken failedToken, CancellationToken cancellationToken)
+   at GitHub.Services.Common.IssuedTokenProvider.GetTokenOperation.GetTokenAsync(VssTraceActivity traceActivity)
+   at GitHub.Services.Common.IssuedTokenProvider.GetTokenAsync(IssuedToken failedToken, CancellationToken cancellationToken)
+   at GitHub.Services.Common.VssHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at GitHub.Services.Common.VssHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at GitHub.Services.Common.VssHttpRetryMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at GitHub.Services.WebApi.VssHttpClientBase.SendAsync(HttpRequestMessage message, HttpCompletionOption completionOption, Object userState, CancellationToken cancellationToken)
+   at GitHub.Services.WebApi.VssHttpClientBase.SendAsync[T](HttpRequestMessage message, Object userState, CancellationToken cancellationToken)
+   at GitHub.Services.WebApi.VssHttpClientBase.SendAsync[T](HttpMethod method, IEnumerable`1 additionalHeaders, Guid locationId, Object routeValues, ApiResourceVersion version, HttpContent content, IEnumerable`1 queryParameters, Object userState, CancellationToken cancellationToken)
+   at GitHub.Runner.Listener.MessageListener.CreateSessionAsync(CancellationToken token)
+[2023-04-16 13:18:00Z ERR  MessageListener] #####################################################
+[2023-04-16 13:18:00Z ERR  MessageListener] System.Threading.Tasks.TaskCanceledException: The operation was canceled.
+ ---> System.IO.IOException: Unable to read data from the transport connection: 由于线程退出或应用程序请求，已中止 I/O 操作。.
+ ---> System.Net.Sockets.SocketException (995): 由于线程退出或应用程序请求，已中止 I/O 操作。
+   --- End of inner exception stack trace ---
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource<System.Int32>.GetResult(Int16 token)
+   at System.Net.Security.SslStream.EnsureFullTlsFrameAsync[TIOAdapter](TIOAdapter adapter)
+   at System.Net.Security.SslStream.ReadAsyncInternal[TIOAdapter](TIOAdapter adapter, Memory`1 buffer)
+   at System.Net.Http.HttpConnection.InitialFillAsync(Boolean async)
+   at System.Net.Http.HttpConnection.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpClient.HandleFailure(Exception e, Boolean telemetryStarted, HttpResponseMessage response, CancellationTokenSource cts, CancellationToken cancellationToken, CancellationTokenSource pendingRequestsCts)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at GitHub.Services.OAuth.VssOAuthTokenHttpClient.GetTokenAsync(VssOAuthGrant grant, VssOAuthClientCredential credential, VssOAuthTokenParameters tokenParameters, CancellationToken cancellationToken)
+   at GitHub.Services.OAuth.VssOAuthTokenProvider.OnGetTokenAsync(IssuedToken failedToken, CancellationToken cancellationToken)
+   at GitHub.Services.Common.IssuedTokenProvider.GetTokenOperation.GetTokenAsync(VssTraceActivity traceActivity)
+   at GitHub.Services.Common.IssuedTokenProvider.GetTokenAsync(IssuedToken failedToken, CancellationToken cancellationToken)
+   at GitHub.Services.Common.VssHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+[2023-04-16 13:18:00Z ERR  MessageListener] #####################################################
+[2023-04-16 13:18:00Z ERR  MessageListener] System.IO.IOException: Unable to read data from the transport connection: 由于线程退出或应用程序请求，已中止 I/O 操作。.
+ ---> System.Net.Sockets.SocketException (995): 由于线程退出或应用程序请求，已中止 I/O 操作。
+   --- End of inner exception stack trace ---
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource<System.Int32>.GetResult(Int16 token)
+   at System.Net.Security.SslStream.EnsureFullTlsFrameAsync[TIOAdapter](TIOAdapter adapter)
+   at System.Net.Security.SslStream.ReadAsyncInternal[TIOAdapter](TIOAdapter adapter, Memory`1 buffer)
+   at System.Net.Http.HttpConnection.InitialFillAsync(Boolean async)
+   at System.Net.Http.HttpConnection.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+[2023-04-16 13:18:00Z ERR  MessageListener] #####################################################
+[2023-04-16 13:18:00Z ERR  MessageListener] System.Net.Sockets.SocketException (995): 由于线程退出或应用程序请求，已中止 I/O 操作。
+[2023-04-16 13:18:00Z INFO MessageListener] Retriable exception: The HTTP request timed out after 00:01:00.
+[2023-04-16 13:18:00Z ERR  Terminal] WRITE ERROR: 2023-04-16 13:18:00Z: Runner connect error: The HTTP request timed out after 00:01:00.. Retrying until reconnected.
+[2023-04-16 13:18:00Z INFO MessageListener] Sleeping for 30 seconds before retrying.
+[2023-04-16 13:18:30Z INFO MessageListener] Attempt to create session.
+[2023-04-16 13:18:30Z INFO MessageListener] Connecting to the Runner Server...
+[2023-04-16 13:18:30Z INFO RunnerServer] EstablishVssConnection
+[2023-04-16 13:18:30Z INFO RunnerServer] Establish connection with 100 seconds timeout.
+[2023-04-16 13:18:30Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2023-04-16 13:18:30Z INFO RunnerServer] EstablishVssConnection
+[2023-04-16 13:18:30Z INFO RunnerServer] Establish connection with 60 seconds timeout.
+[2023-04-16 13:18:30Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2023-04-16 13:18:30Z INFO RunnerServer] EstablishVssConnection
+[2023-04-16 13:18:30Z INFO RunnerServer] Establish connection with 60 seconds timeout.
+[2023-04-16 13:18:30Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2023-04-16 13:18:31Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2023-04-16 13:18:31Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2023-04-16 13:18:32Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2023-04-16 13:18:32Z INFO MessageListener] VssConnection created
+[2023-04-16 13:18:32Z INFO Terminal] WRITE LINE: 
+[2023-04-16 13:18:32Z INFO Terminal] WRITE LINE: 
+[2023-04-16 13:18:32Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-04-16 13:18:33Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-04-16 13:18:33Z INFO MessageListener] Session created.
+[2023-04-16 13:18:33Z INFO Terminal] WRITE LINE: 2023-04-16 13:18:33Z: Runner reconnected.
+[2023-04-16 13:18:33Z INFO Terminal] WRITE LINE: Current runner version: '2.303.0'
+[2023-04-16 13:18:33Z INFO Terminal] WRITE LINE: 2023-04-16 13:18:33Z: Listening for Jobs
+[2023-04-16 13:18:33Z INFO JobDispatcher] Set runner/worker IPC timeout to 30 seconds.
+[2023-04-16 13:48:50Z INFO MessageListener] No message retrieved from session '070fd641-b817-4fa5-b174-626b68937a07' within last 30 minutes.
+[2023-04-16 14:14:00Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-04-16 14:14:01Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-04-16 14:19:04Z INFO MessageListener] No message retrieved from session '070fd641-b817-4fa5-b174-626b68937a07' within last 30 minutes.
+[2023-04-16 17:22:13Z WARN GitHubActionsService] Attempt 1 of GET request to https://pipelines.actions.githubusercontent.com/vbd6EKQARMINAVUS7ckItTttXQj8tyGcNsCx4pAfhScPJ0nv7r/_apis/distributedtask/pools/1/messages?sessionId=070fd641-b817-4fa5-b174-626b68937a07&status=Online&runnerVersion=2.303.0 failed (Socket Error: ConnectionAborted). The operation will be retried in 11.08 seconds.
+[2023-04-17 00:38:24Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-04-17 00:38:24Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-04-17 00:39:14Z INFO MessageListener] No message retrieved from session '070fd641-b817-4fa5-b174-626b68937a07' within last 30 minutes.
+[2023-04-17 01:09:25Z INFO MessageListener] No message retrieved from session '070fd641-b817-4fa5-b174-626b68937a07' within last 30 minutes.
+[2023-04-17 01:33:44Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-04-17 01:33:45Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-04-17 01:39:36Z INFO MessageListener] No message retrieved from session '070fd641-b817-4fa5-b174-626b68937a07' within last 30 minutes.
+[2023-04-17 02:09:47Z INFO MessageListener] No message retrieved from session '070fd641-b817-4fa5-b174-626b68937a07' within last 30 minutes.
+[2023-04-17 02:29:04Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-04-17 02:29:05Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-04-17 02:40:00Z INFO MessageListener] No message retrieved from session '070fd641-b817-4fa5-b174-626b68937a07' within last 30 minutes.
+[2023-04-17 03:10:13Z INFO MessageListener] No message retrieved from session '070fd641-b817-4fa5-b174-626b68937a07' within last 30 minutes.
+[2023-04-17 03:24:28Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-04-17 03:24:29Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-04-17 03:40:24Z INFO MessageListener] No message retrieved from session '070fd641-b817-4fa5-b174-626b68937a07' within last 30 minutes.
+[2023-04-17 04:10:36Z INFO MessageListener] No message retrieved from session '070fd641-b817-4fa5-b174-626b68937a07' within last 30 minutes.
+[2023-04-17 04:19:49Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-04-17 04:19:49Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-04-17 04:40:47Z INFO MessageListener] No message retrieved from session '070fd641-b817-4fa5-b174-626b68937a07' within last 30 minutes.
+[2023-04-17 05:11:00Z INFO MessageListener] No message retrieved from session '070fd641-b817-4fa5-b174-626b68937a07' within last 30 minutes.
+[2023-04-17 05:15:12Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-04-17 05:15:13Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-04-17 05:41:12Z INFO MessageListener] No message retrieved from session '070fd641-b817-4fa5-b174-626b68937a07' within last 30 minutes.
+[2023-04-17 06:10:32Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-04-17 06:10:33Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-04-17 06:11:23Z INFO MessageListener] No message retrieved from session '070fd641-b817-4fa5-b174-626b68937a07' within last 30 minutes.
+[2023-04-17 06:41:33Z INFO MessageListener] No message retrieved from session '070fd641-b817-4fa5-b174-626b68937a07' within last 30 minutes.
+[2023-04-17 07:05:54Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-04-17 07:05:55Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-04-17 07:11:47Z INFO MessageListener] No message retrieved from session '070fd641-b817-4fa5-b174-626b68937a07' within last 30 minutes.
+[2023-04-17 07:41:59Z INFO MessageListener] No message retrieved from session '070fd641-b817-4fa5-b174-626b68937a07' within last 30 minutes.
+[2023-04-17 08:01:17Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-04-17 08:01:17Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-04-17 08:12:12Z INFO MessageListener] No message retrieved from session '070fd641-b817-4fa5-b174-626b68937a07' within last 30 minutes.
+[2023-04-17 08:17:05Z INFO HostContext] Runner will be shutdown for UserCancelled
+[2023-04-17 08:17:05Z WARN GitHubActionsService] GET request to https://pipelines.actions.githubusercontent.com/vbd6EKQARMINAVUS7ckItTttXQj8tyGcNsCx4pAfhScPJ0nv7r/_apis/distributedtask/pools/1/messages?sessionId=070fd641-b817-4fa5-b174-626b68937a07&status=Online&runnerVersion=2.303.0 has been cancelled.
+[2023-04-17 08:17:05Z INFO MessageListener] Get next message has been cancelled.
+[2023-04-17 08:17:05Z INFO JobDispatcher] Shutting down JobDispatcher. Make sure all WorkerDispatcher has finished.
