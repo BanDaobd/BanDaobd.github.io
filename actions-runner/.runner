@@ -1,0 +1,9 @@
+﻿{
+  "agentId": 24,
+  "agentName": "BanDao",
+  "poolId": 1,
+  "poolName": "Default",
+  "serverUrl": "https://pipelines.actions.githubusercontent.com/vbd6EKQARMINAVUS7ckItTttXQj8tyGcNsCx4pAfhScPJ0nv7r",
+  "gitHubUrl": "https://github.com/BanDaobd/BanDaobd.github.io",
+  "workFolder": "_work"
+}

@@ -1,0 +1,126 @@
+[2023-04-13 15:29:40Z INFO HostContext] No proxy settings were found based on environmental variables (http_proxy/https_proxy/HTTP_PROXY/HTTPS_PROXY)
+[2023-04-13 15:29:40Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-04-13 15:29:40Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-04-13 15:29:40Z INFO HostContext] Well known config file 'Credentials': 'D:\Blog\blog\actions-runner\.credentials'
+[2023-04-13 15:29:40Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-04-13 15:29:40Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-04-13 15:29:40Z INFO HostContext] Well known config file 'Runner': 'D:\Blog\blog\actions-runner\.runner'
+[2023-04-13 15:29:40Z INFO Listener] Runner is built for Windows (X64) - win-x64.
+[2023-04-13 15:29:40Z INFO Listener] RuntimeInformation: Microsoft Windows 10.0.22621.
+[2023-04-13 15:29:40Z INFO Listener] Version: 2.303.0
+[2023-04-13 15:29:40Z INFO Listener] Commit: e676c7871817c1b484299cd93fabdf4b95e70741
+[2023-04-13 15:29:40Z INFO Listener] Culture: zh-CN
+[2023-04-13 15:29:40Z INFO Listener] UI Culture: zh-CN
+[2023-04-13 15:29:40Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-04-13 15:29:40Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-04-13 15:29:40Z INFO Listener] Validating directory permissions for: 'D:\Blog\blog\actions-runner'
+[2023-04-13 15:29:40Z INFO CommandLineParser] Parse
+[2023-04-13 15:29:40Z INFO CommandLineParser] Parsing 1 args
+[2023-04-13 15:29:40Z INFO CommandLineParser] parsing argument
+[2023-04-13 15:29:40Z INFO CommandLineParser] HasArgs: False
+[2023-04-13 15:29:40Z INFO CommandLineParser] Adding Command: run
+[2023-04-13 15:29:40Z INFO Listener] Arguments parsed
+[2023-04-13 15:29:40Z INFO Runner] ExecuteCommand
+[2023-04-13 15:29:40Z INFO ConfigurationStore] currentAssemblyLocation: D:\Blog\blog\actions-runner\bin\Runner.Listener.dll
+[2023-04-13 15:29:40Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-04-13 15:29:40Z INFO ConfigurationStore] binPath: D:\Blog\blog\actions-runner\bin
+[2023-04-13 15:29:40Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-04-13 15:29:40Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-04-13 15:29:40Z INFO ConfigurationStore] RootFolder: D:\Blog\blog\actions-runner
+[2023-04-13 15:29:40Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-04-13 15:29:40Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-04-13 15:29:40Z INFO HostContext] Well known config file 'Runner': 'D:\Blog\blog\actions-runner\.runner'
+[2023-04-13 15:29:40Z INFO ConfigurationStore] ConfigFilePath: D:\Blog\blog\actions-runner\.runner
+[2023-04-13 15:29:40Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-04-13 15:29:40Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-04-13 15:29:40Z INFO HostContext] Well known config file 'Credentials': 'D:\Blog\blog\actions-runner\.credentials'
+[2023-04-13 15:29:40Z INFO ConfigurationStore] CredFilePath: D:\Blog\blog\actions-runner\.credentials
+[2023-04-13 15:29:40Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-04-13 15:29:40Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-04-13 15:29:40Z INFO HostContext] Well known config file 'MigratedCredentials': 'D:\Blog\blog\actions-runner\.credentials_migrated'
+[2023-04-13 15:29:40Z INFO ConfigurationStore] MigratedCredFilePath: D:\Blog\blog\actions-runner\.credentials_migrated
+[2023-04-13 15:29:40Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-04-13 15:29:40Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-04-13 15:29:40Z INFO HostContext] Well known config file 'Service': 'D:\Blog\blog\actions-runner\.service'
+[2023-04-13 15:29:40Z INFO ConfigurationStore] ServiceConfigFilePath: D:\Blog\blog\actions-runner\.service
+[2023-04-13 15:29:40Z INFO CommandSettings] Flag 'help': 'False'
+[2023-04-13 15:29:40Z INFO CommandSettings] Flag 'version': 'False'
+[2023-04-13 15:29:40Z INFO CommandSettings] Flag 'commit': 'False'
+[2023-04-13 15:29:40Z INFO CommandSettings] Flag 'check': 'False'
+[2023-04-13 15:29:40Z INFO CommandSettings] Command 'configure': 'False'
+[2023-04-13 15:29:40Z INFO CommandSettings] Command 'remove': 'False'
+[2023-04-13 15:29:40Z INFO CommandSettings] Command 'warmup': 'False'
+[2023-04-13 15:29:40Z INFO ConfigurationManager] LoadSettings
+[2023-04-13 15:29:40Z INFO ConfigurationStore] IsConfigured()
+[2023-04-13 15:29:40Z INFO ConfigurationStore] IsConfigured: True
+[2023-04-13 15:29:40Z INFO ConfigurationManager] Is configured: True
+[2023-04-13 15:29:40Z INFO ConfigurationStore] Read setting file: 299 chars
+[2023-04-13 15:29:40Z INFO ConfigurationManager] Settings Loaded
+[2023-04-13 15:29:40Z INFO ConfigurationStore] IsServiceConfigured()
+[2023-04-13 15:29:40Z INFO ConfigurationStore] IsServiceConfigured: True
+[2023-04-13 15:29:40Z INFO CommandSettings] Command 'run': 'True'
+[2023-04-13 15:29:40Z INFO ConfigurationStore] IsConfigured()
+[2023-04-13 15:29:40Z INFO ConfigurationStore] IsConfigured: True
+[2023-04-13 15:29:40Z INFO ConfigurationManager] Is configured: True
+[2023-04-13 15:29:40Z INFO Runner] Try determine runner startup type base on console redirects.
+[2023-04-13 15:29:40Z INFO Runner] Set runner startup type - Manual
+[2023-04-13 15:29:40Z INFO CommandSettings] Flag 'once': 'False'
+[2023-04-13 15:29:40Z INFO CommandSettings] Flag 'once': 'False'
+[2023-04-13 15:29:40Z INFO Runner] RunAsync
+[2023-04-13 15:29:40Z INFO ConfigurationManager] LoadSettings
+[2023-04-13 15:29:40Z INFO ConfigurationStore] IsConfigured()
+[2023-04-13 15:29:40Z INFO ConfigurationStore] IsConfigured: True
+[2023-04-13 15:29:40Z INFO ConfigurationManager] Is configured: True
+[2023-04-13 15:29:40Z INFO ConfigurationManager] Settings Loaded
+[2023-04-13 15:29:40Z INFO MessageListener] {
+  "AgentId": 24,
+  "AgentName": "BanDao",
+  "PoolId": 1,
+  "PoolName": "Default",
+  "ServerUrl": "https://pipelines.actions.githubusercontent.com/vbd6EKQARMINAVUS7ckItTttXQj8tyGcNsCx4pAfhScPJ0nv7r",
+  "GitHubUrl": "https://github.com/BanDaobd/BanDaobd.github.io",
+  "WorkFolder": "_work"
+}
+[2023-04-13 15:29:40Z INFO MessageListener] Loading Credentials
+[2023-04-13 15:29:40Z INFO ConfigurationStore] HasCredentials()
+[2023-04-13 15:29:40Z INFO ConfigurationStore] stored True
+[2023-04-13 15:29:40Z INFO CredentialManager] GetCredentialProvider
+[2023-04-13 15:29:40Z INFO CredentialManager] Creating type OAuth
+[2023-04-13 15:29:40Z INFO CredentialManager] Creating credential type: OAuth
+[2023-04-13 15:29:40Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-04-13 15:29:40Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-04-13 15:29:40Z INFO HostContext] Well known config file 'RSACredentials': 'D:\Blog\blog\actions-runner\.credentials_rsaparams'
+[2023-04-13 15:29:40Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-04-13 15:29:40Z INFO MessageListener] Attempt to create session.
+[2023-04-13 15:29:40Z INFO MessageListener] Connecting to the Runner Server...
+[2023-04-13 15:29:40Z INFO RunnerServer] EstablishVssConnection
+[2023-04-13 15:29:40Z INFO RunnerServer] Establish connection with 100 seconds timeout.
+[2023-04-13 15:29:40Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2023-04-13 15:29:40Z INFO RunnerServer] EstablishVssConnection
+[2023-04-13 15:29:40Z INFO RunnerServer] Establish connection with 60 seconds timeout.
+[2023-04-13 15:29:40Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2023-04-13 15:29:40Z INFO RunnerServer] EstablishVssConnection
+[2023-04-13 15:29:40Z INFO RunnerServer] Establish connection with 60 seconds timeout.
+[2023-04-13 15:29:40Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2023-04-13 15:29:41Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2023-04-13 15:29:41Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2023-04-13 15:29:42Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2023-04-13 15:29:42Z INFO MessageListener] VssConnection created
+[2023-04-13 15:29:42Z INFO Terminal] WRITE LINE: 
+[2023-04-13 15:29:42Z INFO Terminal] WRITE LINE: 
+[2023-04-13 15:29:42Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-04-13 15:29:42Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-04-13 15:29:43Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-04-13 15:29:44Z INFO MessageListener] Session created.
+[2023-04-13 15:29:44Z INFO Terminal] WRITE LINE: Current runner version: '2.303.0'
+[2023-04-13 15:29:44Z INFO Terminal] WRITE LINE: 2023-04-13 15:29:44Z: Listening for Jobs
+[2023-04-13 15:29:44Z INFO JobDispatcher] Set runner/worker IPC timeout to 30 seconds.
+[2023-04-13 15:34:43Z INFO Terminal] WRITE LINE: Exiting...
+[2023-04-13 15:34:43Z INFO ConfigurationStore] IsServiceConfigured()
+[2023-04-13 15:34:43Z INFO ConfigurationStore] IsServiceConfigured: True
+[2023-04-13 15:34:43Z INFO Runner] Received Ctrl-C signal, stop Runner.Listener and Runner.Worker.
+[2023-04-13 15:34:43Z INFO HostContext] Runner will be shutdown for UserCancelled
+[2023-04-13 15:34:43Z WARN GitHubActionsService] GET request to https://pipelines.actions.githubusercontent.com/vbd6EKQARMINAVUS7ckItTttXQj8tyGcNsCx4pAfhScPJ0nv7r/_apis/distributedtask/pools/1/messages?sessionId=4325b1b8-c6df-4431-b2f1-16f8dd3d17c9&status=Online&runnerVersion=2.303.0 has been cancelled.
+[2023-04-13 15:34:43Z INFO MessageListener] Get next message has been cancelled.
+[2023-04-13 15:34:43Z INFO JobDispatcher] Shutting down JobDispatcher. Make sure all WorkerDispatcher has finished.
+[2023-04-13 15:34:45Z INFO Listener] Runner execution been cancelled.
