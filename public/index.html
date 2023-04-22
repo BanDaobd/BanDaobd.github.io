@@ -51,7 +51,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2023-04-22 14:24:21'
+  postUpdate: '2023-04-23 00:09:19'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -156,7 +156,107 @@
     }
     detectApple()
     })(window)</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="BanDaobd's site" type="application/atom+xml">
-</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/bandaobd.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/background.png')"><nav id="nav"><span id="blog-info"><a href="/" title="BanDaobd's site"><span class="site-name">BanDaobd's site</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">BanDaobd's site</h1><div id="site_social_icons"><a class="social-icon" href="https://github.com/BanDaobd" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:1372007805@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/13/os%E5%89%8D%E7%BD%AE%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%97-%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E7%BC%96%E7%A8%8B/" title="os前置实验日志-保护模式编程">os前置实验日志-保护模式编程</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-04-13T10:30:21.000Z" title="Created 2023-04-13 18:30:21">2023-04-13</time></span></div><div class="content">os前置实验-实模式启动到了解保护模式编程
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/bandaobd.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/background.png')"><nav id="nav"><span id="blog-info"><a href="/" title="BanDaobd's site"><span class="site-name">BanDaobd's site</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">BanDaobd's site</h1><div id="site_social_icons"><a class="social-icon" href="https://github.com/BanDaobd" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:1372007805@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/23/%E6%AD%A3%E5%BC%8F%E8%BF%9B%E5%85%A5%E5%86%85%E6%A0%B8%E4%B9%8B%E5%89%8D%E5%87%BD%E6%95%B0%E8%B7%B3%E8%BD%AC%E6%B5%81%E7%A8%8B/" title="正式进入内核之前函数跳转流程">正式进入内核之前函数跳转流程</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-04-22T16:03:52.000Z" title="Created 2023-04-23 00:03:52">2023-04-23</time></span></div><div class="content">进入内核前的流程梳理
+仅解释函数跳转流程，不包括功能函数
+boot/start.S中
+注意在这个文件中都是以是16位指令运行
+函数_start
+
+
+调用者 无
+
+
+定义 start.S中
+  _start:	
+      // 数据段寄存器置为0
+      mov $0, %ax
+      mov %ax, %ds
+      mov %ax, %ss
+      mov %ax, %es
+      mov %ax, %fs
+      mov %ax, %gs
+
+      // 使用0x7c00之前的空间作栈，大约有30KB的RAM，足够boot和loader使用
+      mov $_start, %esp
+
+
+
+作用
+
+
+
+平坦模型把数据段寄存器置零
+分配栈空间，栈底位0x7c00，向低地址增长
+
+函数read_loader:
+
+
+调用者 无
+
+
+定义 start.S中
+  // 从磁盘加载loader进内存，只支持磁盘1
+  read_loader:
+      mov $0x8000, %bx	// 读取到的内存地址
+      mov $0x2, %cx		//  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/23/%E5%86%85%E8%81%94%E6%B1%87%E7%BC%96/" title="内联汇编">内联汇编</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-04-22T16:03:38.000Z" title="Created 2023-04-23 00:03:38">2023-04-23</time></span></div><div class="content">gcc-x86内联汇编
+基本要求看懂会写就好
+摘自 GCC内联汇编基础
+基本内联汇编
+asm(&quot;普通汇编语句\n\t&quot;,
+    &quot;普通汇编语句&quot;);
+
+扩展内联汇编
+asm ( assembler template
+    : output operands                /* optional */
+    : input operands                   /* optional */
+    : list of clobbered registers   /* optional */
+);
+
+constraints:
+    r	Register(s)
+    a	%eax, %ax, %al
+    b	%ebx, %bx, %bl
+    c	%ecx, %cx, %cl
+    d	%edx, %dx, %adl
+    S	%esi, %si
+    D	%edi, %di
+
+这些值代表其后的寄存器，gcc会在其中选择对应的寄存器值
+“=” 指明这个操作数是只写的，之前保存在其中的值将被废弃而被输 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/23/OS%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%971-%E4%BB%8E%E5%AE%9E%E6%A8%A1%E5%BC%8F%E5%88%B0%E5%8A%A0%E8%BD%BD%E5%86%85%E6%A0%B8%E4%BB%A3%E7%A0%81/" title="OS实验日志1-从实模式到加载内核代码">OS实验日志1-从实模式到加载内核代码</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-04-22T16:03:17.000Z" title="Created 2023-04-23 00:03:17">2023-04-23</time></span></div><div class="content">实验日志1
+此篇不是重点部分但涉及较多汇编和硬件知识，因此只解释引导流程的理论以及功能函数的理论和实现，函数调用流程以及代码参考本人博客中另一篇文章，正式进入内核之前函数跳转流程
+bootloader
+boot启动流程
+
+
+设置段寄存器和栈空间
+     .code16
+     .text
+     .global _start
+ _start:	
+     // 数据段寄存器置为0
+     mov $0, %ax
+     mov %ax, %ds
+     mov %ax, %ss
+     mov %ax, %es
+     mov %ax, %fs
+     mov %ax, %gs
+
+     // 使用0x7c00之前的空间作栈，大约有30KB的RAM，足够boot和loader使用
+     mov $_start, %esp
+
+
+
+显示加载完成提示
+     // 显示boot加载完成提示
+     mov $0xe, %ah
+     mov $'L', %al
+     int $0x10
+
+
+
+从磁盘加载loader进内存
+使用int13中断，流程固定
+ // ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/13/os%E5%89%8D%E7%BD%AE%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%97-%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E7%BC%96%E7%A8%8B/" title="os前置实验日志-保护模式编程">os前置实验日志-保护模式编程</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-04-13T10:30:21.000Z" title="Created 2023-04-13 18:30:21">2023-04-13</time></span></div><div class="content">os前置实验-实模式启动到了解保护模式编程
 简单了解从通电到实模式启动再到保护模式编程，目标是通过定时中断实现双任务切换并在屏幕上显示双任务切换过程，程序仅简单的配置了分页机制、多任务切换、定时中断系统的配置、LDT表等，仅仅是为了熟悉后续操作系统实验
 由于只是为了熟悉保护模式下的编程，所以程序相当简单，实模式和保护模式的内存都使用平坦模型，实模式中段寄存器简单的设置为0
 一些可能用到的硬件知识和一些概念的简略介绍
@@ -187,4 +287,4 @@ More info: Generating
 Deploy to remote sites
 1$ hexo deploy
 More info: Deployment
-</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/bandaobd.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name"></div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/BanDaobd" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:1372007805@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/13/os%E5%89%8D%E7%BD%AE%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%97-%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E7%BC%96%E7%A8%8B/" title="os前置实验日志-保护模式编程">os前置实验日志-保护模式编程</a><time datetime="2023-04-13T10:30:21.000Z" title="Created 2023-04-13 18:30:21">2023-04-13</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2023/04/13/test-my-site/" title="test_my_site">test_my_site</a><time datetime="2023-04-13T07:05:00.000Z" title="Created 2023-04-13 15:05:00">2023-04-13</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2023/04/13/hello-world/" title="Hello World">Hello World</a><time datetime="2023-04-13T07:03:00.208Z" title="Created 2023-04-13 15:03:00">2023-04-13</time></div></div></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">April 2023</span><span class="card-archive-list-count">3</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">3</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-04-22T06:24:21.467Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By </div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/bandaobd.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name"></div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/BanDaobd" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:1372007805@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/23/%E6%AD%A3%E5%BC%8F%E8%BF%9B%E5%85%A5%E5%86%85%E6%A0%B8%E4%B9%8B%E5%89%8D%E5%87%BD%E6%95%B0%E8%B7%B3%E8%BD%AC%E6%B5%81%E7%A8%8B/" title="正式进入内核之前函数跳转流程">正式进入内核之前函数跳转流程</a><time datetime="2023-04-22T16:03:52.000Z" title="Created 2023-04-23 00:03:52">2023-04-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/23/%E5%86%85%E8%81%94%E6%B1%87%E7%BC%96/" title="内联汇编">内联汇编</a><time datetime="2023-04-22T16:03:38.000Z" title="Created 2023-04-23 00:03:38">2023-04-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/23/OS%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%971-%E4%BB%8E%E5%AE%9E%E6%A8%A1%E5%BC%8F%E5%88%B0%E5%8A%A0%E8%BD%BD%E5%86%85%E6%A0%B8%E4%BB%A3%E7%A0%81/" title="OS实验日志1-从实模式到加载内核代码">OS实验日志1-从实模式到加载内核代码</a><time datetime="2023-04-22T16:03:17.000Z" title="Created 2023-04-23 00:03:17">2023-04-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/13/os%E5%89%8D%E7%BD%AE%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%97-%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E7%BC%96%E7%A8%8B/" title="os前置实验日志-保护模式编程">os前置实验日志-保护模式编程</a><time datetime="2023-04-13T10:30:21.000Z" title="Created 2023-04-13 18:30:21">2023-04-13</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2023/04/13/test-my-site/" title="test_my_site">test_my_site</a><time datetime="2023-04-13T07:05:00.000Z" title="Created 2023-04-13 15:05:00">2023-04-13</time></div></div></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">April 2023</span><span class="card-archive-list-count">6</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">6</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-04-22T16:09:19.084Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By </div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
