@@ -1,0 +1,376 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>正式进入内核之前函数跳转流程 | BanDaobd's site</title><meta name="author" content=""><meta name="copyright" content=""><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="进入内核前的流程梳理 仅解释函数跳转流程，不包括功能函数 boot&#x2F;start.S中 注意在这个文件中都是以是16位指令运行 函数_start   调用者 无   定义 start.S中   _start:	       &#x2F;&#x2F; 数据段寄存器置为0       mov $0, %ax       mov %ax, %ds       mov %ax, %ss       mov %ax, %es">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正式进入内核之前函数跳转流程">
+<meta property="og:url" content="https://bandaobd.github.io/2023/04/23/%E6%AD%A3%E5%BC%8F%E8%BF%9B%E5%85%A5%E5%86%85%E6%A0%B8%E4%B9%8B%E5%89%8D%E5%87%BD%E6%95%B0%E8%B7%B3%E8%BD%AC%E6%B5%81%E7%A8%8B/index.html">
+<meta property="og:site_name" content="BanDaobd&#39;s site">
+<meta property="og:description" content="进入内核前的流程梳理 仅解释函数跳转流程，不包括功能函数 boot&#x2F;start.S中 注意在这个文件中都是以是16位指令运行 函数_start   调用者 无   定义 start.S中   _start:	       &#x2F;&#x2F; 数据段寄存器置为0       mov $0, %ax       mov %ax, %ds       mov %ax, %ss       mov %ax, %es">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://bandaobd.github.io/img/bandaobd.jpg">
+<meta property="article:published_time" content="2023-04-23T00:03:52.000Z">
+<meta property="article:modified_time" content="2023-04-22T16:12:35.746Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bandaobd.github.io/img/bandaobd.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://bandaobd.github.io/2023/04/23/%E6%AD%A3%E5%BC%8F%E8%BF%9B%E5%85%A5%E5%86%85%E6%A0%B8%E4%B9%8B%E5%89%8D%E5%87%BD%E6%95%B0%E8%B7%B3%E8%BD%AC%E6%B5%81%E7%A8%8B/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '正式进入内核之前函数跳转流程',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-04-22 16:12:35'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="BanDaobd's site" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/bandaobd.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="BanDaobd's site"><span class="site-name">BanDaobd's site</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">正式进入内核之前函数跳转流程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-04-23T00:03:52.000Z" title="Created 2023-04-23 00:03:52">2023-04-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-04-22T16:12:35.746Z" title="Updated 2023-04-22 16:12:35">2023-04-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="正式进入内核之前函数跳转流程"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>进入内核前的流程梳理</p>
+<p><em>仅解释函数跳转流程，不包括功能函数</em></p>
+<h1>boot/start.S中</h1>
+<p><em>注意在这个文件中都是以是16位指令运行</em></p>
+<h2 id="函数-start">函数_start</h2>
+<ul>
+<li>
+<p>调用者 无</p>
+</li>
+<li>
+<p>定义 start.S中</p>
+<pre><code>  _start:	
+      // 数据段寄存器置为0
+      mov $0, %ax
+      mov %ax, %ds
+      mov %ax, %ss
+      mov %ax, %es
+      mov %ax, %fs
+      mov %ax, %gs
+
+      // 使用0x7c00之前的空间作栈，大约有30KB的RAM，足够boot和loader使用
+      mov $_start, %esp
+</code></pre>
+</li>
+<li>
+<p>作用</p>
+</li>
+</ul>
+<ol>
+<li>平坦模型把数据段寄存器置零</li>
+<li>分配栈空间，栈底位0x7c00，向低地址增长</li>
+</ol>
+<h2 id="函数read-loader">函数read_loader:</h2>
+<ul>
+<li>
+<p>调用者 无</p>
+</li>
+<li>
+<p>定义 start.S中</p>
+<pre><code>  // 从磁盘加载loader进内存，只支持磁盘1
+  read_loader:
+      mov $0x8000, %bx	// 读取到的内存地址
+      mov $0x2, %cx		// ch:磁道号，cl起始扇区号
+      mov $0x2, %ah		// ah: 0x2读磁盘命令，BIOS读磁盘从1号开始读
+      mov $64, %al		// al: 读取的扇区数量, 必须小于128，暂设置成32KB=64*512byte
+      mov $0x0080, %dx	// dh: 磁头号，没有跨磁头为0，dl驱动器号0x80(磁盘1)
+      int $0x13
+      jc read_loader		//jump if carry，读完磁盘后返回这里，为1读取失败循环读
+
+      // 跳转至c部分执行，再由c部分做一些处理
+      jmp boot_entry
+</code></pre>
+</li>
+<li>
+<p>作用<br>
+从磁盘加载loader代码进内存</p>
+</li>
+</ul>
+<h2 id="设置结束标志">设置结束标志</h2>
+<ul>
+<li>
+<p>代码</p>
+<pre><code>      .section boot_end, &quot;ax&quot;
+  boot_sig: .byte 0x55, 0xaa
+</code></pre>
+</li>
+<li>
+<p>作用<br>
+为最后两个字节设置规定的结束标志</p>
+</li>
+</ul>
+<h1>boot/boot.c中</h1>
+<h2 id="函数-void-boot-entry-void">函数 void boot_entry(void)</h2>
+<ul>
+<li>
+<p>调用者 boot/start.S中 函数 reader_loader 方式 jmp boot_entry</p>
+</li>
+<li>
+<p>定义</p>
+<pre><code>  void boot_entry(void) &#123;
+      //把地址强转成函数指针指向一个地址，将地址作为函数跳转
+      ((void (*)(void))LOADER_START_ADDR)();
+  &#125; 
+</code></pre>
+</li>
+<li>
+<p>作用<br>
+loader的C入口函数<br>
+把loader的地址段强转为函数指针实现跳转</p>
+</li>
+</ul>
+<h1>loader/start.S</h1>
+<h2 id="函数-start-2">函数 _start</h2>
+<ul>
+<li>
+<p>调用者 boot/boot.c中 函数 void boot_entry(void) 方式((void (*)(void))LOADER_START_ADDR)();</p>
+</li>
+<li>
+<p>定义<br>
+_start:</p>
+<pre><code>  jmp loader_entry
+</code></pre>
+</li>
+</ul>
+<p>作用<br>
+跳转到loader_entry</p>
+<h2 id="函数-protect-mode-entry">函数 protect_mode_entry</h2>
+<p><em>此函数以及后面执行的函数为32位编码</em></p>
+<ul>
+<li>
+<p>调用者 loader/loader_16.c中 函数 loader_entry 方式 far_jump(8, (uint32_t)protect_mode_entry);</p>
+</li>
+<li>
+<p>定义</p>
+<pre><code>  //上面的loader_entry长跳转到这里
+  protect_mode_entry:
+      //对还处于16位的寄存器做一些修改
+      mov $16, %ax
+      mov %ax, %ds
+      mov %ax, %ss
+      mov %ax, %es
+      mov %ax, %fs
+      mov %ax, %gs
+      //真正进入32位模式
+      jmp $8, $load_kernel
+</code></pre>
+</li>
+<li>
+<p>作用 在进入32位模式前对段寄存器做修改？</p>
+</li>
+</ul>
+<h1>loader/loader_16.c中</h1>
+<h2 id="函数-void-loader-entry-void">函数 void loader_entry(void)</h2>
+<ul>
+<li>
+<p>调用者 loader/start.S中 函数 方式  _start jmp loader_entry</p>
+</li>
+<li>
+<p>定义</p>
+<pre><code>  void loader_entry(void)
+  &#123;
+      show_msg(&quot;......loading......\n\r&quot;); 
+      detect_memory();
+
+      enter_protect_mode();
+  &#125;
+</code></pre>
+</li>
+<li>
+<p>作用 调用内存检测函数 调用保护模式入口函数</p>
+</li>
+</ul>
+<h1>loader/loader_32.c中</h1>
+<h2 id="函数-void-load-kernel-void">函数 void load_kernel(void)</h2>
+<ul>
+<li>
+<p>调用者 loader/start.S中 函数 protect_mode_entry 方式 jmp $8, $load_kernel</p>
+</li>
+<li>
+<p>定义</p>
+<p>void load_kernel(void)<br>
+{<br>
+//从磁盘读内核代码<br>
+//内核放在loader后面，100扇区起始，大小500扇区250kb<br>
+read_disk(100, 500, (uint8_t *)SYS_KERNEL_LOAD_ADDR);</p>
+<pre><code>  //把elf文件加载到0x100000后还要从这个位置解析并加载到0x10000，
+  //因为elf文件需要解析出各个段地址（段地址在脚本中聚合了），并且要得到程序代码入口地址（入口地址不是文件的第一个字节）
+  uint32_t kernel_entry = reload_elf_file((uint8_t *)SYS_KERNEL_LOAD_ADDR);
+
+  if(kernel_entry == 0)
+      die(-1);
+
+  //SYS_KERNEL_LOAD_ADD 是start的位置
+  //不加载二进制文件而是加载elf文件，降低文件大小并且能够得知文件数据信息，方便做读写权限，从kernel_entry进入
+  ((void (*)(boot_info_t *))kernel_entry)(&amp;boot_info);
+</code></pre>
+<p>}</p>
+</li>
+<li>
+<p>作用 从磁盘加载内核代码 解析elf文件并得到内核代码入口，<br>
+使用 ((void (*)(boot_info_t *))kernel_entry)(&amp;boot_info);<a href="#ref-1"><sup>1</sup></a></p>
+</li>
+</ul>
+<h1>注释</h1>
+<div id="ref-1"></div>
+<p>[1] 对于一系列地址转换为函数指针实现跳转的解释，以最后一个带参数的跳转为例</p>
+<pre><code>    ((void (*)(boot_info_t *))kernel_entry)(&amp;boot_info);
+</code></pre>
+<p>(void (*)(boot_info_t *))是一个void类型且参数是boot_info_t *类型的函数指针类型，它是无名的，我们把它指向的函数类型叫做函数A</p>
+<p>把kernel_entry,也就是上面得到的函数入口地址转换为函数A，向函数A传入之前loader中内存检查得到的信息(&amp;boot_info)因此</p>
+<pre><code>    typedef (void (*)(boot_info_t *))    A
+    ((A)kernel_entry)(&amp;boot_info)
+</code></pre>
+<p>函数本就是一个地址，把地址强转为函数后会为函数分配栈也就可以传递参数</p>
+<p>由此引发了一个有点无聊的问题：</p>
+<p>由上文知对于</p>
+<pre><code>    ​((void (*)(boot_info_t *))kernel_entry)(&amp;boot_info)
+</code></pre>
+<p>​相当于</p>
+<pre><code>    typedef (void (*)(boot_info_t *))    A
+    ((A)kernel_entry)(&amp;boot_info)
+</code></pre>
+<p>其中​A是一个无名的函数指针类型，那么调用函数不应该使用</p>
+<pre><code>    (*(A)kernel_entry)(&amp;boot_info)
+</code></pre>
+<p>也就是</p>
+<pre><code>    (*(void (*)(boot_info_t *))kernel_entry)(&amp;boot_info)
+</code></pre>
+<p>吗</p>
+<p>​经过测试，这两种调用方法都能正确跳转</p>
+<p>查阅书籍后<br>
+C++ primeplus p243给出了答案</p>
+<p>尽管两种调用方法在逻辑上是冲突的，但是语言对此做了折衷，允许使用这两种方式</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://bandaobd.github.io"></a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://bandaobd.github.io/2023/04/23/%E6%AD%A3%E5%BC%8F%E8%BF%9B%E5%85%A5%E5%86%85%E6%A0%B8%E4%B9%8B%E5%89%8D%E5%87%BD%E6%95%B0%E8%B7%B3%E8%BD%AC%E6%B5%81%E7%A8%8B/">https://bandaobd.github.io/2023/04/23/%E6%AD%A3%E5%BC%8F%E8%BF%9B%E5%85%A5%E5%86%85%E6%A0%B8%E4%B9%8B%E5%89%8D%E5%87%BD%E6%95%B0%E8%B7%B3%E8%BD%AC%E6%B5%81%E7%A8%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/bandaobd.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/04/23/%E5%86%85%E8%81%94%E6%B1%87%E7%BC%96/" title="内联汇编"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">内联汇编</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/bandaobd.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name"></div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/BanDaobd" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:1372007805@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">boot&#x2F;start.S中</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0-start"><span class="toc-number">1.1.</span> <span class="toc-text">函数_start</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0read-loader"><span class="toc-number">1.2.</span> <span class="toc-text">函数read_loader:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E7%BB%93%E6%9D%9F%E6%A0%87%E5%BF%97"><span class="toc-number">1.3.</span> <span class="toc-text">设置结束标志</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">boot&#x2F;boot.c中</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0-void-boot-entry-void"><span class="toc-number">2.1.</span> <span class="toc-text">函数 void boot_entry(void)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">loader&#x2F;start.S</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0-start-2"><span class="toc-number">3.1.</span> <span class="toc-text">函数 _start</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0-protect-mode-entry"><span class="toc-number">3.2.</span> <span class="toc-text">函数 protect_mode_entry</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">loader&#x2F;loader_16.c中</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0-void-loader-entry-void"><span class="toc-number">4.1.</span> <span class="toc-text">函数 void loader_entry(void)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">loader&#x2F;loader_32.c中</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0-void-load-kernel-void"><span class="toc-number">5.1.</span> <span class="toc-text">函数 void load_kernel(void)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">注释</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/23/%E6%AD%A3%E5%BC%8F%E8%BF%9B%E5%85%A5%E5%86%85%E6%A0%B8%E4%B9%8B%E5%89%8D%E5%87%BD%E6%95%B0%E8%B7%B3%E8%BD%AC%E6%B5%81%E7%A8%8B/" title="正式进入内核之前函数跳转流程">正式进入内核之前函数跳转流程</a><time datetime="2023-04-23T00:03:52.000Z" title="Created 2023-04-23 00:03:52">2023-04-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/23/%E5%86%85%E8%81%94%E6%B1%87%E7%BC%96/" title="内联汇编">内联汇编</a><time datetime="2023-04-23T00:03:38.000Z" title="Created 2023-04-23 00:03:38">2023-04-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/23/OS%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%971-%E4%BB%8E%E5%AE%9E%E6%A8%A1%E5%BC%8F%E5%88%B0%E5%8A%A0%E8%BD%BD%E5%86%85%E6%A0%B8%E4%BB%A3%E7%A0%81/" title="OS实验日志1-从实模式到加载内核代码">OS实验日志1-从实模式到加载内核代码</a><time datetime="2023-04-23T00:03:17.000Z" title="Created 2023-04-23 00:03:17">2023-04-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/22/hello-world/" title="Hello World">Hello World</a><time datetime="2023-04-22T16:12:35.746Z" title="Created 2023-04-22 16:12:35">2023-04-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/13/os%E5%89%8D%E7%BD%AE%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%97-%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E7%BC%96%E7%A8%8B/" title="os前置实验日志-保护模式编程">os前置实验日志-保护模式编程</a><time datetime="2023-04-13T18:30:21.000Z" title="Created 2023-04-13 18:30:21">2023-04-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By </div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
