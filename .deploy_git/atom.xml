@@ -3,18 +3,18 @@
   <title>BanDaobd&#39;s site</title>
   
   
-  <link href="https://github.com/BanDaobd/BanDaobd.github.io.git/atom.xml" rel="self"/>
+  <link href="https://bandaobd.github.io/atom.xml" rel="self"/>
   
-  <link href="https://github.com/BanDaobd/BanDaobd.github.io.git/"/>
+  <link href="https://bandaobd.github.io/"/>
   <updated>2023-04-21T14:35:09.125Z</updated>
-  <id>https://github.com/BanDaobd/BanDaobd.github.io.git/</id>
+  <id>https://bandaobd.github.io/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
     <title>os前置实验日志-保护模式编程</title>
-    <link href="https://github.com/BanDaobd/BanDaobd.github.io.git/2023/04/13/os%E5%89%8D%E7%BD%AE%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%97-%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E7%BC%96%E7%A8%8B/"/>
-    <id>https://github.com/BanDaobd/BanDaobd.github.io.git/2023/04/13/os%E5%89%8D%E7%BD%AE%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%97-%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E7%BC%96%E7%A8%8B/</id>
+    <link href="https://bandaobd.github.io/2023/04/13/os%E5%89%8D%E7%BD%AE%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%97-%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E7%BC%96%E7%A8%8B/"/>
+    <id>https://bandaobd.github.io/2023/04/13/os%E5%89%8D%E7%BD%AE%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%97-%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E7%BC%96%E7%A8%8B/</id>
     <published>2023-04-13T10:30:21.000Z</published>
     <updated>2023-04-21T14:35:09.125Z</updated>
     
@@ -34,8 +34,8 @@
   
   <entry>
     <title>test_my_site</title>
-    <link href="https://github.com/BanDaobd/BanDaobd.github.io.git/2023/04/13/test-my-site/"/>
-    <id>https://github.com/BanDaobd/BanDaobd.github.io.git/2023/04/13/test-my-site/</id>
+    <link href="https://bandaobd.github.io/2023/04/13/test-my-site/"/>
+    <id>https://bandaobd.github.io/2023/04/13/test-my-site/</id>
     <published>2023-04-13T07:05:00.000Z</published>
     <updated>2023-04-13T07:05:00.838Z</updated>
     
@@ -47,8 +47,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="https://github.com/BanDaobd/BanDaobd.github.io.git/2023/04/13/hello-world/"/>
-    <id>https://github.com/BanDaobd/BanDaobd.github.io.git/2023/04/13/hello-world/</id>
+    <link href="https://bandaobd.github.io/2023/04/13/hello-world/"/>
+    <id>https://bandaobd.github.io/2023/04/13/hello-world/</id>
     <published>2023-04-13T07:03:00.208Z</published>
     <updated>2023-04-13T06:58:22.542Z</updated>
     
