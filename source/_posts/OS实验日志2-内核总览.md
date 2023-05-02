@@ -103,11 +103,11 @@ tags:
 
 * 快速跳转
 
-    [OS实验日志2.1-cpu初始化](https://bandaobd.github.io/2023/05/02/OS实验日志2.1-cpu初始化/)
+    [OS实验日志2.1-cpu初始化](https://bandaobd.github.io/2023/05/02/OS实验日志2-1-cpu初始化/)
 
-    [OS实验日志2.2-中断和异常](https://bandaobd.github.io/2023/05/02/OS实验日志2.2-中断和异常/)
+    [OS实验日志2.2-中断和异常](https://bandaobd.github.io/2023/05/02/OS实验日志2-2-中断和异常/)
 
-    [OS实验日志2.3-打印日志](https://bandaobd.github.io/2023/05/02/OS实验日志2.3-打印日志/)
+    [OS实验日志2.3-打印日志](https://bandaobd.github.io/2023/05/02/OS实验日志2-3-打印日志/)
 
     [OS实验日志2.4-TSS结构和简单的双任务切换](https://bandaobd.github.io/2023/04/23/OS实验日志2.4-TSS结构和简单的双任务切换/)
 
