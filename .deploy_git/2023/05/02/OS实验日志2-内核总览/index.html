@@ -1,0 +1,335 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>OS实验日志2-内核总览 | BanDaobd's site</title><meta name="author" content=""><meta name="copyright" content=""><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="内核总览 进入内核以及传递内存检测信息 之前loader已经为内核代码的加载做好了准备，因此我们需要在这里跳转到内核代码，并把之前loader中获得的硬件信息传递给内核   进入内核代码入口 在上一章中，我们把kernel_entry强制转换成一个不会返回的、参数为boot_info_t * 的函数指针（在c和c++中，函数指针pf和*pf都表示对指向的函数进行调用）   (void (*)(bo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OS实验日志2-内核总览">
+<meta property="og:url" content="https://bandaobd.github.io/2023/05/02/OS%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%972-%E5%86%85%E6%A0%B8%E6%80%BB%E8%A7%88/index.html">
+<meta property="og:site_name" content="BanDaobd&#39;s site">
+<meta property="og:description" content="内核总览 进入内核以及传递内存检测信息 之前loader已经为内核代码的加载做好了准备，因此我们需要在这里跳转到内核代码，并把之前loader中获得的硬件信息传递给内核   进入内核代码入口 在上一章中，我们把kernel_entry强制转换成一个不会返回的、参数为boot_info_t * 的函数指针（在c和c++中，函数指针pf和*pf都表示对指向的函数进行调用）   (void (*)(bo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://bandaobd.github.io/img/bandaobd.jpg">
+<meta property="article:published_time" content="2023-05-02T03:00:51.000Z">
+<meta property="article:modified_time" content="2023-05-02T03:04:20.760Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bandaobd.github.io/img/bandaobd.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://bandaobd.github.io/2023/05/02/OS%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%972-%E5%86%85%E6%A0%B8%E6%80%BB%E8%A7%88/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'OS实验日志2-内核总览',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-02 11:04:20'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="BanDaobd's site" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/bandaobd.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="BanDaobd's site"><span class="site-name">BanDaobd's site</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">OS实验日志2-内核总览</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-05-02T03:00:51.000Z" title="Created 2023-05-02 11:00:51">2023-05-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-05-02T03:04:20.760Z" title="Updated 2023-05-02 11:04:20">2023-05-02</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="OS实验日志2-内核总览"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1>内核总览</h1>
+<h2 id="进入内核以及传递内存检测信息">进入内核以及传递内存检测信息</h2>
+<p>之前loader已经为内核代码的加载做好了准备，因此我们需要在这里跳转到内核代码，并把之前loader中获得的硬件信息传递给内核</p>
+<ul>
+<li>
+<p>进入内核代码入口</p>
+<p>在上一章中，我们把kernel_entry强制转换成一个不会返回的、参数为boot_info_t * 的函数指针（在c和c++中，函数指针pf和*pf都表示对指向的函数进行调用）</p>
+<pre><code>  (void (*)(boot_info_t *))kernel_entry)(&amp;boot_info);
+</code></pre>
+<p>其中kernel_entry是elf文件解析出的32位入口地址</p>
+<pre><code>  uint32_t kernel_entry = reload_elf_file((uint8_t *)SYS_KERNEL_LOAD_ADDR);
+</code></pre>
+<p>这个地址是我们在lds脚本指定的elf文件的内存加载位置</p>
+<pre><code>  . = 0x10000;
+</code></pre>
+<p>之前loader中的代码编译成了bin文件，存放在内存地址xxx处，不会影响elf文件中的代码</p>
+<pre><code>  COMMAND $&#123;OBJCOPY_TOOL&#125; -O binary $&#123;PROJECT_NAME&#125;.elf $&#123;CMAKE_SOURCE_DIR&#125;/../../image/$&#123;PROJECT_NAME&#125;.bin
+</code></pre>
+<p>我们通过函数调用跳转到这个地址，而这个地址将会是elf文件代码区的第一个指令的地址，因此我们新建一个文件夹并指定gcc编译器将代码编译成 elf文件</p>
+<pre><code>  COMMAND $&#123;OBJCOPY_TOOL&#125; -S $&#123;PROJECT_NAME&#125;.elf $&#123;CMAKE_SOURCE_DIR&#125;/../../image/$&#123;PROJECT_NAME&#125;.elf
+</code></pre>
+<p>在汇编文件中 _start 标签的汇编代码是默认的程序入口，因此elf文件代码区的第一条指令将会是保护模式中函数_start的第一条指令，我们在_start函数中参数传递</p>
+</li>
+<li>
+<p>参数传递</p>
+<p>在上一章中我们知道，初始化内核也需要内存信息，boot内存检测得到的的信息需要传递给内核</p>
+<p>在讨论如何传递参数前，我们先来看一下函数的栈结构</p>
+<p><img src="/source/markdown_img/1/1.png" alt="avatar"></p>
+<p>如图所示，从栈顶向栈底方向，依次保存着(可能会有的)寄存器现场、局部变量、调用者的ebp(栈基址指针，方便对栈操作)、返回地址、参数1、2、3(函数调用处地址)，而调用函数是通过eax寄存器(一般用来存放第一个参数)或将%eax压入栈中作为被调用函数的参数，我们利用这一点实现参数传递</p>
+<p>对于一个由地址强制转换成的函数，由于函数不会返回，因此不用保调用者寄存器现场，函数显然也没有局部变量，因此栈中应该保存着返回地址以及唯一一个参数 &amp;boot_info（boot_info的地址），我们会在这个函数中再做一次跳转，跳转到c函数中处理(因为c更好处理后续操作)</p>
+<p>一个被call指令正常调用的函数，参数会通过寄存器或栈传递参数，对于即将调用的c函数，本函数_start又变为调用者函数，因此我们在call指令前手动将_start的栈顶指针%esp作为栈基址%ebp压入栈中，在此之前我们得先压入上一个%ebp，然后再将%esp值传给%ebp</p>
+<pre><code>  push %ebp
+  mov %esp, %ebp
+</code></pre>
+<p>此时%esp+4，%esp距离参数boot_t相隔一个刚压入栈中的%ebp和返回地址，偏移量为8，这个%esp作为栈基址传入%ebp中覆盖掉上一个%ebp值。由于我们知道了参数在栈中相对于%ebp的偏移量，易知参数在栈中的位置为%ebp+0x8，我们把这个位置的值传递给%eax，就相当于把参数传递给了了call调用的c函数</p>
+<pre><code>  mov 0x8(%ebp), %eax
+</code></pre>
+<p>或者可以不用把%esp传递给%ebp，那么也就不用保存上一个%ebp，直接使用相对%esp的偏移量传递值给%eax</p>
+<pre><code>  mov 0x4(%esp), %eax
+</code></pre>
+<p>最后将%eax压入栈，调用c函数，完成c函数读取栈顶值作为参数，完成参数传递</p>
+<pre><code>  push %eax
+  call kernel_init
+</code></pre>
+<p>这段汇编的作用是使用_start指定入口地址以及方便手动传递参数</p>
+</li>
+</ul>
+<h2 id="内核总览">内核总览</h2>
+<p>我们在内核初始化函数中初始化内核的各项功能，这些功能代码构成了内核状态的一部分</p>
+<ul>
+<li>
+<p>内核构成</p>
+<p>一个内核由以下几部分组成：cpu管理、进程管理、存储管理、文件系统、系统调用</p>
+<p>初始化内核就是初始化这些组成部分</p>
+<p>在初始化之前，我们传入了内存检测结果，这个结果将在很大程度上影响我们的操作系统运行，因此我们对其做一个断言，如果后续问题是内存检测导致的，我们将快速定位到错误原因</p>
+<pre><code>  void kernel_init(boot_info_t * boot_info)
+  &#123;
+      //断定它成立，如果不成立在此处引发异常并中断程序
+      ASSERT(boot_info-&gt;ram_region_count != 0);
+
+      cpu_init();
+      //日志初始化放在前面，后面调用的函数就能使用日志打印错误信息
+      log_init();
+      irq_init();
+      time_init();
+      task_manager_init();
+  &#125;
+</code></pre>
+</li>
+<li>
+<p>内存结构总览</p>
+<p><img src="/source/markdown_img/1/1.png" alt="avatar"></p>
+</li>
+<li>
+<p>快速跳转</p>
+<p><a href="https://bandaobd.github.io/2023/04/23/OS%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%972.1-cpu%E5%88%9D%E5%A7%8B%E5%8C%96/">OS实验日志2.1-cpu初始化</a></p>
+<p><a href="https://bandaobd.github.io/2023/04/23/OS%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%972.2-%E4%B8%AD%E6%96%AD%E5%92%8C%E5%BC%82%E5%B8%B8/">OS实验日志2.2-中断和异常</a></p>
+<p><a href="https://bandaobd.github.io/2023/04/23/OS%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%972.3-%E6%89%93%E5%8D%B0%E6%97%A5%E5%BF%97/">OS实验日志2.3-打印日志</a></p>
+<p><a href="https://bandaobd.github.io/2023/04/23/OS%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%972.4-TSS%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%80%E5%8D%95%E7%9A%84%E5%8F%8C%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/">OS实验日志2.4-TSS结构和简单的双任务切换</a></p>
+<p><a href="https://bandaobd.github.io/2023/04/23/OS%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%972.5-%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/">OS实验日志2.5-进程调度算法</a></p>
+<p><a href="https://bandaobd.github.io/2023/04/23/OS%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%972.6-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E4%B8%8E%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/">OS实验日志2.6-内存管理与虚拟内存</a></p>
+<p><a href="https://bandaobd.github.io/2023/04/23/OS%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%972.7-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%AE%9E%E7%8E%B0/">OS实验日志2.7-系统调用实现</a></p>
+<p><a href="https://bandaobd.github.io/2023/04/23/OS%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%972.8-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">OS实验日志2.8-文件系统</a></p>
+</li>
+</ul>
+<h2 id="一些硬件和机制总览">一些硬件和机制总览</h2>
+<p><em>这里只是简要介绍一下各部分功能和部分实现，具体实现见上面的跳转链接</em></p>
+<p><em>个人理解，不一定对</em></p>
+<p><em>还没做完，后面会加新做的部分</em></p>
+<h3 id="地址分段机制">地址分段机制</h3>
+<ol>
+<li>分段机制是设置逻辑地址结构的方法</li>
+<li>逻辑地址描述为：段号：偏移量</li>
+<li>使用GDT表结构设置程序的段号，段号保存在GDT表的表项中</li>
+<li>每个表项除了段号，还有相应位用于的代码和数据保护机制</li>
+<li>有多种类型的表项代表不同类型的段：数据、代码、栈、门、tss，它们的结构也各不相同，分段机制隔离了这些代码和数据</li>
+<li>逻辑地址是程序员可见的地址，进程的运行离不开GDT表，GDT表是描述逻辑地址的结构</li>
+</ol>
+<h3 id="分页机制">分页机制</h3>
+<ol>
+<li>分页机制与分段机制不同，后者是设置逻辑地址结构的方法，而分页机制是实现虚拟地址和物理地址映射的方法，在平坦模型下逻辑地址可看作等同于虚拟地址</li>
+<li>虚拟地址的来源是cpu的总线，因此是程序员不可见的</li>
+<li>上面说到，虚拟地址来源于cpu地址总线，因此其大小也由总线位数决定，比如32位总线的cpu的寻址范围为 2^32 也就是 4 * 1024 * 1024 * 1024 = 4GB，由此可知虚拟地址的作用之一是地址扩展，然而一台电脑上加载的代码数量上限一定程度上取决于实际物理内存的大小，如果物理地址的范围小于总线寻址范围，那么虚拟内存中被填满的部分一定小于物理内存</li>
+<li>虚拟内存也能实现内核代码数据保护、进程数据隔离和共享、进程权限设置等功能</li>
+<li>虚拟地址和物理地址的映射函数由操作系统决定，映射的结果保存在多级页表结构中</li>
+</ol>
+<h3 id="物理地址">物理地址</h3>
+<ol>
+<li>物理地址就是物理地址，磁盘和硬盘内的物理地址是如何组织和寻址的请自行查阅资料</li>
+<li>知道的少量信息是linux上的物理地址一般被分为大小为4kb的页，即使一个进程大小不满4kb，下一个进程也不会被加载到这4kb中紧随着这个进程的位置，而是选择下一块4kb页，因此虚拟地址和物理地址做映射时需要考虑4kb地址对齐的问题</li>
+</ol>
+<h3 id="段寄存器">段寄存器</h3>
+<ol>
+<li>
+<p>段寄存器其中存放段选择子，决定选择GDT表中的段描述符，选择子包含段描述符的起始地址和大小，还有属性，属性中包括存在标志位和RPL权限，描述符包含代码区的起始地址、大小和属性等</p>
+<pre><code> CS
+ 代码段，指定代码段空间
+ SS
+ 栈段，指定栈的空间，访问时使用SS:ESP
+ DS
+ ES
+ FS
+ GS
+ 以上是数据段，指定数据段的控制
+</code></pre>
+<p>寄存器中的选择子结构:</p>
+<pre><code> 0~1 权限位RPL，2~2 TI 到GDT表或LDT表，3~15 Index索引
+</code></pre>
+</li>
+</ol>
+<h3 id="带保护的平坦模式">带保护的平坦模式</h3>
+<p>既然上面提到了逻辑地址是面向操作系统使用者的，而平坦模型又是一种逻辑地址模型，因此我们需要对操作系统使用者做一些限制保护内核安全</p>
+<ol>
+<li>
+<p>首先是基础平坦模式：</p>
+<p>分为代码段和数据段，两个段起始地址都为0，大小为4GB，CS指向代码区，其它指向数据段，基地址都是0</p>
+</li>
+<li>
+<p>保护平坦模式</p>
+<p>相比于上面，数据区加了个limit界限防止恶意数据溢出修改代码段<br>
+我们选用这种保护平坦模式</p>
+</li>
+<li>
+<p>平坦模式中做的保护有限，我们会在其他地址模型中做其他的保护，这些保护组合在一起构成了我们整个操作系统的保护</p>
+</li>
+</ol>
+<h3 id="寻址过程">寻址过程</h3>
+<p>逻辑地址（GDT）-&gt;线性地址-&gt;虚拟地址（查页表）-&gt;物理地址</p>
+<p>我们采用平坦模型，线性地址等于逻辑地址</p>
+<ol>
+<li>
+<p>逻辑地址寻址：<br>
+寄存器段选择子-&gt;GDT表段描述符（基地址）+offset-&gt;逻辑地址</p>
+<p>例如</p>
+<pre><code> 逻辑地址0x8:0x1234
+ 用0x8查到GDT表中基地址为0x10000
+ 线性地址为0x10000+0x1234 = 0x11234
+</code></pre>
+</li>
+<li>
+<p>虚拟地址寻址</p>
+</li>
+</ol>
+<h3 id="如何控制物理地址">如何控制物理地址</h3>
+<p>对于内核代码编写者来说，我们需要并且能够控制物理地址</p>
+<p>通过控制ELF？</p>
+<ol start="6">
+<li>添加assert宏辅助调试<br>
+见注释<br>
+如果要变成发布版，在最外层CMakeList.txt中的CMAKE_C_FLAGS中添加-DRELEASE即可</li>
+</ol>
+<h1>从这里开始与前置课分离，每天学的内容必须立刻整理并写成markdown发布，前面的可以选择慢慢整理，问题不大</h1>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://bandaobd.github.io"></a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://bandaobd.github.io/2023/05/02/OS%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%972-%E5%86%85%E6%A0%B8%E6%80%BB%E8%A7%88/">https://bandaobd.github.io/2023/05/02/OS%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%972-%E5%86%85%E6%A0%B8%E6%80%BB%E8%A7%88/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/bandaobd.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/05/02/OS%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%972-1-cpu%E5%88%9D%E5%A7%8B%E5%8C%96/" title="OS实验日志2.1-cpu初始化"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">OS实验日志2.1-cpu初始化</div></div></a></div><div class="next-post pull-right"><a href="/2023/05/02/OS%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%971-%E5%8A%A0%E8%BD%BD%E5%86%85%E6%A0%B8%E4%BB%A3%E7%A0%81/" title="OS实验日志1-加载内核代码"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">OS实验日志1-加载内核代码</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/bandaobd.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name"></div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/BanDaobd" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:1372007805@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">内核总览</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E5%85%A5%E5%86%85%E6%A0%B8%E4%BB%A5%E5%8F%8A%E4%BC%A0%E9%80%92%E5%86%85%E5%AD%98%E6%A3%80%E6%B5%8B%E4%BF%A1%E6%81%AF"><span class="toc-number">1.1.</span> <span class="toc-text">进入内核以及传递内存检测信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E6%A0%B8%E6%80%BB%E8%A7%88"><span class="toc-number">1.2.</span> <span class="toc-text">内核总览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E7%A1%AC%E4%BB%B6%E5%92%8C%E6%9C%BA%E5%88%B6%E6%80%BB%E8%A7%88"><span class="toc-number">1.3.</span> <span class="toc-text">一些硬件和机制总览</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%B0%E5%9D%80%E5%88%86%E6%AE%B5%E6%9C%BA%E5%88%B6"><span class="toc-number">1.3.1.</span> <span class="toc-text">地址分段机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E9%A1%B5%E6%9C%BA%E5%88%B6"><span class="toc-number">1.3.2.</span> <span class="toc-text">分页机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80"><span class="toc-number">1.3.3.</span> <span class="toc-text">物理地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AE%B5%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.3.4.</span> <span class="toc-text">段寄存器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%A6%E4%BF%9D%E6%8A%A4%E7%9A%84%E5%B9%B3%E5%9D%A6%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.5.</span> <span class="toc-text">带保护的平坦模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BB%E5%9D%80%E8%BF%87%E7%A8%8B"><span class="toc-number">1.3.6.</span> <span class="toc-text">寻址过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%8E%A7%E5%88%B6%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80"><span class="toc-number">1.3.7.</span> <span class="toc-text">如何控制物理地址</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">从这里开始与前置课分离，每天学的内容必须立刻整理并写成markdown发布，前面的可以选择慢慢整理，问题不大</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/02/OS%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%972-3-%E6%89%93%E5%8D%B0%E6%97%A5%E5%BF%97/" title="OS实验日志2.3-打印日志">OS实验日志2.3-打印日志</a><time datetime="2023-05-02T03:01:36.000Z" title="Created 2023-05-02 11:01:36">2023-05-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/02/OS%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%972-2-%E4%B8%AD%E6%96%AD%E5%92%8C%E5%BC%82%E5%B8%B8/" title="OS实验日志2.2-中断和异常">OS实验日志2.2-中断和异常</a><time datetime="2023-05-02T03:01:21.000Z" title="Created 2023-05-02 11:01:21">2023-05-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/02/OS%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%972-1-cpu%E5%88%9D%E5%A7%8B%E5%8C%96/" title="OS实验日志2.1-cpu初始化">OS实验日志2.1-cpu初始化</a><time datetime="2023-05-02T03:01:09.000Z" title="Created 2023-05-02 11:01:09">2023-05-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/02/OS%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%972-%E5%86%85%E6%A0%B8%E6%80%BB%E8%A7%88/" title="OS实验日志2-内核总览">OS实验日志2-内核总览</a><time datetime="2023-05-02T03:00:51.000Z" title="Created 2023-05-02 11:00:51">2023-05-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/02/OS%E5%AE%9E%E9%AA%8C%E6%97%A5%E5%BF%971-%E5%8A%A0%E8%BD%BD%E5%86%85%E6%A0%B8%E4%BB%A3%E7%A0%81/" title="OS实验日志1-加载内核代码">OS实验日志1-加载内核代码</a><time datetime="2023-05-02T03:00:38.000Z" title="Created 2023-05-02 11:00:38">2023-05-02</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By </div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
