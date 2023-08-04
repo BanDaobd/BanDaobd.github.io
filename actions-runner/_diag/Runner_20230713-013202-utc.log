@@ -1,0 +1,358 @@
+[2023-07-13 01:32:02Z INFO HostContext] No proxy settings were found based on environmental variables (http_proxy/https_proxy/HTTP_PROXY/HTTPS_PROXY)
+[2023-07-13 01:32:02Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-13 01:32:02Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-07-13 01:32:02Z INFO HostContext] Well known config file 'Credentials': 'D:\Blog\blog\actions-runner\.credentials'
+[2023-07-13 01:32:02Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-13 01:32:02Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-07-13 01:32:02Z INFO HostContext] Well known config file 'Runner': 'D:\Blog\blog\actions-runner\.runner'
+[2023-07-13 01:32:02Z INFO Listener] Runner is built for Windows (X64) - win-x64.
+[2023-07-13 01:32:02Z INFO Listener] RuntimeInformation: Microsoft Windows 10.0.22621.
+[2023-07-13 01:32:02Z INFO Listener] Version: 2.305.0
+[2023-07-13 01:32:02Z INFO Listener] Commit: 6cbe663c239dba8a109c6ac2801b25f1ed7c51e9
+[2023-07-13 01:32:02Z INFO Listener] Culture: zh-CN
+[2023-07-13 01:32:02Z INFO Listener] UI Culture: zh-CN
+[2023-07-13 01:32:02Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-13 01:32:02Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-07-13 01:32:02Z INFO Listener] Validating directory permissions for: 'D:\Blog\blog\actions-runner'
+[2023-07-13 01:32:02Z INFO CommandLineParser] Parse
+[2023-07-13 01:32:02Z INFO CommandLineParser] Parsing 3 args
+[2023-07-13 01:32:02Z INFO CommandLineParser] parsing argument
+[2023-07-13 01:32:02Z INFO CommandLineParser] HasArgs: False
+[2023-07-13 01:32:02Z INFO CommandLineParser] Adding Command: run
+[2023-07-13 01:32:02Z INFO CommandLineParser] parsing argument
+[2023-07-13 01:32:02Z INFO CommandLineParser] HasArgs: True
+[2023-07-13 01:32:02Z INFO CommandLineParser] arg: startuptype
+[2023-07-13 01:32:02Z INFO CommandLineParser] parsing argument
+[2023-07-13 01:32:02Z INFO CommandLineParser] HasArgs: True
+[2023-07-13 01:32:02Z INFO CommandLineParser] Adding option 'startuptype': 'service'
+[2023-07-13 01:32:02Z INFO Listener] Arguments parsed
+[2023-07-13 01:32:02Z INFO Runner] ExecuteCommand
+[2023-07-13 01:32:02Z INFO ConfigurationStore] currentAssemblyLocation: D:\Blog\blog\actions-runner\bin\Runner.Listener.dll
+[2023-07-13 01:32:02Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-13 01:32:02Z INFO ConfigurationStore] binPath: D:\Blog\blog\actions-runner\bin
+[2023-07-13 01:32:02Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-13 01:32:02Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-07-13 01:32:02Z INFO ConfigurationStore] RootFolder: D:\Blog\blog\actions-runner
+[2023-07-13 01:32:02Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-13 01:32:02Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-07-13 01:32:02Z INFO HostContext] Well known config file 'Runner': 'D:\Blog\blog\actions-runner\.runner'
+[2023-07-13 01:32:02Z INFO ConfigurationStore] ConfigFilePath: D:\Blog\blog\actions-runner\.runner
+[2023-07-13 01:32:02Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-13 01:32:02Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-07-13 01:32:02Z INFO HostContext] Well known config file 'Credentials': 'D:\Blog\blog\actions-runner\.credentials'
+[2023-07-13 01:32:02Z INFO ConfigurationStore] CredFilePath: D:\Blog\blog\actions-runner\.credentials
+[2023-07-13 01:32:02Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-13 01:32:02Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-07-13 01:32:02Z INFO HostContext] Well known config file 'MigratedCredentials': 'D:\Blog\blog\actions-runner\.credentials_migrated'
+[2023-07-13 01:32:02Z INFO ConfigurationStore] MigratedCredFilePath: D:\Blog\blog\actions-runner\.credentials_migrated
+[2023-07-13 01:32:02Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-13 01:32:02Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-07-13 01:32:02Z INFO HostContext] Well known config file 'Service': 'D:\Blog\blog\actions-runner\.service'
+[2023-07-13 01:32:02Z INFO ConfigurationStore] ServiceConfigFilePath: D:\Blog\blog\actions-runner\.service
+[2023-07-13 01:32:02Z INFO CommandSettings] Flag 'help': 'False'
+[2023-07-13 01:32:02Z INFO CommandSettings] Flag 'version': 'False'
+[2023-07-13 01:32:02Z INFO CommandSettings] Flag 'commit': 'False'
+[2023-07-13 01:32:02Z INFO CommandSettings] Flag 'check': 'False'
+[2023-07-13 01:32:03Z INFO CommandSettings] Command 'configure': 'False'
+[2023-07-13 01:32:03Z INFO CommandSettings] Command 'remove': 'False'
+[2023-07-13 01:32:03Z INFO CommandSettings] Command 'warmup': 'False'
+[2023-07-13 01:32:03Z INFO ConfigurationManager] LoadSettings
+[2023-07-13 01:32:03Z INFO ConfigurationStore] IsConfigured()
+[2023-07-13 01:32:03Z INFO ConfigurationStore] IsConfigured: True
+[2023-07-13 01:32:03Z INFO ConfigurationManager] Is configured: True
+[2023-07-13 01:32:03Z INFO ConfigurationStore] Read setting file: 299 chars
+[2023-07-13 01:32:03Z INFO ConfigurationManager] Settings Loaded
+[2023-07-13 01:32:03Z INFO ConfigurationStore] IsServiceConfigured()
+[2023-07-13 01:32:03Z INFO ConfigurationStore] IsServiceConfigured: True
+[2023-07-13 01:32:03Z INFO CommandSettings] Command 'run': 'True'
+[2023-07-13 01:32:03Z INFO ConfigurationStore] IsConfigured()
+[2023-07-13 01:32:03Z INFO ConfigurationStore] IsConfigured: True
+[2023-07-13 01:32:03Z INFO ConfigurationManager] Is configured: True
+[2023-07-13 01:32:03Z INFO Runner] Set runner startup type - Service
+[2023-07-13 01:32:03Z INFO CommandSettings] Flag 'once': 'False'
+[2023-07-13 01:32:03Z INFO CommandSettings] Flag 'once': 'False'
+[2023-07-13 01:32:03Z INFO Runner] RunAsync
+[2023-07-13 01:32:03Z INFO ConfigurationManager] LoadSettings
+[2023-07-13 01:32:03Z INFO ConfigurationStore] IsConfigured()
+[2023-07-13 01:32:03Z INFO ConfigurationStore] IsConfigured: True
+[2023-07-13 01:32:03Z INFO ConfigurationManager] Is configured: True
+[2023-07-13 01:32:03Z INFO ConfigurationManager] Settings Loaded
+[2023-07-13 01:32:03Z INFO MessageListener] {
+  "AgentId": 24,
+  "AgentName": "BanDao",
+  "PoolId": 1,
+  "PoolName": "Default",
+  "ServerUrl": "https://pipelines.actions.githubusercontent.com/vbd6EKQARMINAVUS7ckItTttXQj8tyGcNsCx4pAfhScPJ0nv7r",
+  "GitHubUrl": "https://github.com/BanDaobd/BanDaobd.github.io",
+  "WorkFolder": "_work"
+}
+[2023-07-13 01:32:03Z INFO MessageListener] Loading Credentials
+[2023-07-13 01:32:03Z INFO ConfigurationStore] HasCredentials()
+[2023-07-13 01:32:03Z INFO ConfigurationStore] stored True
+[2023-07-13 01:32:03Z INFO CredentialManager] GetCredentialProvider
+[2023-07-13 01:32:03Z INFO CredentialManager] Creating type OAuth
+[2023-07-13 01:32:03Z INFO CredentialManager] Creating credential type: OAuth
+[2023-07-13 01:32:03Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-13 01:32:03Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-07-13 01:32:03Z INFO HostContext] Well known config file 'RSACredentials': 'D:\Blog\blog\actions-runner\.credentials_rsaparams'
+[2023-07-13 01:32:03Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-13 01:32:03Z INFO MessageListener] Attempt to create session.
+[2023-07-13 01:32:03Z INFO MessageListener] Connecting to the Runner Server...
+[2023-07-13 01:32:03Z INFO RunnerServer] EstablishVssConnection
+[2023-07-13 01:32:03Z INFO RunnerServer] Establish connection with 100 seconds timeout.
+[2023-07-13 01:32:03Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2023-07-13 01:32:03Z INFO RunnerServer] EstablishVssConnection
+[2023-07-13 01:32:03Z INFO RunnerServer] Establish connection with 60 seconds timeout.
+[2023-07-13 01:32:03Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2023-07-13 01:32:03Z INFO RunnerServer] EstablishVssConnection
+[2023-07-13 01:32:03Z INFO RunnerServer] Establish connection with 60 seconds timeout.
+[2023-07-13 01:32:03Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2023-07-13 01:32:04Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2023-07-13 01:32:04Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2023-07-13 01:32:04Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2023-07-13 01:32:04Z INFO MessageListener] VssConnection created
+[2023-07-13 01:32:04Z INFO Terminal] WRITE LINE: 
+[2023-07-13 01:32:04Z INFO Terminal] WRITE LINE: 
+[2023-07-13 01:32:05Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-13 01:32:05Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-13 01:32:05Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-13 01:32:05Z INFO MessageListener] Session created.
+[2023-07-13 01:32:05Z INFO Terminal] WRITE LINE: Current runner version: '2.305.0'
+[2023-07-13 01:32:05Z INFO Terminal] WRITE LINE: 2023-07-13 01:32:05Z: Listening for Jobs
+[2023-07-13 01:32:05Z INFO JobDispatcher] Set runner/worker IPC timeout to 30 seconds.
+[2023-07-13 02:02:17Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-13 02:27:25Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-13 02:27:26Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-13 02:32:28Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-13 03:02:38Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-13 03:22:45Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-13 03:22:46Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-13 03:32:50Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-13 04:03:00Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-13 04:18:07Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-13 04:18:08Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-13 04:33:13Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-13 05:03:24Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-13 05:13:28Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-13 05:13:29Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-13 05:33:37Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-13 06:52:16Z WARN GitHubActionsService] Attempt 1 of GET request to https://pipelines.actions.githubusercontent.com/vbd6EKQARMINAVUS7ckItTttXQj8tyGcNsCx4pAfhScPJ0nv7r/_apis/distributedtask/pools/1/messages?sessionId=beb8548c-1a61-4c05-9ef5-94d67ea87651&status=Online&runnerVersion=2.305.0 failed (Socket Error: ConnectionAborted). The operation will be retried in 10.916 seconds.
+[2023-07-13 06:52:28Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-13 06:52:29Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-13 06:53:19Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-13 07:23:31Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-13 07:47:51Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-13 07:47:52Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-13 07:53:44Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-13 08:23:56Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-13 08:43:13Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-13 08:43:15Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-13 08:43:15Z WARN GitHubActionsService] Retrieving an AAD auth token took a long time (2.0517796 seconds)
+[2023-07-13 08:54:10Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-13 09:24:23Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-13 09:38:38Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-13 09:38:39Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-13 09:54:35Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-13 10:24:47Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-13 10:34:01Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-13 10:34:01Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-13 10:55:00Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-13 11:25:10Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-13 11:29:22Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-13 11:29:22Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-13 11:55:22Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-13 12:24:43Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-13 12:24:45Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-13 12:25:35Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-13 12:55:48Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-13 13:20:11Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-13 13:20:12Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-13 13:26:05Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-13 13:56:19Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-13 14:15:38Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-13 14:15:39Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-13 14:26:34Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-13 14:56:46Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-13 15:11:02Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-13 15:11:03Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-13 15:27:00Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-13 18:42:12Z WARN GitHubActionsService] Attempt 1 of GET request to https://pipelines.actions.githubusercontent.com/vbd6EKQARMINAVUS7ckItTttXQj8tyGcNsCx4pAfhScPJ0nv7r/_apis/distributedtask/pools/1/messages?sessionId=beb8548c-1a61-4c05-9ef5-94d67ea87651&status=Online&runnerVersion=2.305.0 failed (Socket Error: ConnectionAborted). The operation will be retried in 11.024 seconds.
+[2023-07-14 00:50:38Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-14 00:50:38Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-14 00:51:29Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-14 01:05:46Z WARN GitHubActionsService] Attempt 1 of GET request to https://pipelines.actions.githubusercontent.com/vbd6EKQARMINAVUS7ckItTttXQj8tyGcNsCx4pAfhScPJ0nv7r/_apis/distributedtask/pools/1/messages?sessionId=beb8548c-1a61-4c05-9ef5-94d67ea87651&status=Online&runnerVersion=2.305.0 failed (Socket Error: ConnectionReset). The operation will be retried in 10.931 seconds.
+[2023-07-14 01:16:07Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-14 01:16:07Z INFO MessageListener] Message '8' received from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651'.
+[2023-07-14 01:16:07Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-14 01:16:07Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-07-14 01:16:07Z INFO HostContext] Well known directory 'Work': 'D:\Blog\blog\actions-runner\_work'
+[2023-07-14 01:16:07Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-14 01:16:07Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-07-14 01:16:07Z INFO HostContext] Well known directory 'Work': 'D:\Blog\blog\actions-runner\_work'
+[2023-07-14 01:16:07Z INFO SelfUpdater] Cloning dotnet runtime to D:\Blog\blog\actions-runner\_work\__dotnet_runtime__
+[2023-07-14 01:16:07Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-14 01:16:07Z INFO SelfUpdater] Successfully cloned dotnet runtime to D:\Blog\blog\actions-runner\_work\__dotnet_runtime__. Total files: 222
+[2023-07-14 01:16:07Z INFO SelfUpdater] Cloning externals to D:\Blog\blog\actions-runner\_work\__externals__
+[2023-07-14 01:16:07Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-14 01:16:07Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-07-14 01:16:07Z INFO HostContext] Well known directory 'Externals': 'D:\Blog\blog\actions-runner\externals'
+[2023-07-14 01:16:07Z INFO SelfUpdater] Successfully cloned externals to D:\Blog\blog\actions-runner\_work\__externals__.
+[2023-07-14 01:16:07Z INFO SelfUpdater] Waiting for 2 tasks to complete.
+[2023-07-14 01:16:07Z INFO SelfUpdater] Externals clone finished.
+[2023-07-14 01:16:07Z INFO SelfUpdater] Calculating hash for D:\Blog\blog\actions-runner\_work\__externals__
+[2023-07-14 01:16:07Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-14 01:16:07Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-14 01:16:07Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-07-14 01:16:07Z INFO HostContext] Well known directory 'Externals': 'D:\Blog\blog\actions-runner\externals'
+[2023-07-14 01:16:07Z INFO ProcessInvokerWrapper] Starting process:
+[2023-07-14 01:16:07Z INFO ProcessInvokerWrapper]   File name: 'D:\Blog\blog\actions-runner\externals\node16\bin\node.exe'
+[2023-07-14 01:16:07Z INFO ProcessInvokerWrapper]   Arguments: '"D:\Blog\blog\actions-runner\bin\hashFiles"'
+[2023-07-14 01:16:07Z INFO ProcessInvokerWrapper]   Working directory: 'D:\Blog\blog\actions-runner\_work\__externals__'
+[2023-07-14 01:16:07Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2023-07-14 01:16:07Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2023-07-14 01:16:07Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'True'
+[2023-07-14 01:16:07Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2023-07-14 01:16:07Z INFO ProcessInvokerWrapper]   Persist current code page: 'False'
+[2023-07-14 01:16:07Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2023-07-14 01:16:07Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2023-07-14 01:16:08Z INFO ProcessInvokerWrapper] Process started with process id 25724, waiting for process exit.
+[2023-07-14 01:16:08Z INFO Runner] Refresh message received, kick-off selfupdate background process.
+[2023-07-14 01:16:09Z INFO SelfUpdater] Version '2.306.0' of 'agent' package available in server.
+[2023-07-14 01:16:09Z INFO SelfUpdater] Current running runner version is 2.305.0
+[2023-07-14 01:16:09Z INFO SelfUpdater] An update is available.
+[2023-07-14 01:16:09Z INFO Terminal] WRITE LINE: Runner update in progress, do not shutdown runner.
+[2023-07-14 01:16:09Z INFO SelfUpdater] CloneDotnetRuntimeTime: 264ms
+[2023-07-14 01:16:09Z INFO SelfUpdater] CloneExternalsTime: 231ms
+[2023-07-14 01:16:09Z INFO SelfUpdater] RunnerPlatform: win-x64
+[2023-07-14 01:16:09Z INFO SelfUpdater] Hash result: '24fd131b5dce33ef16038b771407bc0507da8682a72fb3b7780607235f76db0b'
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper] Finished process 25724 with exit code 0, and elapsed time 00:00:01.4731031.
+[2023-07-14 01:16:09Z INFO SelfUpdater] Externals content hash: 24fd131b5dce33ef16038b771407bc0507da8682a72fb3b7780607235f76db0b
+[2023-07-14 01:16:09Z INFO SelfUpdater] Still waiting for 1 tasks to complete.
+[2023-07-14 01:16:09Z INFO SelfUpdater] Waiting for 1 tasks to complete.
+[2023-07-14 01:16:09Z INFO SelfUpdater] Dotnet runtime clone finished.
+[2023-07-14 01:16:09Z INFO SelfUpdater] Calculating hash for D:\Blog\blog\actions-runner\_work\__dotnet_runtime__
+[2023-07-14 01:16:09Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-14 01:16:09Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-14 01:16:09Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-07-14 01:16:09Z INFO HostContext] Well known directory 'Externals': 'D:\Blog\blog\actions-runner\externals'
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper] Starting process:
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper]   File name: 'D:\Blog\blog\actions-runner\externals\node16\bin\node.exe'
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper]   Arguments: '"D:\Blog\blog\actions-runner\bin\hashFiles"'
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper]   Working directory: 'D:\Blog\blog\actions-runner\_work\__dotnet_runtime__'
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'True'
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper]   Persist current code page: 'False'
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper] Process started with process id 15088, waiting for process exit.
+[2023-07-14 01:16:09Z INFO Terminal] WRITE LINE: Downloading 2.306.0 runner
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper] Kill entire process tree since both cancel and terminate signal has been ignored by the target process.
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper] Scan all processes to find relationship between all processes.
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper] Find all child processes of process '15088'.
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper] Need kill all child processes trees before kill process '15088'.
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper] Child process '26652' needs be killed first.
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper] Find all child processes of process '26652'.
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper] Kill process '26652'.
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper] Kill process '15088'.
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper] Process Cancellation finished.
+[2023-07-14 01:16:09Z INFO ProcessInvokerWrapper] Finished process 15088 with exit code -1, and elapsed time 00:00:00.5525926.
+[2023-07-14 01:16:09Z ERR  SelfUpdater] Fail to hash runtime content: System.OperationCanceledException: The operation was canceled.
+   at System.Threading.CancellationToken.ThrowOperationCanceledException()
+   at GitHub.Runner.Sdk.ProcessInvoker.ExecuteAsync(String workingDirectory, String fileName, String arguments, IDictionary`2 environment, Boolean requireExitCodeZero, Encoding outputEncoding, Boolean killProcessOnCancel, Channel`1 redirectStandardIn, Boolean inheritConsoleHandler, Boolean keepStandardInOpen, Boolean highPriorityProcess, CancellationToken cancellationToken)
+   at GitHub.Runner.Common.ProcessInvokerWrapper.ExecuteAsync(String workingDirectory, String fileName, String arguments, IDictionary`2 environment, Boolean requireExitCodeZero, Encoding outputEncoding, Boolean killProcessOnCancel, Channel`1 redirectStandardIn, Boolean inheritConsoleHandler, Boolean keepStandardInOpen, Boolean highPriorityProcess, CancellationToken cancellationToken)
+   at GitHub.Runner.Listener.SelfUpdater.HashFiles(String fileFolder, CancellationToken token)
+   at GitHub.Runner.Listener.SelfUpdater.CloneAndCalculateAssetsHash(String dotnetRuntimeCloneDirectory, String externalsCloneDirectory, CancellationToken token)
+[2023-07-14 01:16:09Z INFO SelfUpdater] Still waiting for 0 tasks to complete.
+[2023-07-14 01:16:10Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-14 01:16:10Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-07-14 01:16:10Z INFO HostContext] Well known directory 'Work': 'D:\Blog\blog\actions-runner\_work'
+[2023-07-14 01:16:10Z INFO SelfUpdater] Attempt 1: save latest runner into D:\Blog\blog\actions-runner\_work\_update\runner1.zip.
+[2023-07-14 01:16:10Z INFO SelfUpdater] Download runner: begin download
+[2023-07-14 01:16:10Z INFO SelfUpdater] Downloading https://github.com/actions/runner/releases/download/v2.306.0/actions-runner-win-x64-2.306.0.zip
+[2023-07-14 01:31:10Z WARN SelfUpdater] Runner download has timed out after 900 seconds
+[2023-07-14 01:31:10Z WARN SelfUpdater] Failed to get package 'D:\Blog\blog\actions-runner\_work\_update\runner1.zip' from 'https://github.com/actions/runner/releases/download/v2.306.0/actions-runner-win-x64-2.306.0.zip'. Exception System.Threading.Tasks.TaskCanceledException: The operation was canceled.
+ ---> System.IO.IOException: Unable to read data from the transport connection: 由于线程退出或应用程序请求，已中止 I/O 操作。.
+ ---> System.Net.Sockets.SocketException (995): 由于线程退出或应用程序请求，已中止 I/O 操作。
+   --- End of inner exception stack trace ---
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource<System.Int32>.GetResult(Int16 token)
+   at System.Net.Security.SslStream.EnsureFullTlsFrameAsync[TIOAdapter](TIOAdapter adapter)
+   at System.Net.Security.SslStream.ReadAsyncInternal[TIOAdapter](TIOAdapter adapter, Memory`1 buffer)
+   at System.Net.Http.HttpConnection.FillAsync(Boolean async)
+   at System.Net.Http.HttpConnection.CopyToContentLengthAsync(Stream destination, Boolean async, UInt64 length, Int32 bufferSize, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnection.ContentLengthReadStream.CompleteCopyToAsync(Task copyTask, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.ContentLengthReadStream.CompleteCopyToAsync(Task copyTask, CancellationToken cancellationToken)
+   at GitHub.Runner.Listener.SelfUpdater.DownLoadRunner(String downloadDirectory, String packageDownloadUrl, String packageHashValue, CancellationToken token)
+[2023-07-14 01:31:10Z INFO SelfUpdater] Attempt 2: save latest runner into D:\Blog\blog\actions-runner\_work\_update\runner1.zip.
+[2023-07-14 01:31:10Z INFO SelfUpdater] Download runner: begin download
+[2023-07-14 01:31:10Z INFO SelfUpdater] Downloading https://github.com/actions/runner/releases/download/v2.306.0/actions-runner-win-x64-2.306.0.zip
+[2023-07-14 01:46:10Z WARN SelfUpdater] Runner download has timed out after 900 seconds
+[2023-07-14 01:46:10Z WARN SelfUpdater] Failed to get package 'D:\Blog\blog\actions-runner\_work\_update\runner1.zip' from 'https://github.com/actions/runner/releases/download/v2.306.0/actions-runner-win-x64-2.306.0.zip'. Exception System.Threading.Tasks.TaskCanceledException: The operation was canceled.
+ ---> System.IO.IOException: Unable to read data from the transport connection: 由于线程退出或应用程序请求，已中止 I/O 操作。.
+ ---> System.Net.Sockets.SocketException (995): 由于线程退出或应用程序请求，已中止 I/O 操作。
+   --- End of inner exception stack trace ---
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource<System.Int32>.GetResult(Int16 token)
+   at System.Net.Security.SslStream.EnsureFullTlsFrameAsync[TIOAdapter](TIOAdapter adapter)
+   at System.Net.Security.SslStream.ReadAsyncInternal[TIOAdapter](TIOAdapter adapter, Memory`1 buffer)
+   at System.Net.Http.HttpConnection.FillAsync(Boolean async)
+   at System.Net.Http.HttpConnection.CopyToContentLengthAsync(Stream destination, Boolean async, UInt64 length, Int32 bufferSize, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnection.ContentLengthReadStream.CompleteCopyToAsync(Task copyTask, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.ContentLengthReadStream.CompleteCopyToAsync(Task copyTask, CancellationToken cancellationToken)
+   at GitHub.Runner.Listener.SelfUpdater.DownLoadRunner(String downloadDirectory, String packageDownloadUrl, String packageHashValue, CancellationToken token)
+[2023-07-14 01:46:10Z INFO SelfUpdater] Attempt 3: save latest runner into D:\Blog\blog\actions-runner\_work\_update\runner1.zip.
+[2023-07-14 01:46:10Z INFO SelfUpdater] Download runner: begin download
+[2023-07-14 01:46:10Z INFO SelfUpdater] Downloading https://github.com/actions/runner/releases/download/v2.306.0/actions-runner-win-x64-2.306.0.zip
+[2023-07-14 01:46:23Z INFO MessageListener] No message retrieved from session 'beb8548c-1a61-4c05-9ef5-94d67ea87651' within last 30 minutes.
+[2023-07-14 01:46:23Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-14 01:46:23Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-14 01:46:31Z WARN SelfUpdater] Failed to get package 'D:\Blog\blog\actions-runner\_work\_update\runner1.zip' from 'https://github.com/actions/runner/releases/download/v2.306.0/actions-runner-win-x64-2.306.0.zip'. Exception System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.IO.IOException: Unable to read data from the transport connection: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。.
+ ---> System.Net.Sockets.SocketException (10060): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   --- End of inner exception stack trace ---
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource<System.Int32>.GetResult(Int16 token)
+   at System.Net.Security.SslStream.EnsureFullTlsFrameAsync[TIOAdapter](TIOAdapter adapter)
+   at System.Net.Security.SslStream.ReadAsyncInternal[TIOAdapter](TIOAdapter adapter, Memory`1 buffer)
+   at System.Net.Http.HttpConnection.InitialFillAsync(Boolean async)
+   at System.Net.Http.HttpConnection.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.GetStreamAsyncCore(HttpRequestMessage request, CancellationToken cancellationToken)
+   at GitHub.Runner.Listener.SelfUpdater.DownLoadRunner(String downloadDirectory, String packageDownloadUrl, String packageHashValue, CancellationToken token)
+[2023-07-14 01:46:31Z INFO Terminal] WRITE LINE: Runner update process finished.
+[2023-07-14 01:46:31Z INFO SelfUpdater] DownloadUrl: https://github.com/actions/runner/releases/download/v2.306.0/actions-runner-win-x64-2.306.0.zip
+[2023-07-14 01:46:31Z INFO SelfUpdater] RuntimeTrimmed: False
+[2023-07-14 01:46:31Z INFO SelfUpdater] ExternalsTrimmed: False
+[2023-07-14 01:46:31Z INFO SelfUpdater] System.Threading.Tasks.TaskCanceledException: Runner package 'https://github.com/actions/runner/releases/download/v2.306.0/actions-runner-win-x64-2.306.0.zip' failed after 3 download attempts
+   at GitHub.Runner.Listener.SelfUpdater.DownloadLatestRunner(CancellationToken token, String targetVersion)
+   at GitHub.Runner.Listener.SelfUpdater.SelfUpdate(AgentRefreshMessage updateMessage, IJobDispatcher jobDispatcher, Boolean restartInteractiveRunner, CancellationToken token)
+[2023-07-14 01:46:32Z ERR  GitHubActionsService] PUT request to https://pipelines.actions.githubusercontent.com/vbd6EKQARMINAVUS7ckItTttXQj8tyGcNsCx4pAfhScPJ0nv7r/_apis/distributedtask/pools/1/agents/24/updates?currentState=Runner%20update%20process%20finished.&updateTrace=DownloadUrl%3A%20https%3A%2F%2Fgithub.com%2Factions%2Frunner%2Freleases%2Fdownload%2Fv2.306.0%2Factions-runner-win-x64-2.306.0.zip%0D%0ARuntimeTrimmed%3A%20False%0D%0AExternalsTrimmed%3A%20False%0D%0ASystem.Threading.Tasks.TaskCanceledException%3A%20Runner%20package%20%27https%3A%2F%2Fgithub.com%2Factions%2Frunner%2Freleases%2Fdownload%2Fv2.306.0%2Factions-runner-win-x64-2.306.0.zip%27%20failed%20after%203%20download%20attempts%0D%0A%20%20%20at%20GitHub.Runner.Listener.SelfUpdater.DownloadLatestRunner%28CancellationToken%20token%2C%20String%20targetVersion%29%0D%0A%20%20%20at%20GitHub.Runner.Listener.SelfUpdater.SelfUpdate%28AgentRefreshMessage%20updateMessage%2C%20IJobDispatcher%20jobDispatcher%2C%20Boolean%20restartInteractiveRunner%2C%20CancellationToken%20token%29 failed. HTTP Status: BadRequest, AFD Ref: Ref A: 286BA8218843415D9BC40F2B17A1C2C2 Ref B: TYAEDGE0905 Ref C: 2023-07-14T01:46:31Z
+[2023-07-14 01:46:32Z ERR  SelfUpdater] GitHub.DistributedTask.WebApi.TaskAgentPendingUpdateNotFoundException: No runner pending update found for runner 24.
+   at GitHub.Services.WebApi.VssHttpClientBase.HandleResponseAsync(HttpResponseMessage response, CancellationToken cancellationToken)
+   at GitHub.Services.WebApi.VssHttpClientBase.SendAsync(HttpRequestMessage message, HttpCompletionOption completionOption, Object userState, CancellationToken cancellationToken)
+   at GitHub.Services.WebApi.VssHttpClientBase.SendAsync[T](HttpRequestMessage message, Object userState, CancellationToken cancellationToken)
+   at GitHub.Services.WebApi.VssHttpClientBase.SendAsync[T](HttpMethod method, IEnumerable`1 additionalHeaders, Guid locationId, Object routeValues, ApiResourceVersion version, HttpContent content, IEnumerable`1 queryParameters, Object userState, CancellationToken cancellationToken)
+   at GitHub.Runner.Listener.SelfUpdater.UpdateRunnerUpdateStateAsync(String currentState)
+[2023-07-14 01:46:32Z INFO SelfUpdater] Catch exception during report update state, ignore this error and continue auto-update.
+[2023-07-14 01:46:32Z INFO JobDispatcher] Shutting down JobDispatcher. Make sure all WorkerDispatcher has finished.
+[2023-07-14 01:46:33Z ERR  Terminal] WRITE ERROR: An error occurred: Runner package 'https://github.com/actions/runner/releases/download/v2.306.0/actions-runner-win-x64-2.306.0.zip' failed after 3 download attempts
+[2023-07-14 01:46:33Z ERR  Listener] System.Threading.Tasks.TaskCanceledException: Runner package 'https://github.com/actions/runner/releases/download/v2.306.0/actions-runner-win-x64-2.306.0.zip' failed after 3 download attempts
+   at GitHub.Runner.Listener.SelfUpdater.DownloadLatestRunner(CancellationToken token, String targetVersion)
+   at GitHub.Runner.Listener.SelfUpdater.SelfUpdate(AgentRefreshMessage updateMessage, IJobDispatcher jobDispatcher, Boolean restartInteractiveRunner, CancellationToken token)
+   at GitHub.Runner.Listener.SelfUpdater.SelfUpdate(AgentRefreshMessage updateMessage, IJobDispatcher jobDispatcher, Boolean restartInteractiveRunner, CancellationToken token)
+   at GitHub.Runner.Listener.Runner.RunAsync(RunnerSettings settings, Boolean runOnce)
+   at GitHub.Runner.Listener.Runner.RunAsync(RunnerSettings settings, Boolean runOnce)
+   at GitHub.Runner.Listener.Runner.RunAsync(RunnerSettings settings, Boolean runOnce)
+   at GitHub.Runner.Listener.Runner.ExecuteCommand(CommandSettings command)
+   at GitHub.Runner.Listener.Program.MainAsync(IHostContext context, String[] args)

@@ -1,0 +1,22 @@
+[2023/05/06 周六  9:18:13.70] --------whoami-------- 
+nt authority\network service
+[2023/05/06 周六  9:18:13.72] --------whoami-------- 
+[2023/05/06 周六  9:18:13.72] Waiting for Runner.Listener.exe (3252) to complete 
+Runner.Listener.exe           3252 Services                   0     73,552 K
+[2023/05/06 周六  9:18:13.79] Process 3252 still running, check again after 1 second. 
+Runner.Listener.exe           3252 Services                   0     73,960 K
+[2023/05/06 周六  9:18:14.88] Process 3252 still running, check again after 1 second. 
+[2023/05/06 周六  9:18:15.95] Process 3252 finished running 
+[2023/05/06 周六  9:18:15.95] Sleep 1 more second to make sure process exited 
+[2023/05/06 周六  9:18:16.98] Re-organize folders 
+[2023/05/06 周六  9:18:17.00] move "D:\Blog\blog\actions-runner\bin" "D:\Blog\blog\actions-runner\bin.2.303.0" 
+移动了　        1 个目录。
+[2023/05/06 周六  9:18:17.02] move "D:\Blog\blog\actions-runner\externals" "D:\Blog\blog\actions-runner\externals.2.303.0" 
+移动了　        1 个目录。
+[2023/05/06 周六  9:18:17.03] Create junction bin folder 
+为 D:\Blog\blog\actions-runner\bin <<===>> D:\Blog\blog\actions-runner\bin.2.304.0 创建的联接
+[2023/05/06 周六  9:18:17.04] Create junction externals folder 
+为 D:\Blog\blog\actions-runner\externals <<===>> D:\Blog\blog\actions-runner\externals.2.304.0 创建的联接
+[2023/05/06 周六  9:18:17.05] Update succeed 
+[2023/05/06 周六  9:18:17.06] update.finished file creation succeed 
+[2023/05/06 周六  9:18:17.06] Rename "D:\Blog\blog\actions-runner\_diag\SelfUpdate-20230506-011813.log" to be "D:\Blog\blog\actions-runner\_diag\SelfUpdate-20230506-011813.log.succeed" 

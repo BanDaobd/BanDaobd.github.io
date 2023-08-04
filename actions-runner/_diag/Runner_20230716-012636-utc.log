@@ -1,0 +1,169 @@
+[2023-07-16 01:26:36Z INFO HostContext] No proxy settings were found based on environmental variables (http_proxy/https_proxy/HTTP_PROXY/HTTPS_PROXY)
+[2023-07-16 01:26:36Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-16 01:26:36Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-07-16 01:26:36Z INFO HostContext] Well known config file 'Credentials': 'D:\Blog\blog\actions-runner\.credentials'
+[2023-07-16 01:26:37Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-16 01:26:37Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-07-16 01:26:37Z INFO HostContext] Well known config file 'Runner': 'D:\Blog\blog\actions-runner\.runner'
+[2023-07-16 01:26:37Z INFO Listener] Runner is built for Windows (X64) - win-x64.
+[2023-07-16 01:26:37Z INFO Listener] RuntimeInformation: Microsoft Windows 10.0.22621.
+[2023-07-16 01:26:37Z INFO Listener] Version: 2.306.0
+[2023-07-16 01:26:37Z INFO Listener] Commit: da6dfe9110e494c9c0f375d9d0e1deff824b1e50
+[2023-07-16 01:26:37Z INFO Listener] Culture: zh-CN
+[2023-07-16 01:26:37Z INFO Listener] UI Culture: zh-CN
+[2023-07-16 01:26:37Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-16 01:26:37Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-07-16 01:26:37Z INFO Listener] Validating directory permissions for: 'D:\Blog\blog\actions-runner'
+[2023-07-16 01:26:37Z INFO CommandLineParser] Parse
+[2023-07-16 01:26:37Z INFO CommandLineParser] Parsing 3 args
+[2023-07-16 01:26:37Z INFO CommandLineParser] parsing argument
+[2023-07-16 01:26:37Z INFO CommandLineParser] HasArgs: False
+[2023-07-16 01:26:37Z INFO CommandLineParser] Adding Command: run
+[2023-07-16 01:26:37Z INFO CommandLineParser] parsing argument
+[2023-07-16 01:26:37Z INFO CommandLineParser] HasArgs: True
+[2023-07-16 01:26:37Z INFO CommandLineParser] arg: startuptype
+[2023-07-16 01:26:37Z INFO CommandLineParser] parsing argument
+[2023-07-16 01:26:37Z INFO CommandLineParser] HasArgs: True
+[2023-07-16 01:26:37Z INFO CommandLineParser] Adding option 'startuptype': 'service'
+[2023-07-16 01:26:37Z INFO Listener] Arguments parsed
+[2023-07-16 01:26:37Z INFO Runner] ExecuteCommand
+[2023-07-16 01:26:37Z INFO ConfigurationStore] currentAssemblyLocation: D:\Blog\blog\actions-runner\bin\Runner.Listener.dll
+[2023-07-16 01:26:37Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-16 01:26:37Z INFO ConfigurationStore] binPath: D:\Blog\blog\actions-runner\bin
+[2023-07-16 01:26:37Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-16 01:26:37Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-07-16 01:26:37Z INFO ConfigurationStore] RootFolder: D:\Blog\blog\actions-runner
+[2023-07-16 01:26:37Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-16 01:26:37Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-07-16 01:26:37Z INFO HostContext] Well known config file 'Runner': 'D:\Blog\blog\actions-runner\.runner'
+[2023-07-16 01:26:37Z INFO ConfigurationStore] ConfigFilePath: D:\Blog\blog\actions-runner\.runner
+[2023-07-16 01:26:37Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-16 01:26:37Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-07-16 01:26:37Z INFO HostContext] Well known config file 'Credentials': 'D:\Blog\blog\actions-runner\.credentials'
+[2023-07-16 01:26:37Z INFO ConfigurationStore] CredFilePath: D:\Blog\blog\actions-runner\.credentials
+[2023-07-16 01:26:37Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-16 01:26:37Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-07-16 01:26:37Z INFO HostContext] Well known config file 'MigratedCredentials': 'D:\Blog\blog\actions-runner\.credentials_migrated'
+[2023-07-16 01:26:37Z INFO ConfigurationStore] MigratedCredFilePath: D:\Blog\blog\actions-runner\.credentials_migrated
+[2023-07-16 01:26:37Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-16 01:26:37Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-07-16 01:26:37Z INFO HostContext] Well known config file 'Service': 'D:\Blog\blog\actions-runner\.service'
+[2023-07-16 01:26:37Z INFO ConfigurationStore] ServiceConfigFilePath: D:\Blog\blog\actions-runner\.service
+[2023-07-16 01:26:37Z INFO CommandSettings] Flag 'help': 'False'
+[2023-07-16 01:26:37Z INFO CommandSettings] Flag 'version': 'False'
+[2023-07-16 01:26:37Z INFO CommandSettings] Flag 'commit': 'False'
+[2023-07-16 01:26:37Z INFO CommandSettings] Flag 'check': 'False'
+[2023-07-16 01:26:37Z INFO CommandSettings] Command 'configure': 'False'
+[2023-07-16 01:26:37Z INFO CommandSettings] Command 'remove': 'False'
+[2023-07-16 01:26:37Z INFO CommandSettings] Command 'warmup': 'False'
+[2023-07-16 01:26:37Z INFO ConfigurationManager] LoadSettings
+[2023-07-16 01:26:37Z INFO ConfigurationStore] IsConfigured()
+[2023-07-16 01:26:37Z INFO ConfigurationStore] IsConfigured: True
+[2023-07-16 01:26:37Z INFO ConfigurationManager] Is configured: True
+[2023-07-16 01:26:37Z INFO ConfigurationStore] Read setting file: 299 chars
+[2023-07-16 01:26:37Z INFO ConfigurationManager] Settings Loaded
+[2023-07-16 01:26:37Z INFO ConfigurationStore] IsServiceConfigured()
+[2023-07-16 01:26:37Z INFO ConfigurationStore] IsServiceConfigured: True
+[2023-07-16 01:26:37Z INFO CommandSettings] Command 'run': 'True'
+[2023-07-16 01:26:37Z INFO ConfigurationStore] IsConfigured()
+[2023-07-16 01:26:37Z INFO ConfigurationStore] IsConfigured: True
+[2023-07-16 01:26:37Z INFO ConfigurationManager] Is configured: True
+[2023-07-16 01:26:37Z INFO Runner] Set runner startup type - Service
+[2023-07-16 01:26:37Z INFO CommandSettings] Flag 'once': 'False'
+[2023-07-16 01:26:37Z INFO CommandSettings] Flag 'once': 'False'
+[2023-07-16 01:26:37Z INFO Runner] RunAsync
+[2023-07-16 01:26:37Z INFO ConfigurationManager] LoadSettings
+[2023-07-16 01:26:37Z INFO ConfigurationStore] IsConfigured()
+[2023-07-16 01:26:37Z INFO ConfigurationStore] IsConfigured: True
+[2023-07-16 01:26:37Z INFO ConfigurationManager] Is configured: True
+[2023-07-16 01:26:37Z INFO ConfigurationManager] Settings Loaded
+[2023-07-16 01:26:37Z INFO MessageListener] {
+  "AgentId": 24,
+  "AgentName": "BanDao",
+  "PoolId": 1,
+  "PoolName": "Default",
+  "ServerUrl": "https://pipelines.actions.githubusercontent.com/vbd6EKQARMINAVUS7ckItTttXQj8tyGcNsCx4pAfhScPJ0nv7r",
+  "GitHubUrl": "https://github.com/BanDaobd/BanDaobd.github.io",
+  "WorkFolder": "_work"
+}
+[2023-07-16 01:26:37Z INFO MessageListener] Loading Credentials
+[2023-07-16 01:26:37Z INFO ConfigurationStore] HasCredentials()
+[2023-07-16 01:26:37Z INFO ConfigurationStore] stored True
+[2023-07-16 01:26:37Z INFO CredentialManager] GetCredentialProvider
+[2023-07-16 01:26:37Z INFO CredentialManager] Creating type OAuth
+[2023-07-16 01:26:37Z INFO CredentialManager] Creating credential type: OAuth
+[2023-07-16 01:26:37Z INFO HostContext] Well known directory 'Bin': 'D:\Blog\blog\actions-runner\bin'
+[2023-07-16 01:26:37Z INFO HostContext] Well known directory 'Root': 'D:\Blog\blog\actions-runner'
+[2023-07-16 01:26:37Z INFO HostContext] Well known config file 'RSACredentials': 'D:\Blog\blog\actions-runner\.credentials_rsaparams'
+[2023-07-16 01:26:37Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-16 01:26:37Z INFO MessageListener] Attempt to create session.
+[2023-07-16 01:26:37Z INFO MessageListener] Connecting to the Runner Server...
+[2023-07-16 01:26:37Z INFO RunnerServer] EstablishVssConnection
+[2023-07-16 01:26:37Z INFO RunnerServer] Establish connection with 100 seconds timeout.
+[2023-07-16 01:26:37Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2023-07-16 01:26:37Z INFO RunnerServer] EstablishVssConnection
+[2023-07-16 01:26:37Z INFO RunnerServer] Establish connection with 60 seconds timeout.
+[2023-07-16 01:26:37Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2023-07-16 01:26:37Z INFO RunnerServer] EstablishVssConnection
+[2023-07-16 01:26:37Z INFO RunnerServer] Establish connection with 60 seconds timeout.
+[2023-07-16 01:26:37Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2023-07-16 01:26:38Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2023-07-16 01:26:38Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2023-07-16 01:26:39Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2023-07-16 01:26:39Z INFO MessageListener] VssConnection created
+[2023-07-16 01:26:39Z INFO Terminal] WRITE LINE: 
+[2023-07-16 01:26:39Z INFO Terminal] WRITE LINE: 
+[2023-07-16 01:26:39Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-16 01:26:39Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-16 01:26:40Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-16 01:26:40Z INFO MessageListener] Session created.
+[2023-07-16 01:26:40Z INFO Terminal] WRITE LINE: Current runner version: '2.306.0'
+[2023-07-16 01:26:40Z INFO Terminal] WRITE LINE: 2023-07-16 01:26:40Z: Listening for Jobs
+[2023-07-16 01:26:40Z INFO JobDispatcher] Set runner/worker IPC timeout to 30 seconds.
+[2023-07-16 01:56:50Z INFO MessageListener] No message retrieved from session 'da3ddcec-fb6d-4aed-8244-ecd238981dac' within last 30 minutes.
+[2023-07-16 02:22:00Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-16 02:22:01Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-16 02:27:03Z INFO MessageListener] No message retrieved from session 'da3ddcec-fb6d-4aed-8244-ecd238981dac' within last 30 minutes.
+[2023-07-16 02:57:15Z INFO MessageListener] No message retrieved from session 'da3ddcec-fb6d-4aed-8244-ecd238981dac' within last 30 minutes.
+[2023-07-16 03:17:24Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-16 03:17:25Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-16 03:27:30Z INFO MessageListener] No message retrieved from session 'da3ddcec-fb6d-4aed-8244-ecd238981dac' within last 30 minutes.
+[2023-07-16 03:57:40Z INFO MessageListener] No message retrieved from session 'da3ddcec-fb6d-4aed-8244-ecd238981dac' within last 30 minutes.
+[2023-07-16 04:12:46Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-16 04:12:46Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-16 04:27:53Z INFO MessageListener] No message retrieved from session 'da3ddcec-fb6d-4aed-8244-ecd238981dac' within last 30 minutes.
+[2023-07-16 04:58:05Z INFO MessageListener] No message retrieved from session 'da3ddcec-fb6d-4aed-8244-ecd238981dac' within last 30 minutes.
+[2023-07-16 05:08:10Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-16 05:08:12Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-16 07:51:27Z WARN GitHubActionsService] Attempt 1 of GET request to https://pipelines.actions.githubusercontent.com/vbd6EKQARMINAVUS7ckItTttXQj8tyGcNsCx4pAfhScPJ0nv7r/_apis/distributedtask/pools/1/messages?sessionId=da3ddcec-fb6d-4aed-8244-ecd238981dac&status=Online&runnerVersion=2.306.0 failed (Socket Error: ConnectionAborted). The operation will be retried in 10.847 seconds.
+[2023-07-16 07:51:39Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-16 07:51:40Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-16 07:52:30Z INFO MessageListener] No message retrieved from session 'da3ddcec-fb6d-4aed-8244-ecd238981dac' within last 30 minutes.
+[2023-07-16 08:22:41Z INFO MessageListener] No message retrieved from session 'da3ddcec-fb6d-4aed-8244-ecd238981dac' within last 30 minutes.
+[2023-07-16 08:47:02Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-16 08:47:03Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-16 08:52:56Z INFO MessageListener] No message retrieved from session 'da3ddcec-fb6d-4aed-8244-ecd238981dac' within last 30 minutes.
+[2023-07-16 09:23:07Z INFO MessageListener] No message retrieved from session 'da3ddcec-fb6d-4aed-8244-ecd238981dac' within last 30 minutes.
+[2023-07-16 09:42:26Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-16 09:42:27Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-16 09:53:21Z INFO MessageListener] No message retrieved from session 'da3ddcec-fb6d-4aed-8244-ecd238981dac' within last 30 minutes.
+[2023-07-16 10:23:35Z INFO MessageListener] No message retrieved from session 'da3ddcec-fb6d-4aed-8244-ecd238981dac' within last 30 minutes.
+[2023-07-16 10:37:51Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-16 10:37:52Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-16 13:37:14Z WARN GitHubActionsService] Attempt 1 of GET request to https://pipelines.actions.githubusercontent.com/vbd6EKQARMINAVUS7ckItTttXQj8tyGcNsCx4pAfhScPJ0nv7r/_apis/distributedtask/pools/1/messages?sessionId=da3ddcec-fb6d-4aed-8244-ecd238981dac&status=Online&runnerVersion=2.306.0 failed (Socket Error: ConnectionAborted). The operation will be retried in 11.14 seconds.
+[2023-07-16 13:37:27Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-16 13:37:28Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-16 13:38:17Z INFO MessageListener] No message retrieved from session 'da3ddcec-fb6d-4aed-8244-ecd238981dac' within last 30 minutes.
+[2023-07-16 14:08:29Z INFO MessageListener] No message retrieved from session 'da3ddcec-fb6d-4aed-8244-ecd238981dac' within last 30 minutes.
+[2023-07-16 14:32:51Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-16 14:32:52Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-16 14:38:44Z INFO MessageListener] No message retrieved from session 'da3ddcec-fb6d-4aed-8244-ecd238981dac' within last 30 minutes.
+[2023-07-16 15:08:59Z INFO MessageListener] No message retrieved from session 'da3ddcec-fb6d-4aed-8244-ecd238981dac' within last 30 minutes.
+[2023-07-16 18:25:23Z WARN GitHubActionsService] Attempt 1 of GET request to https://pipelines.actions.githubusercontent.com/vbd6EKQARMINAVUS7ckItTttXQj8tyGcNsCx4pAfhScPJ0nv7r/_apis/distributedtask/pools/1/messages?sessionId=da3ddcec-fb6d-4aed-8244-ecd238981dac&status=Online&runnerVersion=2.306.0 failed (Socket Error: ConnectionAborted). The operation will be retried in 10.926 seconds.
+[2023-07-16 18:29:39Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\Blog\blog\actions-runner\.credentials_rsaparams
+[2023-07-16 18:29:40Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2023-07-16 18:30:22Z INFO HostContext] Runner will be shutdown for UserCancelled
+[2023-07-16 18:30:22Z WARN GitHubActionsService] GET request to https://pipelines.actions.githubusercontent.com/vbd6EKQARMINAVUS7ckItTttXQj8tyGcNsCx4pAfhScPJ0nv7r/_apis/distributedtask/pools/1/messages?sessionId=da3ddcec-fb6d-4aed-8244-ecd238981dac&status=Online&runnerVersion=2.306.0 has been cancelled.
+[2023-07-16 18:30:22Z INFO MessageListener] Get next message has been cancelled.
+[2023-07-16 18:30:22Z INFO JobDispatcher] Shutting down JobDispatcher. Make sure all WorkerDispatcher has finished.
+[2023-07-16 18:30:23Z INFO Listener] Runner execution been cancelled.
